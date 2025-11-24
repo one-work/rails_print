@@ -11,6 +11,7 @@ module Print
 
       has_many :mqtt_acls, primary_key: :username, foreign_key: :username
 
+      before_validation :set_pass, if: -> { password_changed? && password.present? }
       before_create :init_acls
     end
 
