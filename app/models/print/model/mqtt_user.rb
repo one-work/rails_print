@@ -26,14 +26,14 @@ module Print
     def api
       return @api if defined? @api
       @api = MQTT::Client.connect(
-        host: 'work_design-emqx',
+        host: 'linli-emqx',
         username: username,
         password: password
       )
     end
 
     def init_acls
-      ['${clientid}/unregistered', '${clientid}', '${clientid}/confirm', 'zonelink/notice', 'linlishenghuo/notice'].each do |topic|
+      ['${clientid}/unregistered', '${clientid}', '${clientid}/confirm', 'linlishenghuo/notice'].each do |topic|
         mqtt_acls.find_or_initialize_by(topic: topic) do |acl|
           acl.action = 'subscribe'
         end
