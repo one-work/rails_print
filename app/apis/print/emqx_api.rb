@@ -2,14 +2,15 @@
 module Print
   class EmqxApi
     include CommonApi
+    BASE = 'http://linli-emqx:18083/api/v5/'
 
     def clients(**options)
-      r = get 'clients', origin: @app.base_url, **options
+      r = get 'clients', origin: BASE, **options
       r['data']
     end
 
     def publish(topic, payload, retain = false, qos = 2, **options)
-      post 'publish', topic: topic, payload: payload, retain: retain, qos: qos, **options
+      post 'publish', topic: topic, payload: payload, retain: retain, qos: qos, origin: BASE, **options
     end
 
     private
