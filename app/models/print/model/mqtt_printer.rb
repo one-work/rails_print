@@ -98,7 +98,7 @@ module Print
       all_size = [all.size].pack('N').bytes
 
       r = (PREFIX + all_size + all)
-      api.publish dev_imei, r.pack('C*'), false, 2
+      api.publish dev_imei, Base64.encode64(r.pack('C*')), payload_encoding: 'base64'
     end
 
   end
