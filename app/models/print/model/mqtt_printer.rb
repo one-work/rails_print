@@ -62,20 +62,20 @@ module Print
 
     def api
       return @api if defined? @api
-      @api = $mqtt_user.api
+      @api = EmqxApi.new
     end
 
     def register_success
-      api.publish "#{dev_imei}/unregistered", 'registerSuccess', false, 2
+      api.publish "#{dev_imei}/unregistered", 'registerSuccess'
     end
 
     def register_401
-      api.publish "#{dev_imei}/unregistered", 'registerFail@401', false, 2
+      api.publish "#{dev_imei}/unregistered", 'registerFail@401'
     end
 
     def confirm(payload, kind: 'ready')
       _, id = payload.split('#')
-      api.publish "#{dev_imei}/confirm", "#{kind}##{id}", false, 2
+      api.publish "#{dev_imei}/confirm", "#{kind}##{id}"
     end
 
     def print

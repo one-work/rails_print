@@ -8,8 +8,8 @@ module Print
       r['data']
     end
 
-    def publish(qos: 2, **options)
-      post 'publish', qos: qos, **options
+    def publish(topic, payload, retain = false, qos = 2, **options)
+      post 'publish', topic: topic, payload: payload, retain: retain, qos: qos, **options
     end
 
     private
