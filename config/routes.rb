@@ -42,7 +42,7 @@ Rails.application.routes.draw do
           post :scan
         end
       end
-      resources :printers
+      resources :mqtt_printers
     end
   end
 end
