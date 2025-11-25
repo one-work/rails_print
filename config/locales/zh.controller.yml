@@ -34,9 +34,9 @@ zh:
       devices:
         index:
           title: 打印机设置
-      printers:
+      mqtt_printers:
         index:
-          title: 自有打印机
+          title: 打印机设置
       jia_bo_printers:
         index:
           title: 佳博云打印
