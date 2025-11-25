@@ -98,10 +98,7 @@ module Print
       all_size = [all.size].pack('N').bytes
 
       r = (PREFIX + all_size + all)
-      logger.debug "The Str: #{r}"
-
       api.publish dev_imei, r.pack('C*'), false, 2
-      r
     end
 
   end
