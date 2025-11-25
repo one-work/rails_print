@@ -19,7 +19,7 @@ Rails.application.routes.draw do
           post :search_organs
         end
         member do
-          get :organ
+          post :organ
         end
       end
       resources :jia_bo_apps do
