@@ -78,6 +78,14 @@ module Print
       api.publish "#{dev_imei}/confirm", "#{kind}##{id}"
     end
 
+    def confirm_complete(payload)
+      _, task_id = payload.split('#')
+      task = Task.find task_id
+      task.update completed_at: Time.current
+
+      api.publish "#{dev_imei}/confirm", "complete##{task_id}"
+    end
+
     def print(task_id)
       pr = BaseEsc.new
       esc = yield pr

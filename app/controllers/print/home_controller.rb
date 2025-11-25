@@ -30,7 +30,7 @@ module Print
 
     # cloudPrinter/complete
     def complete
-      @mqtt_printer.confirm(params[:payload], kind: 'complete')
+      @mqtt_printer.confirm_complete(params[:payload])
 
       head :ok
     end
