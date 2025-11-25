@@ -88,10 +88,9 @@ module Print
 
     def print(task_id)
       pr = BaseEsc.new
-      esc = yield pr
+      yield pr
 
-      payload = esc.render
-      print_cmd(payload, task_id)
+      print_cmd(pr.render, task_id)
     end
 
     def print_cmd(payload, task_id)
