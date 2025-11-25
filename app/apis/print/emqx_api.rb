@@ -15,7 +15,7 @@ module Print
 
     private
     def with_access_token(tries: 2, params: {}, headers: {}, payload: {})
-      @client.plugin(:basic_auth).basic_auth(Rails.application.credentials.dig(:emqx, :key), Rails.application.credentials.dig(:emqx, :secret))
+      @client = @client.plugin(:basic_auth).basic_auth(Rails.application.credentials.dig(:emqx, :key), Rails.application.credentials.dig(:emqx, :secret))
       yield
     end
 
