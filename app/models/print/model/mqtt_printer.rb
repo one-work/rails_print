@@ -73,15 +73,15 @@ module Print
       api.publish "#{dev_imei}/confirm", "#{kind}##{id}", false, 2
     end
 
-    def print_pos(text = '')
+    def print
       pr = BaseEsc.new
-      pr.text(text)
+      esc = yield pr
 
-      payload = pr.render
-      print(payload)
+      payload = esc.render
+      print_cmd(payload)
     end
 
-    def print(payload, task: '1001')
+    def print_cmd(payload, task: '1001')
       task_bytes = task.bytes
       task_size = task_bytes.size
       payload_bytes = payload
