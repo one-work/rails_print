@@ -11,6 +11,10 @@ module Print
       @printer.test_print
     end
 
+    def new
+      @printer.devices.build
+    end
+
     def edit
       @printer.devices.presence || @printer.devices.build
     end
