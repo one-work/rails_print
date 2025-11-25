@@ -91,6 +91,7 @@ module Print
       yield pr
 
       print_cmd(pr.render, task_id)
+      pr
     end
 
     def print_cmd(payload, task_id)

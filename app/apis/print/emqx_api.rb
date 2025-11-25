@@ -2,7 +2,7 @@
 module Print
   class EmqxApi
     include CommonApi
-    BASE = 'http://linli-emqx:18083/api/v5/'
+    BASE = "#{Rails.application.credentials.dig(:emqx, :host)}/api/v5/"
 
     def clients(**options)
       r = get 'clients', origin: BASE, **options
