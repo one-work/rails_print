@@ -19,15 +19,15 @@ module Print
     end
 
     private
-    def set_printer
+    def set_mqtt_printer
       @mqtt_printer = MqttPrinter.find params[:id]
     end
 
-    def set_new_printer
+    def set_new_mqtt_printer
       @mqtt_printer = MqttPrinter.new(printer_params)
     end
 
-    def printer_params
+    def mqtt_printer_params
       params.fetch(:mqtt_printer, {}).permit(
         devices_attributes: [:aim]
       )
