@@ -14,7 +14,14 @@ Rails.application.routes.draw do
       resources :mqtt_users do
         resources :mqtt_acls
       end
-      resources :mqtt_printers
+      resources :mqtt_printers do
+        collection do
+          post :search_organs
+        end
+        member do
+          get :organ
+        end
+      end
       resources :jia_bo_apps do
         resources :jia_bo_printers do
           collection do

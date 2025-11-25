@@ -19,7 +19,12 @@ module Print
       attribute :password, :string
       attribute :extra, :json, default: {}
 
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
+
       has_one :mqtt_user, primary_key: :username, foreign_key: :username, dependent: :destroy
+
+      has_many :devices, as: :printer
+      accepts_nested_attributes_for :devices
 
       before_validation :init_username, if: :dev_imei_changed?
       after_save :init_mqtt_user, if: :saved_change_to_username?
