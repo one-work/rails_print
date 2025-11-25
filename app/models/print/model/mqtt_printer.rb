@@ -78,16 +78,16 @@ module Print
       api.publish "#{dev_imei}/confirm", "#{kind}##{id}"
     end
 
-    def print
+    def print(task_id)
       pr = BaseEsc.new
       esc = yield pr
 
       payload = esc.render
-      print_cmd(payload)
+      print_cmd(payload, task_id)
     end
 
-    def print_cmd(payload, task: '1001')
-      task_bytes = task.bytes
+    def print_cmd(payload, task_id)
+      task_bytes = task_id.bytes
       task_size = task_bytes.size
       payload_bytes = payload
       payload_size = [payload_bytes.size].pack('N').bytes
