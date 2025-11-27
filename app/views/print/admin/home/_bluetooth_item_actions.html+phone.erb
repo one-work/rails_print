@@ -1,0 +1,10 @@
+<div id="tr_<%= model.id %>" class="media">
+  <%= link_to({ controller: 'bluetooth_printers', action: 'show', id: model.id }, class: 'media-content') do %>
+    <%= yield %>
+  <% end %>
+  <div class="media-right">
+    <%= button_to({ controller: 'bluetooth_printers', action: 'actions', id: model.id }, class: 'button is-borderless') do %>
+      <%= svg_tag 'ellipsis-vertical' %>
+    <% end %>
+  </div>
+</div>
