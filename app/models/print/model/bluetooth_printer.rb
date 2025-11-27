@@ -1,5 +1,5 @@
-module Bluetooth
-  module Model::Device
+module Print
+  module Model::BluetoothPrinter
     extend ActiveSupport::Concern
 
     included do
