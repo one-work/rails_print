@@ -99,5 +99,9 @@ module Print
       r
     end
 
+    def dev_qrcode
+      QrcodeHelper.data_url(dev_imei)
+    end
+
   end
 end
