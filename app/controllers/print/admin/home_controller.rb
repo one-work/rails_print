@@ -7,11 +7,14 @@ module Print
     def scan
       if params[:result].include?('&')
         name, _ = params[:result].split('&')
-      else
-      end
 
-      @device.name = name
-      @device.save
+        bluetooth_printer = BluetoothPrinter.find_or_create_by(name: name, **default_form_params)
+        bluetooth_printer.save
+      else
+        mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
+        mqtt_printer.organ = current_organ
+        mqtt_printer.save
+      end
     end
 
   end
