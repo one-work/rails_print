@@ -2,6 +2,8 @@ module Print
   class Admin::HomeController < Admin::BaseController
 
     def index
+      @mqtt_printers = MqttPrinter.where(default_params).page(params[:page])
+      @bluetooth_printers = BluetoothPrinter.where(default_params).page(params[:page])
     end
 
     def scan
