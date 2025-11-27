@@ -43,7 +43,7 @@ Rails.application.routes.draw do
     namespace :admin, defaults: { namespace: 'admin' } do
       root 'home#index'
       controller :home do
-
+        post :scan
       end
       resources :devices
       resources :jia_bo_printers do
