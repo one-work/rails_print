@@ -1,4 +1,4 @@
-module Bluetooth
+module Print
   class DevicesController < BaseController
 
     def index
