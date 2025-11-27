@@ -110,9 +110,9 @@ module Print
       cmd(r)
     end
 
-    def voice(type)
+    def voice(type = 0xc1)
       payload = VOICE + [type]
-      cmd(payload)
+      print_cmd(payload, '1001')
     end
 
     def cmd(r)
