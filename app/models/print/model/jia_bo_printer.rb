@@ -31,10 +31,10 @@ module Print
 
     def print
       pr = BaseEsc.new
-      esc = yield pr
+      yield pr
 
       remote_print(
-        data: esc.render_raw,
+        data: pr.render_raw,
         mode: 3,
         cmd_type: 'ESC'
       )

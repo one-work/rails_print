@@ -19,7 +19,12 @@ module Print
       attribute :password, :string
       attribute :extra, :json, default: {}
 
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
+
       has_one :mqtt_user, primary_key: :username, foreign_key: :username, dependent: :destroy
+
+      has_many :devices, as: :printer
+      accepts_nested_attributes_for :devices
 
       before_validation :init_username, if: :dev_imei_changed?
       after_save :init_mqtt_user, if: :saved_change_to_username?
@@ -57,32 +62,40 @@ module Print
 
     def api
       return @api if defined? @api
-      @api = $mqtt_user.api
+      @api = EmqxApi.new
     end
 
     def register_success
-      api.publish "#{dev_imei}/unregistered", 'registerSuccess', false, 2
+      api.publish "#{dev_imei}/unregistered", 'registerSuccess'
     end
 
     def register_401
-      api.publish "#{dev_imei}/unregistered", 'registerFail@401', false, 2
+      api.publish "#{dev_imei}/unregistered", 'registerFail@401'
     end
 
     def confirm(payload, kind: 'ready')
       _, id = payload.split('#')
-      api.publish "#{dev_imei}/confirm", "#{kind}##{id}", false, 2
+      api.publish "#{dev_imei}/confirm", "#{kind}##{id}"
     end
 
-    def print_pos(text = '')
+    def confirm_complete(payload)
+      _, task_id = payload.split('#')
+      task = Task.find task_id
+      task.update completed_at: Time.current
+
+      api.publish "#{dev_imei}/confirm", "complete##{task_id}"
+    end
+
+    def print(task_id)
       pr = BaseEsc.new
-      pr.text(text)
+      yield pr
 
-      payload = pr.render
-      print(payload)
+      print_cmd(pr.render, task_id)
+      pr
     end
 
-    def print(payload, task: '1001')
-      task_bytes = task.bytes
+    def print_cmd(payload, task_id)
+      task_bytes = task_id.bytes
       task_size = task_bytes.size
       payload_bytes = payload
       payload_size = [payload_bytes.size].pack('N').bytes
@@ -93,10 +106,7 @@ module Print
       all_size = [all.size].pack('N').bytes
 
       r = (PREFIX + all_size + all)
-      logger.debug "The Str: #{r}"
-
-      api.publish dev_imei, r.pack('C*'), false, 2
-      r
+      api.publish dev_imei, Base64.encode64(r.pack('C*')), payload_encoding: 'base64'
     end
 
     def dev_qrcode

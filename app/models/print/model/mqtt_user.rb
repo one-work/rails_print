@@ -11,6 +11,7 @@ module Print
 
       has_many :mqtt_acls, primary_key: :username, foreign_key: :username
 
+      before_validation :set_pass, if: -> { password_changed? && password.present? }
       before_create :init_acls
     end
 
@@ -26,20 +27,33 @@ module Print
     def api
       return @api if defined? @api
       @api = MQTT::Client.connect(
-        host: 'work_design-emqx',
+        host: 'linli-emqx',
         username: username,
         password: password
       )
     end
 
     def init_acls
-      ['${clientid}/unregistered', '${clientid}', '${clientid}/confirm', 'zonelink/notice', 'linlishenghuo/notice'].each do |topic|
+      [
+        '${clientid}/unregistered',
+        '${clientid}',
+        '${clientid}/confirm',
+        'linlishenghuo/notice'
+      ].each do |topic|
         mqtt_acls.find_or_initialize_by(topic: topic) do |acl|
           acl.action = 'subscribe'
         end
       end
 
-      ['cloudPrinter/register', 'cloudPrinter/ready', 'cloudPrinter/exception', 'cloudPrinter/heartbeat', 'cloudPrinter/complete', 'lwtt'].each do |topic|
+      [
+        'cloudPrinter/register',
+        'cloudPrinter/ready',
+        'cloudPrinter/exception',
+        'cloudPrinter/heartbeat',
+        'cloudPrinter/complete',
+        'cloudPrinter/pull',
+        'lwtt'
+      ].each do |topic|
         mqtt_acls.find_or_initialize_by(topic: topic) do |acl|
           acl.action = 'publish'
         end

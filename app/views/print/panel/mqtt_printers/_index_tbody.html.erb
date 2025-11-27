@@ -2,6 +2,14 @@
 <td><%= model.dev_desc %></td>
 <td><%= model.online %></td>
 <td>
+  <p><%= model.organ.name if model.organ %></p>
+  <p>
+    <%= button_to({ action: 'organ', id: model.id }) do %>
+      <%= svg_tag 'pencil' %>
+    <% end %>
+  </p>
+</td>
+<td>
   <p><%= model.username %></p>
   <p><%= model.password %></p>
 </td>

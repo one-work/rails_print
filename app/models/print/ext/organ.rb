@@ -7,6 +7,11 @@ module Print
       has_one :produce_printer, -> { where(aim: 'produce') }, class_name: 'Print::Device'
 
       has_many :devices, class_name: 'Print::Device'
+      has_many :bluetooth_printers, class_name: 'Print::BluetoothPrinter'
+    end
+
+    def bluetooth_device
+      bluetoothes.pluck(:name)[0]
     end
 
   end

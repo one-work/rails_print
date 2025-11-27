@@ -20,8 +20,9 @@ module Print
       self.organ_id = printer.organ_id
     end
 
-    def print(&block)
-      printer.print(&block)
+    def print(gid, &block)
+      task = Task.create(gid: gid, aim: aim)
+      printer.print(task.id, &block)
     end
 
     def print_later
