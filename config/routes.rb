@@ -7,6 +7,12 @@ Rails.application.routes.draw do
       post :exception
       post :complete
     end
+    resources :devices do
+      collection do
+        get :test
+        post :err
+      end
+    end
 
     namespace :panel, defaults: { namespace: 'panel' } do
       root 'home#index'
@@ -36,6 +42,9 @@ Rails.application.routes.draw do
 
     namespace :admin, defaults: { namespace: 'admin' } do
       root 'home#index'
+      controller :home do
+
+      end
       resources :devices
       resources :jia_bo_printers do
         collection do
@@ -43,6 +52,7 @@ Rails.application.routes.draw do
         end
       end
       resources :mqtt_printers, except: [:destroy]
+      resources :bluetooth_printers
     end
   end
 end

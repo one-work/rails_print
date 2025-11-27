@@ -1,4 +1,4 @@
-module Bluetooth
+module Print
   module Model::Err
     extend ActiveSupport::Concern
 
