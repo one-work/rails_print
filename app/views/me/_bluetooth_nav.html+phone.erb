@@ -1,0 +1,8 @@
+<%= link_to({ controller: 'bluetooth/admin/devices' }, class: 'cell has-column-centered') do %>
+  <div class="text-primary">
+    <%= svg_tag 'bluetooth', class: 'icon is-medium' %>
+  </div>
+  <div class="size-7 text-grey text-centered mt-1">
+    <p><%= t('bluetooth.admin.devices.index.title') %></p>
+  </div>
+<% end %>

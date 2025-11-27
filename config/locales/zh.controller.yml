@@ -31,6 +31,15 @@ zh:
       home:
         index:
           title: 打印机
+      blue_devices:
+        index:
+          title: 蓝牙打印
+        new:
+          title: 手动添加
+        scan:
+          title: 扫码添加
+        destroy:
+          title: 解除绑定
       devices:
         index:
           title: 打印机设置

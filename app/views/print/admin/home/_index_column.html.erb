@@ -2,4 +2,7 @@
   <%= link_to({ controller: 'print/admin/mqtt_printers' }, data: { turbo_frame: 'panel', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
     <span><%= t('print.admin.mqtt_printers.index.title') %></span>
   <% end %>
+  <%= link_to({ controller: 'bluetooth/admin/devices' }, data: { turbo_frame: 'panel', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
+    <span><%= t('bluetooth.admin.devices.index.title') %></span>
+  <% end %>
 </div>

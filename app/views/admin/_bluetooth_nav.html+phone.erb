@@ -1,0 +1,13 @@
+<div class="box is-padding-less">
+  <div class="box-header">
+    <span class="size-7 has-border-left-primary"><%= t('bluetooth.admin.title') %></span>
+  </div>
+  <div class="fixed-grid has-4-cols is-shadow-top p-3">
+    <div class="grid">
+      <%= link_to({ controller: 'bluetooth/admin/devices' }, class: 'cell has-column-centered') do %>
+        <%= svg_tag 'bluetooth', class: 'icon is-medium text-primary' %>
+        <div class="text-grey size-7 mt-1"><%= t('bluetooth.admin.devices.index.title') %></div>
+      <% end %>
+    </div>
+  </div>
+</div>
