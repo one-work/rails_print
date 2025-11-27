@@ -3,6 +3,7 @@ module Print
     extend ActiveSupport::Concern
     PREFIX = [0x1e, 0x10]
     TAG = [0x1b, 0x63]
+    VOICE = [0x1b, 0x23, 0x23, 0x50, 0x4c, 0x4d, 0x43]
 
     included do
       attribute :dev_imei, :string, index: true
@@ -80,8 +81,8 @@ module Print
 
     def confirm_complete(payload)
       _, task_id = payload.split('#')
-      task = Task.find task_id
-      task.update completed_at: Time.current
+      task = Task.find_by id: task_id
+      task.update completed_at: Time.current if task
 
       api.publish "#{dev_imei}/confirm", "complete##{task_id}"
     end
@@ -106,6 +107,15 @@ module Print
       all_size = [all.size].pack('N').bytes
 
       r = (PREFIX + all_size + all)
+      cmd(r)
+    end
+
+    def voice(type)
+      payload = VOICE + [type]
+      cmd(payload)
+    end
+
+    def cmd(r)
       api.publish dev_imei, Base64.encode64(r.pack('C*')), payload_encoding: 'base64'
     end
 
