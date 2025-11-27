@@ -13,7 +13,7 @@ module Print
       else
         mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
         mqtt_printer.organ = current_organ
-        mqtt_printer.save
+        mqtt_printer.save!
       end
     end
 
