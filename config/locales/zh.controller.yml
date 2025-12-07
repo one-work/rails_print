@@ -46,6 +46,8 @@ zh:
       mqtt_printers:
         index:
           title: 打印机设置
+        destroy:
+          title: 解绑
       jia_bo_printers:
         index:
           title: 佳博云打印
