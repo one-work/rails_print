@@ -7,6 +7,8 @@ module Print
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
+      has_many :devices, as: :printer, dependent: :delete_all
+
       validates :name, uniqueness: { scope: :organ_id }
     end
 
