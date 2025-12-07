@@ -51,7 +51,7 @@ Rails.application.routes.draw do
           post :scan
         end
       end
-      resources :mqtt_printers, except: [:destroy]
+      resources :mqtt_printers
       resources :bluetooth_printers
     end
   end

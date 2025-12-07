@@ -29,12 +29,17 @@ module Print
 
       before_validation :init_username, if: :dev_imei_changed?
       after_save :init_mqtt_user, if: :saved_change_to_username?
+      after_save :clear_devices, if: -> { saved_change_to_organ_id? && organ_id.blank? }
     end
 
     def init_username
       r = Digest::MD5.hexdigest("linlishenghuo-#{dev_imei}").upcase
       self.username = r[0..11]
       self.password = r[-16..-1]
+    end
+
+    def clear_devices
+      devices.delete_all
     end
 
     def init_mqtt_user

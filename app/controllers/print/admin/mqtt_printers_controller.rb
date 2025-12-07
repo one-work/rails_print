@@ -18,6 +18,11 @@ module Print
       @mqtt_printer.devices.presence || @mqtt_printer.devices.build
     end
 
+    def destroy
+      @mqtt_printer.organ_id = nil
+      @mqtt_printer.save
+    end
+
     private
     def set_mqtt_printer
       @mqtt_printer = MqttPrinter.find params[:id]
