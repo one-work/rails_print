@@ -11,7 +11,7 @@ module Print
     end
 
     def bluetooth_device
-      bluetoothes.pluck(:name)[0]
+      bluetooth_printers.pluck(:name)[0]
     end
 
   end
