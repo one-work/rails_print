@@ -3,7 +3,7 @@ module Print
     before_action :set_new_bluetooth_printer, only: [:new, :create]
 
     private
-    def set_new_printer
+    def set_new_bluetooth_printer
       @bluetooth_printer = BluetoothPrinter.new(bluetooth_printer_params)
     end
 
