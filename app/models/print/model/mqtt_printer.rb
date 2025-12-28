@@ -26,6 +26,7 @@ module Print
 
       has_many :devices, as: :printer, dependent: :delete_all
       accepts_nested_attributes_for :devices
+      has_many :tasks, through: :devices
 
       before_validation :init_username, if: :dev_imei_changed?
       after_save :init_mqtt_user, if: :saved_change_to_username?
@@ -92,11 +93,14 @@ module Print
       api.publish "#{dev_imei}/confirm", "complete##{task_id}"
     end
 
-    def print(task_id)
+    def print(task)
       pr = BaseEsc.new
       yield pr
 
-      print_cmd(pr.render, task_id)
+      task.body = pr.render
+      task.save
+
+      print_cmd(pr.render, task.id)
       pr.render_raw
     end
 

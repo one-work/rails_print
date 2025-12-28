@@ -13,6 +13,8 @@ module Print
       belongs_to :organ, class_name: 'Org::Organ', optional: true
       belongs_to :printer, polymorphic: true
 
+      has_many :tasks
+
       before_validation :sync_organ_from_printer, if: :new_record?
     end
 
@@ -21,8 +23,8 @@ module Print
     end
 
     def print(gid, &block)
-      task = Task.create(gid: gid, aim: aim)
-      printer.print(task.id, &block)
+      task = tasks.build(gid: gid, aim: aim)
+      printer.print(task, &block)
     end
 
     def print_later
