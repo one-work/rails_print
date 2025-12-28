@@ -51,3 +51,6 @@ zh:
       jia_bo_printers:
         index:
           title: 佳博云打印
+      tasks:
+        index:
+          title: 打印任务
