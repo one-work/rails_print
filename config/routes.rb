@@ -43,12 +43,18 @@ Rails.application.routes.draw do
           end
         end
       end
+      resources :templates do
+        resources :template_items
+      end
     end
 
     namespace :admin, defaults: { namespace: 'admin' } do
       root 'home#index'
       controller :home do
         post :scan
+      end
+      resources :templates do
+        resources :template_items
       end
       resources :devices do
         resources :tasks

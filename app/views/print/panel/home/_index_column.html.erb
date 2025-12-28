@@ -8,7 +8,10 @@
   <%= link_to({ controller: 'print/panel/mqtt_printers' }, data: { turbo_frame: 'panel', action: 'menu-popup#enter' }, class: active_helper(controllers: ['mqtt_printers'], item: 'cell button is-fullwidth', active: 'cell button is-fullwidth is-active')) do %>
     <span><%= t('print.panel.mqtt_printers.index.title') %></span>
   <% end %>
-  <%= link_to({ controller: 'print/panel/jia_bo_apps' }, data: { turbo_frame: 'panel', action: 'menu-popup#enter' }, class: active_helper(controllers: ['apps' , 'templates', 'devices'], item: 'cell button is-fullwidth', active: 'cell button is-fullwidth is-active')) do %>
+  <%= link_to({ controller: 'print/panel/jia_bo_apps' }, data: { turbo_frame: 'panel', action: 'menu-popup#enter' }, class: active_helper(controllers: ['apps', 'devices'], item: 'cell button is-fullwidth', active: 'cell button is-fullwidth is-active')) do %>
     <span><%= t('print.panel.jia_bo_apps.index.title') %></span>
+  <% end %>
+  <%= link_to({ controller: 'print/panel/templates' }, data: { turbo_frame: 'panel', action: 'menu-popup#enter' }, class: active_helper(controllers: ['templates'], item: 'cell button is-fullwidth', active: 'cell button is-fullwidth is-active')) do %>
+    <span><%= t('print.panel.templates.index.title') %></span>
   <% end %>
 </div>

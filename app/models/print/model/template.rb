@@ -4,9 +4,10 @@ module Print
 
     included do
       attribute :name, :string
-      attribute :err_msg, :string
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
+
+      has_many :template_items
     end
 
   end

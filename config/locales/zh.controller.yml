@@ -26,6 +26,9 @@ zh:
       mqtt_users:
         index:
           title: MQTT 用户
+      templates:
+        index:
+          title: 模版
     admin:
       title: 打印机
       home:
