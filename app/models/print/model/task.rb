@@ -14,14 +14,15 @@ module Print
     end
 
     def sync_to_locator
-      model = model
-      model.print_info ||= {}
-      model.print_info.merge! aim => completed_at.to_fs(:iso8601)
-      model.save
+      _model = model
+      _model.print_info ||= {}
+      _model.print_info.merge! aim => completed_at.to_fs(:iso8601)
+      _model.save
     end
 
-    def locate_model
-      GlobalID::Locator.locate gid
+    def model
+      return @model if defined? @model
+      @model = GlobalID::Locator.locate gid
     end
 
   end
