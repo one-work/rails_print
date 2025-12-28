@@ -50,7 +50,9 @@ Rails.application.routes.draw do
       controller :home do
         post :scan
       end
-      resources :devices
+      resources :devices do
+        resources :tasks
+      end
       resources :jia_bo_printers do
         collection do
           post :scan

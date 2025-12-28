@@ -1,0 +1,9 @@
+<td><%= model.aim_i18n %></td>
+<td><%= model.gid %></td>
+<td>
+  <p class="text-grey"><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
+  <% if model.completed_at %>
+    <p class="text-success"><time data-controller="time"><%= model.completed_at.to_fs(:iso8601) %></time></p>
+  <% end %>
+</td>
+<td><%= model.body %></td>
