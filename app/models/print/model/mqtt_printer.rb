@@ -128,5 +128,13 @@ module Print
       QrcodeHelper.data_url(dev_imei)
     end
 
+    def webhook_url
+      Rails.application.routes.url_for(
+        controller: 'print/mqtt_printers',
+        action: 'print',
+        id: id
+      )
+    end
+
   end
 end
