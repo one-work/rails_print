@@ -5,7 +5,9 @@
   <% end %>
 </p>
 <div data-controller="clipboard" data-action="click->clipboard#copyInner" class="clipboard">
-  <span>打印任务地址：</span>
-  <span data-clipboard-target="source" class="truncate"><%= model.webhook_url %></span>
+  <div class="truncate">
+    <span>打印任务地址：</span>
+    <span data-clipboard-target="source"><%= model.webhook_url %></span>
+  </div>
   <%= svg_tag 'clone', class: 'icon is-small ml-1 text-grey copy' %>
 </div>
