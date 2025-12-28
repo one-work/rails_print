@@ -96,11 +96,10 @@ module Print
     def print(task)
       pr = BaseEsc.new
       yield pr
-      task.body = pr.render
+      task.body = pr.render_raw
       task.save
 
-      print_cmd(task.body, task.id)
-      pr.render_raw
+      print_cmd(pr.render, task.id)
     end
 
     def print_cmd(payload, task_id)
