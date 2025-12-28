@@ -1,5 +1,10 @@
-<p><%= model.dev_imei %></p>
-<div data-controller="clipboard" data-action="click->clipboard#copyInner" class="truncate">
-  <span data-clipboard-target="source"><%= model.webhook_url %></span>
-  <%= svg_tag 'clone' %>
+<p>
+  <%= link_to({ controller: 'mqtt_printers', action: 'show', id: model.id }) do %>
+    <%= model.dev_imei %>
+  <% end %>
+</p>
+<p>Webhook Url:</p>
+<div data-controller="clipboard" data-action="click->clipboard#copyInner" class="clipboard">
+  <span data-clipboard-target="source" class="truncate"><%= model.webhook_url %></span>
+  <%= svg_tag 'clone', class: 'icon is-small ml-1 text-grey copy' %>
 </div>
