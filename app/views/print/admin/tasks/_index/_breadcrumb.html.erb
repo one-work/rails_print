@@ -1,5 +1,7 @@
+<li>
 <% if @device.printer_type == 'Print::MqttPrinter' %>
   <%= link_to t('.mqtt_printers.index.title'), { controller: 'mqtt_printers' } %>
 <% end %>
+</li>
 <li><%= link_to t('.devices.index.title'), { controller: 'devices' } %></li>
-<li><%= t('.title') %></li>
+<li class="is-active"><%= t('.title') %></li>
