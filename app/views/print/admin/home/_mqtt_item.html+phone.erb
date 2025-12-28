@@ -1,1 +1,5 @@
 <p><%= model.dev_imei %></p>
+<div data-controller="clipboard" data-action="click->clipboard#copyInner" class="truncate">
+  <span data-clipboard-target="source"><%= model.webhook_url %></span>
+  <%= svg_tag 'clone' %>
+</div>
