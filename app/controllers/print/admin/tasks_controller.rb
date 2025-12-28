@@ -3,7 +3,7 @@ module Print
     before_action :set_device
 
     def index
-      @tasks = @device.tasks.page(params[:page])
+      @tasks = @device.tasks.order(id: :desc).page(params[:page])
     end
 
     private
