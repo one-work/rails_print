@@ -1,5 +1,5 @@
 module Print
-  class Panel::TemplatesController < Panel::BaseController
+  class Admin::TemplatesController < Admin::BaseController
 
   end
 end
