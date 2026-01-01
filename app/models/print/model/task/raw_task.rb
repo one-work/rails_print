@@ -3,6 +3,7 @@ module Print
     extend ActiveSupport::Concern
 
     included do
+      belongs_to :mqtt_printer
     end
 
   end
