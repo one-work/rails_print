@@ -6,7 +6,7 @@ module Print
     def create
       @task.save
 
-      render json: {  }
+      render json: { task_id: @task.id }
     end
 
     private
@@ -15,12 +15,19 @@ module Print
     end
 
     def set_new_task
-      @task = @printer.template_tasks.build(task_params)
+      if params[:template_id]
+        @task = @printer.template_tasks.build(task_params)
+      else
+        @task = @printer.raw_tasks.build(task_params)
+      end
     end
 
     def task_params
       params.permit(
-        :body
+        :uid,
+        :body,
+        :template_id,
+        :print_at
       )
     end
 
