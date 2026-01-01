@@ -27,6 +27,7 @@ module Print
       has_many :devices, as: :printer, dependent: :delete_all
       accepts_nested_attributes_for :devices
       has_many :tasks, through: :devices
+      has_many :template_tasks
 
       before_validation :init_username, if: :dev_imei_changed?
       after_save :init_mqtt_user, if: :saved_change_to_username?
