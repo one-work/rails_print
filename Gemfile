@@ -4,6 +4,7 @@ source "https://rubygems.org"
 gemspec
 
 gem "puma"
+gem 'solid_queue'
 
 gem "sqlite3"
 
