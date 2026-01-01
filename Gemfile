@@ -3,7 +3,7 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in rails_jia_bo.gemspec.
 gemspec
 
-gem "puma"
+gem 'rails', github: 'rails/rails'
 gem 'solid_queue'
 
 gem "sqlite3"
