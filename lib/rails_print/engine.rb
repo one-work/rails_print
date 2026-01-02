@@ -14,9 +14,9 @@ module RailsPrint
       g.rails = {
         assets: false,
         stylesheets: false,
-        helper: false
+        helper: false,
+        template_engine: nil
       }
-      g.template_engine nil
       g.test_unit = {
         fixture: true
       }
