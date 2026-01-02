@@ -8,9 +8,10 @@ module RailsPrint
 
     config.autoload_paths += Dir[
       "#{config.root}/app/models/task",
+      "#{config.root}/test/controllers"
     ]
     config.eager_load_paths += Dir[
-      "#{config.root}/app/models/task",
+      "#{config.root}/app/models/task"
     ]
 
     config.generators do |g|

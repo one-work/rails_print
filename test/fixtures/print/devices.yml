@@ -1,0 +1,10 @@
+one:
+  organ_id: 1
+  printer_type: MyString
+  printer_id: 1
+  aim: MyString
+two:
+  organ_id: 1
+  printer_type: MyString
+  printer_id: 1
+  aim: MyString

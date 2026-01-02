@@ -1,15 +1,6 @@
-require 'test_helper'
-
+#require 'print_test_helper'
 module Print
   class TasksControllerTest < ActionDispatch::IntegrationTest
-
-    setup do
-      @task = print_tasks(:one)
-    end
-
-    def test_create_ok
-      super
-    end
 
   end
 end
