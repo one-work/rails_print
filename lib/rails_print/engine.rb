@@ -18,7 +18,11 @@ module RailsPrint
         assets: false,
         helper: false,
         resource_route: false,
-        template_engine: nil
+        template_engine: nil,
+        test_framework: :test_unit
+      }
+      g.test_unit = {
+        fixture: true
       }
       g.templates.prepend File.expand_path('lib/templates', RailsCom::Engine.root)
     end
