@@ -9,3 +9,4 @@ gem 'sqlite3'
 gem 'rubocop-rails-omakase', require: false
 gem 'listen'
 gem 'bcrypt'
+gem 'debug'

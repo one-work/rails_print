@@ -153,6 +153,9 @@ GEM
     crass (1.0.6)
     csv (3.3.5)
     date (3.5.1)
+    debug (1.11.1)
+      irb (~> 1.10)
+      reline (>= 0.3.8)
     default_where (2.2.0)
       activerecord (>= 4.0.0)
     drb (2.2.3)
@@ -363,6 +366,7 @@ PLATFORMS
 
 DEPENDENCIES
   bcrypt
+  debug
   listen
   propshaft
   rails!

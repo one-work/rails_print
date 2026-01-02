@@ -1,0 +1,30 @@
+one:
+  organ_id: 1
+  dev_imei: MyString
+  dev_type: MyString
+  dev_vendor: MyString
+  dev_network: MyString
+  dev_tel: MyString
+  dev_spec: MyString
+  dev_cut: false
+  dev_desc: MyString
+  dev_ip: MyString
+  online: false
+  username: MyString
+  password: MyString
+  extra: 
+two:
+  organ_id: 1
+  dev_imei: MyString
+  dev_type: MyString
+  dev_vendor: MyString
+  dev_network: MyString
+  dev_tel: MyString
+  dev_spec: MyString
+  dev_cut: false
+  dev_desc: MyString
+  dev_ip: MyString
+  online: false
+  username: MyString
+  password: MyString
+  extra: 
