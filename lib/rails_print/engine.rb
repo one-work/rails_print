@@ -16,6 +16,7 @@ module RailsPrint
         stylesheets: false,
         helper: false
       }
+      g.template_engine nil
       g.test_unit = {
         fixture: true
       }
