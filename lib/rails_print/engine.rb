@@ -1,3 +1,4 @@
+require 'rails_com'
 module RailsPrint
   class Engine < ::Rails::Engine
 
