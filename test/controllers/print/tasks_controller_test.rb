@@ -4,13 +4,12 @@ module Print
 
     setup do
       @task = print_tasks(:one)
-      binding.b
     end
 
     test 'create ok' do
       assert_difference('Task.count') do
         post(
-          url_for(controller: 'tasks', action: 'create'),
+          url_for(controller: 'print/tasks', action: 'create', printer_id: @task.mqtt_printer_id),
           params: {
             task: {
               body: @task.body
