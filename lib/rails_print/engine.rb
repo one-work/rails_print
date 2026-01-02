@@ -8,5 +8,18 @@ module RailsPrint
       "#{config.root}/app/models/task",
     ]
 
+    config.generators do |g|
+      g.resource_route false
+      g.rails = {
+        assets: false,
+        stylesheets: false,
+        helper: false
+      }
+      g.test_unit = {
+        fixture: true
+      }
+      g.templates.prepend File.expand_path('lib/templates', RailsCom::Engine.root)
+    end
+
   end
 end
