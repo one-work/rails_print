@@ -14,15 +14,11 @@ module RailsPrint
     ]
 
     config.generators do |g|
-      g.resource_route false
       g.rails = {
         assets: false,
-        stylesheets: false,
         helper: false,
+        resource_route: false,
         template_engine: nil
-      }
-      g.test_unit = {
-        fixture: true
       }
       g.templates.prepend File.expand_path('lib/templates', RailsCom::Engine.root)
     end
