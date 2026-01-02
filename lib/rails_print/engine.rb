@@ -2,6 +2,10 @@ require 'rails_com'
 module RailsPrint
   class Engine < ::Rails::Engine
 
+    def railtie_namespace
+      Print
+    end
+
     config.autoload_paths += Dir[
       "#{config.root}/app/models/task",
     ]
