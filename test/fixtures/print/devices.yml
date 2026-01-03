@@ -1,8 +1,10 @@
-one:
+default: &default
   organ_id: 1
   printer_type: MyString
   printer_id: 1
   aim: MyString
+index:
+  <<: *default
 two:
   organ_id: 1
   printer_type: MyString

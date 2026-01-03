@@ -1,6 +1,8 @@
-one:
+default: &default
   organ_id: 1
   name: MyString
+index:
+  <<: *default
 two:
   organ_id: 1
   name: MyString
