@@ -3,8 +3,8 @@ module Print
   class TasksControllerTest < ActionDispatch::IntegrationTest
 
     setup do
-      @printer = MqttPrinter.new(id: '2222')
-      @task = @printer.template_tasks.build()
+      @task = print_tasks(:one)
+      @params = @task.as_json(only: [:printer_id, :body])
     end
 
   end
