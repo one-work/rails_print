@@ -13,7 +13,7 @@ Rails.application.routes.draw do
         post :err
       end
     end
-    resources :printers, only: [] do
+    resources :mqtt_printers, only: [] do
       resources :tasks, only: [:create]
     end
 

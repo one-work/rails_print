@@ -4,7 +4,7 @@ module Print
   class TasksControllerTest < ActionDispatch::IntegrationTest
 
     setup do
-      @task = print_tasks(:one)
+      @model = print_tasks(:one)
       @params = @task.as_json(only: [:printer_id, :body])
     end
 

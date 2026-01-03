@@ -11,7 +11,7 @@ module Print
 
     private
     def set_printer
-      @printer = MqttPrinter.find(params[:printer_id])
+      @printer = MqttPrinter.find(params[:mqtt_printer_id])
     end
 
     def set_new_task
