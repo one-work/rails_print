@@ -5,6 +5,11 @@ index:
   <<: *default
 new:
   <<: *default
-two:
-  organ_id: 1
-  name: MyString
+show:
+  <<: *default
+edit:
+  <<: *default
+update:
+  <<: *default
+destroy:
+  <<: *default
