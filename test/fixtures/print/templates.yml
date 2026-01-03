@@ -3,6 +3,8 @@ default: &default
   name: MyString
 index:
   <<: *default
+new:
+  <<: *default
 two:
   organ_id: 1
   name: MyString
