@@ -1,4 +1,5 @@
 create:
+  type: Print::TemplateTask
   mqtt_printer: one
   template: one
   uid: MyString
