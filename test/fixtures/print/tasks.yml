@@ -5,8 +5,8 @@ default: &default
 create:
   <<: *default
   type: Print::TemplateTask
-  mqtt_printer: one
-  template: one
+  mqtt_printer: default
+  template: default
 two:
   device_id: 1
   mqtt_printer_id: 1
