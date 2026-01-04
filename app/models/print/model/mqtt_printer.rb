@@ -129,7 +129,7 @@ module Print
     end
 
     def dev_qrcode
-      QrcodeHelper.data_url(dev_imei)
+      QrcodeUtil.data_url(dev_imei)
     end
 
     def webhook_url
