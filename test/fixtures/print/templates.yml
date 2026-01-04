@@ -1,15 +1,3 @@
-default: &default
+default:
   organ_id: 1
   name: MyString
-index:
-  <<: *default
-new:
-  <<: *default
-show:
-  <<: *default
-edit:
-  <<: *default
-update:
-  <<: *default
-destroy:
-  <<: *default
