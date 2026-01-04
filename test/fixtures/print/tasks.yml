@@ -1,10 +1,12 @@
-create:
-  type: Print::TemplateTask
-  mqtt_printer: one
-  template: one
+default: &default
   uid: MyString
   print_at: 2026-01-02 19:25:32
   body: MyText
+create:
+  <<: *default
+  type: Print::TemplateTask
+  mqtt_printer: one
+  template: one
 two:
   device_id: 1
   mqtt_printer_id: 1
@@ -12,5 +14,3 @@ two:
   aim: MyString
   uid: MyString
   print_at: 2026-01-02 19:25:32
-  completed_at: 2026-01-02 19:25:32
-  body: MyText
