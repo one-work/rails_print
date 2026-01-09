@@ -131,6 +131,7 @@ PATH
       net-scp
       ostruct
       positioning
+      psych-pure
       rails
       reline
       solid_cache
@@ -289,6 +290,9 @@ GEM
     psych (5.3.1)
       date
       stringio
+    psych-pure (0.3.0)
+      psych
+      strscan
     raabro (1.4.0)
     racc (1.8.1)
     rack (3.2.4)
@@ -365,6 +369,7 @@ GEM
     sqlite3 (2.9.0-arm64-darwin)
     sshkey (3.0.0)
     stringio (3.2.0)
+    strscan (3.1.7)
     thor (1.4.0)
     timeout (0.6.0)
     tsort (0.2.0)

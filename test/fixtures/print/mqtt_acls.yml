@@ -1,0 +1,9 @@
+default: &default
+  username: MyString
+  permission: MyString
+  action: MyString
+  topic: MyString
+create:
+  <<: *default
+update:
+  <<: *default
