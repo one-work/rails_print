@@ -1,6 +1,6 @@
 default: &default
   uid: MyString
-  print_at: 2026-01-02 19:25:32
+  print_at: 2026-01-02 19:25:32 # 打印时间
   body: MyText
 create:
   <<: *default
