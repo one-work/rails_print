@@ -1,0 +1,6 @@
+<%= f.collection_select :mqtt_printer_id, @mqtt_printers, :id, :dev_imei %>
+<%= f.fields :payload, model: OpenStruct.new(f.object.payload) do |ef| %>
+  <% @template.code_kinds.each do |k, v| %>
+    <%= ef.text_field k, value: f.object.payload[k], class: 'input', label: @template.code_names[k] %>
+  <% end %>
+<% end %>

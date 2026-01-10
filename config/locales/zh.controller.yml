@@ -64,3 +64,6 @@ zh:
       templates:
         index:
           title: 打印模板
+      template_tasks:
+        new:
+          title: 打印任务

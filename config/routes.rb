@@ -55,6 +55,7 @@ Rails.application.routes.draw do
         post :scan
       end
       resources :templates do
+        resources :template_tasks
         resources :template_items
       end
       resources :devices do
