@@ -1,5 +1,3 @@
-#ENV['RAILS_ENV'] = 'test'
-#require_relative '../test/dummy/config/environment'
 #ActiveRecord::Migrator.migrations_paths = [File.expand_path('../test/dummy/db/migrate', __dir__)]
 
 abort("Abort testing: Your Rails environment is running in production mode!") if Rails.env.production?
@@ -14,16 +12,15 @@ if defined?(ActiveRecord::Base)
     include ActiveRecord::TestFixtures
     include ActiveRecord::Assertions::QueryAssertions
 
-    self.fixture_paths << "#{Rails.root}/test/fixtures/"
-    self.file_fixture_path = "#{Rails.root}/test/fixtures/files"
+    self.fixture_paths << [
+      "#{Rails.root}/test/fixtures/",
+      File.expand_path('../test/fixtures', __dir__)
+    ]
+    self.file_fixture_path = File.expand_path('../test/fixtures', __dir__) + '/files'
   end
 
   ActiveSupport.on_load(:action_dispatch_integration_test) do
     self.fixture_paths += ActiveSupport::TestCase.fixture_paths
-  end
-else
-  ActiveSupport.on_load(:active_support_test_case) do
-    self.file_fixture_path = "#{Rails.root}/test/fixtures/files"
   end
 end
 
@@ -42,9 +39,5 @@ ActiveSupport.on_load(:action_dispatch_integration_test) do
 end
 
 if ActiveSupport::TestCase.respond_to?(:fixture_paths=)
-  ActiveSupport::TestCase.fixture_paths = [File.expand_path('../test/fixtures', __dir__)]
-  ActiveSupport::TestCase.file_fixture_path = File.expand_path('../test/fixtures', __dir__) + '/files'
   ActiveSupport::TestCase.fixtures :all
-
-  ActionDispatch::IntegrationTest.fixture_paths = ActiveSupport::TestCase.fixture_paths
 end
