@@ -1,5 +1,5 @@
 module Print
-  class Admin::TemplateItemsController < Admin::BaseController
+  class Admin::TemplateItemsController < Panel::TemplateItemsController
 
     private
     def set_template
