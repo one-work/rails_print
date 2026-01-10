@@ -10,8 +10,8 @@ module Print
       has_many :template_items
     end
 
-    def xx
-
+    def code_kinds
+      template_items.load.pluck(:code, :kind).to_h
     end
 
   end

@@ -13,9 +13,11 @@ module Print
         qrcode: 'qrcode'
       }
 
+      belongs_to :template
+
       positioned on: :template_id
 
-      belongs_to :template
+      validates :code, uniqueness: { scope: :template_id }
     end
 
   end

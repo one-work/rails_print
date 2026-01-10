@@ -10,11 +10,14 @@ module Print
     end
 
     def body
-
     end
 
     def print
-      mqtt_printer.print(self, &block)
+      mqtt_printer.print(self) do |pr|
+        payload.each do |key, value|
+          pr.public_send template.code_kinds[key], value
+        end
+      end
     end
 
   end

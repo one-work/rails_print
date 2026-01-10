@@ -3,6 +3,10 @@ module Print
     before_action :set_template
     before_action :set_create_template_item, only: [:create]
 
+    def index
+      @template_items = @template.template_items.page(params[:page])
+    end
+
     private
     def set_template
       @template = Template.find params[:template_id]
