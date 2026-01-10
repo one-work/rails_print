@@ -1,2 +1,2 @@
-print/tasks:
+print/api/tasks:
   - create

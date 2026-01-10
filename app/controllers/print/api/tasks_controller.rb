@@ -1,5 +1,5 @@
 module Print
-  class TasksController < BaseController
+  class Api::TasksController < Api::BaseController
     before_action :set_printer
     before_action :set_new_task, only: [:create]
 
@@ -23,7 +23,7 @@ module Print
     end
 
     def task_params
-      params.fetch(:task, {}).permit(
+      params.permit(
         :uid,
         :body,
         :template_id,

@@ -13,8 +13,11 @@ Rails.application.routes.draw do
         post :err
       end
     end
-    resources :mqtt_printers, only: [] do
-      resources :tasks, only: [:create]
+
+    namespace :api, defaults: { namespace: 'api' } do
+      resources :mqtt_printers, only: [] do
+        resources :tasks, only: [:create]
+      end
     end
 
     namespace :panel, defaults: { namespace: 'panel' } do
