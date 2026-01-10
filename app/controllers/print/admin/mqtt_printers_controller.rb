@@ -1,7 +1,7 @@
 module Print
   class Admin::MqttPrintersController < Admin::BaseController
     before_action :set_mqtt_printer, only: [:show, :edit, :update, :destroy, :actions]
-    before_action :set_new_mqtt_printer, only: [:new, :create]
+    before_action :set_new_mqtt_printer, only: [:new]
 
     def index
       @mqtt_printers = MqttPrinter.default_where(default_params).page(params[:page])
@@ -11,7 +11,17 @@ module Print
       @mqtt_printer.test_print
     end
 
-    def new
+    def create
+      @mqtt_printer = MqttPrinter.find_by(dev_imei: params[:dev_imei])
+
+      if @mqtt_printer
+        @mqtt_printer.organ = current_organ
+        @mqtt_printer.devices.find_or_initialize_by(aim: 'produce')
+        @mqtt_printer.devices.find_or_initialize_by(aim: 'receipt')
+        @mqtt_printer.save!
+      else
+        render 'create_fail'
+      end
     end
 
     def edit
@@ -29,12 +39,11 @@ module Print
     end
 
     def set_new_mqtt_printer
-      @mqtt_printer = MqttPrinter.new(mqtt_printer_params)
+      @mqtt_printer = MqttPrinter.new
     end
 
     def mqtt_printer_params
       params.fetch(:mqtt_printer, {}).permit(
-        :imei,
         devices_attributes: [:aim]
       )
     end
