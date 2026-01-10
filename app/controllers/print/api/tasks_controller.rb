@@ -15,18 +15,19 @@ module Print
     end
 
     def set_new_task
-      if task_params[:template_id]
+      if params[:template_id]
         @task = @printer.template_tasks.build(task_params)
+        @task.template_id = params[:template_id]
+        @task.payload = params.fetch(:body, {}).permit!
       else
         @task = @printer.raw_tasks.build(task_params)
+        @task.body = params[:body]
       end
     end
 
     def task_params
       params.permit(
         :uid,
-        :body,
-        :template_id,
         :print_at
       )
     end

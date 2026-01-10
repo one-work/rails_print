@@ -10,5 +10,9 @@ module Print
       has_many :template_items
     end
 
+    def xx
+
+    end
+
   end
 end
