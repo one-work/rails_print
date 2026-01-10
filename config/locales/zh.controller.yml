@@ -61,3 +61,6 @@ zh:
       tasks:
         index:
           title: 打印任务
+      templates:
+        index:
+          title: 打印模板

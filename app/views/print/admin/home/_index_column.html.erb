@@ -5,4 +5,7 @@
   <%= link_to({ controller: 'print/admin/bluetooth_printers' }, data: { turbo_frame: 'panel', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
     <span><%= t('print.admin.bluetooth_printers.index.title') %></span>
   <% end %>
+  <%= link_to({ controller: 'print/admin/templates' }, data: { turbo_frame: 'panel', action: 'menu-popup#enter' }, class: 'cell button is-fullwidth') do %>
+    <span><%= t('print.admin.templates.index.title') %></span>
+  <% end %>
 </div>
