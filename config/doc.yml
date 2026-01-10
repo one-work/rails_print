@@ -1,2 +1,3 @@
 print/api/tasks:
-  - create
+  create:
+    task_id: 订单
