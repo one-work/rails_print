@@ -1,8 +1,9 @@
 zh:
   print:
-    tasks:
-      create:
-        title: 打印任务
+    api:
+      tasks:
+        create:
+          title: 打印任务
     panel:
       title: 打印机
       home:
