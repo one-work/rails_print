@@ -20,7 +20,7 @@ module Print
         @mqtt_printer.devices.find_or_initialize_by(aim: 'receipt')
         @mqtt_printer.save!
       else
-        render 'create_fail'
+        render 'alert_message', locals: { message: '该打印机未注册' }
       end
     end
 
