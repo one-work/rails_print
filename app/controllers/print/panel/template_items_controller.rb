@@ -13,7 +13,7 @@ module Print
     end
 
     def template_item_params
-      params.expect(template_item: [:name, :code])
+      params.expect(template_item: [:name, :code, :kind])
     end
 
   end
