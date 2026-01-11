@@ -14,7 +14,8 @@ module Print
     def template
       @task = @printer.template_tasks.build(task_params)
       @task.template_id = params[:template_id]
-      @task.payload = params.fetch(:body, {}).permit!
+      @task.payload = params.fetch(:payload, {}).permit!
+      @task.save
 
       render json: { task_id: @task.id }
     end
@@ -26,6 +27,7 @@ module Print
 
     def task_params
       params.permit(
+        :body,
         :uid,
         :print_at
       )
