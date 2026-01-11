@@ -1,6 +1,6 @@
 #ActiveRecord::Migrator.migrations_paths = [File.expand_path('../test/dummy/db/migrate', __dir__)]
 
-abort("Abort testing: Your Rails environment is running in production mode!") if Rails.env.production?
+if Rails.env.test?
 
 require 'active_support/test_case'
 require 'rails/testing/maintain_test_schema'
@@ -40,4 +40,6 @@ end
 
 if ActiveSupport::TestCase.respond_to?(:fixture_paths=)
   ActiveSupport::TestCase.fixtures :all
+end
+
 end
