@@ -14,8 +14,9 @@ module Print
 
     def print
       mqtt_printer.print(self) do |pr|
-        payload.each do |key, value|
-          pr.public_send template.code_kinds[key], value
+        template.code_kinds.each do |code, kind|
+          value = payload[code]
+          pr.public_send kind, value if value.present?
         end
       end
     end
