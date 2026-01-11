@@ -3,7 +3,9 @@ zh:
     api:
       tasks:
         create:
-          title: 发送打印任务
+          title: 发送普通打印任务
+        template:
+          title: 发送模板打印任务
     panel:
       title: 打印机
       home:
