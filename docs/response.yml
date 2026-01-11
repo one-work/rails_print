@@ -1,3 +1,5 @@
 print/api/tasks:
   create:
-    task_id: 订单
+    task_id: 任务 ID
+  template:
+    task_id: 任务 ID

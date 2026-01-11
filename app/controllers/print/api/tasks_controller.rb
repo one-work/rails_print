@@ -4,7 +4,17 @@ module Print
     before_action :set_new_task, only: [:create]
 
     def create
+      @task = @printer.raw_tasks.build(task_params)
+      @task.body = params[:body]
       @task.save
+
+      render json: { task_id: @task.id }
+    end
+
+    def template
+      @task = @printer.template_tasks.build(task_params)
+      @task.template_id = params[:template_id]
+      @task.payload = params.fetch(:body, {}).permit!
 
       render json: { task_id: @task.id }
     end
@@ -12,17 +22,6 @@ module Print
     private
     def set_printer
       @printer = MqttPrinter.find(params[:mqtt_printer_id])
-    end
-
-    def set_new_task
-      if params[:template_id]
-        @task = @printer.template_tasks.build(task_params)
-        @task.template_id = params[:template_id]
-        @task.payload = params.fetch(:body, {}).permit!
-      else
-        @task = @printer.raw_tasks.build(task_params)
-        @task.body = params[:body]
-      end
     end
 
     def task_params

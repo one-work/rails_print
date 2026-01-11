@@ -4,13 +4,10 @@ default: &default
   body: MyText
 create:
   <<: *default
+  type: Print::RawTask
+  mqtt_printer: default
+template:
+  <<: *default
   type: Print::TemplateTask
   mqtt_printer: default
   template: default
-two:
-  device_id: 1
-  mqtt_printer_id: 1
-  template_id: 1
-  aim: MyString
-  uid: MyString
-  print_at: 2026-01-02 19:25:32

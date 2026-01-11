@@ -16,7 +16,11 @@ Rails.application.routes.draw do
 
     namespace :api, defaults: { namespace: 'api' } do
       resources :mqtt_printers, only: [] do
-        resources :tasks, only: [:create]
+        resources :tasks, only: [:create] do
+          collection do
+            post :template
+          end
+        end
       end
     end
 
