@@ -10,7 +10,8 @@ module Print
       enum :kind, {
         break_line: 'break_line',
         text: 'text',
-        qrcode: 'qrcode'
+        qrcode: 'qrcode',
+        dash: 'dash'
       }
 
       belongs_to :template
