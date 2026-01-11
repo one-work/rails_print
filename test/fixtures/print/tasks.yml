@@ -1,13 +1,14 @@
 default: &default
   uid: MyString
   print_at: 2026-01-02 19:25:32 # 打印时间
-  body: MyText
 create:
   <<: *default
   type: Print::RawTask
   mqtt_printer: default
+  body: Mytext
 template:
   <<: *default
   type: Print::TemplateTask
   mqtt_printer: default
   template: default
+  payload: {}

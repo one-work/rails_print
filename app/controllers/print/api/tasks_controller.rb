@@ -1,7 +1,6 @@
 module Print
   class Api::TasksController < Api::BaseController
     before_action :set_printer
-    before_action :set_new_task, only: [:create]
 
     def create
       @task = @printer.raw_tasks.build(task_params)
