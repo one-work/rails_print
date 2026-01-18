@@ -1,0 +1,11 @@
+<%=
+  tr_tag(
+    model,
+    {
+      action: url_for(controller: 'devices', action: 'new'),
+      params: { 'device[printer_type]': 'Print::JiaBoPrinter', 'device[printer_id]': model.id },
+      icon: 'pencil',
+      title: t('.devices.new.title')
+    }
+  ) { yield }
+%>

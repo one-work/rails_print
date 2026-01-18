@@ -1,0 +1,12 @@
+<%=
+  tr_tag(
+    model,
+    {
+      action: url_for(action: 'test', id: model.id),
+      method: :patch,
+      icon: 'print',
+      title: t('.test.title'),
+      confirm: t('.test.confirm')
+    }
+  ) { yield }
+%>

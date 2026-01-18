@@ -7,22 +7,3 @@
   <p><%= device.aim_i18n %></p>
 <% end %>
 </td>
-<td>
-  <div data-show-target="item" class="visibility-hidden">
-    <%= button_to({ action: 'show', id: model.id }, aria: { label: t('.show.title') }, class: 'button is-small is-borderless') do %>
-      <%= svg_tag 'eye', class: 'icon text-info' %>
-    <% end %>
-    <%= button_to({ action: 'edit', id: model.id }, aria: { label: t('.edit.title') }, class: 'button is-small is-borderless') do %>
-      <%= svg_tag 'pencil', class: 'icon text-link' %>
-    <% end %>
-    <%= button_to({ action: 'destroy', id: model.id }, method: :delete, aria: { label: t('.destroy.title') }, class: 'button is-small is-borderless') do %>
-      <%= svg_tag 'trash', class: 'icon text-danger' %>
-    <% end %>
-  </div>
-  <div data-show-target="item" class="visibility-hidden">
-    <%= button_to({ controller: 'devices', action: 'new' }, params: { 'device[printer_type]': 'Print::JiaBoPrinter', 'device[printer_id]': model.id }, class: 'button is-small is-borderless') do %>
-      <%= svg_tag 'pencil' %>
-      <span class="ml-1"><%= t('.devices.new.title') %></span>
-    <% end %>
-  </div>
-</td>

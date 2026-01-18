@@ -1,0 +1,11 @@
+<%=
+  tr_tag(
+    model,
+    {
+      href: url_for(controller: 'jia_bo_printers', jia_bo_app_id: model.id),
+      icon: 'print',
+      title: t('.jia_bo_printers.index.title'),
+      count: model.jia_bo_printers_count
+    }
+  ) { yield }
+%>
