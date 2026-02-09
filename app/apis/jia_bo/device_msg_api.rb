@@ -9,7 +9,7 @@ module JiaBo
     end
 
     private
-    def with_access_token(params: {}, headers: {}, payload: {})
+    def with_access_token(params: {}, headers: {}, payload: {}, **)
       payload.merge!(
         reqTime: (Time.current.to_f * 1000).round.to_s,
         memberCode: @app.jia_bo_app.member_code,

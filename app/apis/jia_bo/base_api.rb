@@ -16,7 +16,7 @@ module JiaBo
     end
 
     private
-    def with_access_token(params: {}, headers: {}, payload: {}, tries: 2)
+    def with_access_token(params: {}, headers: {}, payload: {}, tries: 2, **)
       payload.merge!(
         reqTime: (Time.current.to_f * 1000).round.to_s,
         memberCode: @app.member_code
