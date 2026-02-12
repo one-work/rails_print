@@ -133,7 +133,7 @@ module Print
     end
 
     def webhook_url
-      Rails.application.routes.url_for(
+      Rails.app.routes.url_for(
         controller: 'print/api/tasks',
         action: 'create',
         mqtt_printer_id: id
