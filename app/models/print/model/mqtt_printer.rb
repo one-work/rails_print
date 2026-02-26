@@ -75,7 +75,17 @@ module Print
     end
 
     def register_success
-      api.publish "#{dev_imei}/unregistered", 'registerSuccess'
+      api.publish(
+        "#{dev_imei}/unregistered",
+        'registerSuccess'
+      )
+    end
+
+    def register_success_with_user
+      api.publish(
+        "#{dev_imei}/unregistered",
+        "registerSuccess@#{username}@#{password}"
+      )
     end
 
     def register_401

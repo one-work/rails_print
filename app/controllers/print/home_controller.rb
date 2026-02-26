@@ -9,7 +9,11 @@ module Print
       @mqtt_printer.assign_info(params[:payload])
       @mqtt_printer.save
 
-      @mqtt_printer.register_success
+      if params[:peerhost]
+        @mqtt_printer.register_success_with_user
+      else
+        @mqtt_printer.register_success
+      end
 
       head :ok
     end

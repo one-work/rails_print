@@ -18,7 +18,6 @@ module Print
         subscribe: 'subscribe',
         all: 'all'
       }, prefix: true, default: 'subscribe'
-
     end
 
   end
