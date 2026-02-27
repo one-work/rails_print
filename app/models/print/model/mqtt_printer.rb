@@ -136,15 +136,15 @@ module Print
     end
 
     def clear_user
-      cmd(CLEAR_USER)
+      cmd_plain(CLEAR_USER.map(&:to_16_str).join)
     end
 
     def test_print
-      print_cmd([0x12, 0x54], '1002')
+      cmd_plain([0x12, 0x54].map(&:to_16_str).join)
     end
 
-    def cmd_plain
-      api.publish dev_imei, '1254'
+    def cmd_plain(r)
+      api.publish dev_imei, r
     end
 
     def cmd(r)
