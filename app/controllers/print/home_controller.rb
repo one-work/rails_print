@@ -25,6 +25,7 @@ module Print
       else
         mqtt_printer = MqttPrinter.new(dev_imei: params[:clientid])
         mqtt_printer.confirm(params[:payload], kind: 'ready')
+        mqtt_printer.test_print
         mqtt_printer.clear_user
       end
 
