@@ -20,7 +20,13 @@ module Print
 
     # cloudPrinter/ready
     def ready
-      @mqtt_printer.confirm(params[:payload], kind: 'ready')
+      if @mqtt_printer
+        @mqtt_printer.confirm(params[:payload], kind: 'ready')
+      else
+        mqtt_printer = MqttPrinter.new(dev_imei: params[:clientid])
+        mqtt_printer.confirm(params[:payload], kind: 'ready')
+        mqtt_printer.clear_user
+      end
 
       head :ok
     end
