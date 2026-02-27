@@ -136,11 +136,11 @@ module Print
     end
 
     def clear_user
-      cmd(CLEAR_USER)
+      print_cmd(CLEAR_USER, '1003')
     end
 
     def test_print
-      cmd([0x12, 0x54])
+      print_cmd([0x12, 0x54], '1002')
     end
 
     def cmd(r)
