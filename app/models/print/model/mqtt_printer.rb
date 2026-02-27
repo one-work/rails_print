@@ -136,11 +136,11 @@ module Print
     end
 
     def clear_user
-      print_cmd(CLEAR_USER, '1003')
+      cmd(CLEAR_USER.map(&:to_16_str))
     end
 
     def test_print
-      print_cmd([0x12, 0x54], '1002')
+      cmd([0x12, 0x54].map(&:to_16_str))
     end
 
     def cmd(r)
