@@ -1,3 +1,17 @@
 <%= f.fields :devices do |ef| %>
-  <%= ef.select :aim, options_for_select(Print::Device.options_i18n(:aim), ef.object.aim) %>
+  <% if ef.object.id %>
+    <label class="checkbox">
+      <span>
+        <%= hidden_field_tag "mqtt_printer[devices_attributes][#{ef.index}][id]", ef.object.id %>
+        <%= hidden_field_tag "mqtt_printer[devices_attributes][#{ef.index}][_destroy]", 1 %>
+        <%= check_box_tag "mqtt_printer[devices_attributes][#{ef.index}][_destroy]", 0, true %>
+      </span>
+      <span><%= Print::Device.enum_i18n(:aim, ef.object.aim) %></span>
+    </label>
+  <% else %>
+    <label class="checkbox">
+      <%= check_box_tag "mqtt_printer[devices_attributes][#{ef.index}][aim]", ef.object.aim %>
+      <span><%= Print::Device.enum_i18n(:aim, ef.object.aim) %></span>
+    </label>
+  <% end %>
 <% end %>

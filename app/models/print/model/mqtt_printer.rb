@@ -25,7 +25,7 @@ module Print
       has_one :mqtt_user, primary_key: :username, foreign_key: :username, dependent: :destroy
 
       has_many :devices, as: :printer, dependent: :delete_all
-      accepts_nested_attributes_for :devices
+      accepts_nested_attributes_for :devices, allow_destroy: true
       has_many :tasks, through: :devices
       has_many :template_tasks
       has_many :raw_tasks

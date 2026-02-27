@@ -27,7 +27,9 @@ module Print
     end
 
     def edit
-      @mqtt_printer.devices.presence || @mqtt_printer.devices.build
+      ['produce', 'receipt'].each do |aim|
+        @mqtt_printer.devices.load.find { |i| i.aim == aim } || @mqtt_printer.devices.build(aim: aim)
+      end
     end
 
     def destroy
@@ -46,7 +48,7 @@ module Print
 
     def mqtt_printer_params
       params.fetch(:mqtt_printer, {}).permit(
-        devices_attributes: [:aim]
+        devices_attributes: [:aim, :id, :_destroy]
       )
     end
 
