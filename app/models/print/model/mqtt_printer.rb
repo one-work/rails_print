@@ -144,7 +144,7 @@ module Print
     end
 
     def cmd_plain(r)
-      api.publish dev_imei, r
+      api.publish dev_imei, r.upcase, payload_encoding: 'plain'
     end
 
     def cmd(r)
