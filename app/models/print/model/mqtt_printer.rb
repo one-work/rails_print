@@ -143,6 +143,10 @@ module Print
       print_cmd([0x12, 0x54], '1002')
     end
 
+    def cmd_plain
+      api.publish dev_imei, '1254'
+    end
+
     def cmd(r)
       api.publish dev_imei, Base64.encode64(r.pack('C*')), payload_encoding: 'base64'
     end
