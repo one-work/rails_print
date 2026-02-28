@@ -1,6 +1,6 @@
 <td class="family-monospace">
   <p><%= model.dev_imei %></p>
-  <p><time data-controller="time"><%= model.created_at.to_fs(:created_at) %></time></p>
+  <p><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
 </td>
 <td><%= model.dev_desc %></td>
 <td><%= model.online %></td>
