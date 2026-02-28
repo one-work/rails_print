@@ -9,6 +9,7 @@ module Print
       attribute :print_at, :datetime
       attribute :completed_at, :datetime
       attribute :body, :text
+      attribute :imei, :string, index: true
     end
 
   end

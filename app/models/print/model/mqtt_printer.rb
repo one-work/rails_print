@@ -30,6 +30,7 @@ module Print
       has_many :tasks, through: :devices
       has_many :template_tasks
       has_many :raw_tasks
+      has_many :deferred_tasks
 
       before_validation :init_username, if: :dev_imei_changed?
       after_save :init_mqtt_user, if: :saved_change_to_username?
@@ -128,7 +129,19 @@ module Print
     end
 
     def clear_user
-      print_cmd(CLEAR_USER, '1002')
+      raw_task = RawTask.create(
+        imei: dev_imei,
+        body: CLEAR_USER.map(&:to_16_str).join
+      )
+      print_cmd(CLEAR_USER, raw_task.id)
+
+      DeferredTask.create(body: 'ddd')
+    end
+
+    def check_deferred_tasks
+      deferred_tasks.where(completed_at: nil).each do |task|
+        task.print
+      end
     end
 
     def test_print

@@ -24,6 +24,8 @@ module Print
       if @mqtt_printer.new_record?
         # 数据库不存在记录，则清除账号密码后触发重设
         @mqtt_printer.clear_user
+      else
+        @mqtt_printer.check_deferred_tasks
       end
 
       head :ok
