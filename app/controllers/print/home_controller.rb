@@ -1,7 +1,7 @@
 module Print
   class HomeController < BaseController
     skip_before_action :verify_authenticity_token, only: [:message, :ready, :exception, :complete]
-    before_action :set_mqtt_printer, only: [:ready, :exception, :complete]
+    before_action :set_mqtt_printer, only: [:ready, :exception]
 
     def message
       @mqtt_printer = MqttPrinter.find_or_initialize_by(dev_imei: params[:clientid])
@@ -25,7 +25,6 @@ module Print
       else
         mqtt_printer = MqttPrinter.new(dev_imei: params[:clientid])
         mqtt_printer.confirm(params[:payload], kind: 'ready')
-        mqtt_printer.test_print
         mqtt_printer.clear_user
       end
 
@@ -41,7 +40,10 @@ module Print
 
     # cloudPrinter/complete
     def complete
-      @mqtt_printer.confirm_complete(params[:payload])
+      dev_imei, task_id = payload.split('#')
+      task = Task.find_by id: task_id
+      task.update completed_at: Time.current if task
+      EmqxApi.publish "#{dev_imei}/confirm", "complete##{task_id}"
 
       head :ok
     end

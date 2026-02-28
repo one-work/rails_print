@@ -72,7 +72,7 @@ module Print
 
     def api
       return @api if defined? @api
-      @api = EmqxApi.new
+      @api = EmqxApi
     end
 
     def register_success
@@ -99,11 +99,7 @@ module Print
     end
 
     def confirm_complete(payload)
-      _, task_id = payload.split('#')
-      task = Task.find_by id: task_id
-      task.update completed_at: Time.current if task
 
-      api.publish "#{dev_imei}/confirm", "complete##{task_id}"
     end
 
     def print(task)

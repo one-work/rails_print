@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 module Print
-  class EmqxApi
-    include CommonApi
+  module EmqxApi
+    extend CommonApi
+    extend self
     BASE = "#{Rails.application.credentials.dig(:emqx, :host)}/api/v5/"
 
     def clients(**options)
