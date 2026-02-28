@@ -1,8 +1,11 @@
-<th><%= Print::MqttUser.human_attribute_name(:dev_imei) %></th>
-<th><%= Print::MqttUser.human_attribute_name(:dev_desc) %></th>
-<th><%= Print::MqttUser.human_attribute_name(:online) %></th>
-<th><%= Print::MqttUser.human_attribute_name(:organ_id) %></th>
 <th>
-  <p><%= Print::MqttUser.human_attribute_name(:username) %></p>
-  <p><%= Print::MqttUser.human_attribute_name(:password) %></p>
+  <p><%= Print::MqttPrinter.human_attribute_name(:dev_imei) %></p>
+  <p><%= Print::MqttPrinter.human_attribute_name(:created_at) %></p>
+</th>
+<th><%= Print::MqttPrinter.human_attribute_name(:dev_desc) %></th>
+<th><%= Print::MqttPrinter.human_attribute_name(:online) %></th>
+<th><%= Print::MqttPrinter.human_attribute_name(:organ_id) %></th>
+<th>
+  <p><%= Print::MqttPrinter.human_attribute_name(:username) %></p>
+  <p><%= Print::MqttPrinter.human_attribute_name(:password) %></p>
 </th>

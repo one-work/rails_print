@@ -1,4 +1,7 @@
-<td class="family-monospace"><%= model.dev_imei %></td>
+<td class="family-monospace">
+  <p><%= model.dev_imei %></p>
+  <p><time data-controller="time"><%= model.created_at.to_fs(:created_at) %></time></p>
+</td>
 <td><%= model.dev_desc %></td>
 <td><%= model.online %></td>
 <td>
