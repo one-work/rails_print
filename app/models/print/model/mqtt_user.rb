@@ -5,6 +5,7 @@ module Print
 
     included do
       attribute :username, :string
+      attribute :ip, :string
       attribute :password_hash, :string
       attribute :password, :string
       attribute :is_superuser, :boolean, default: false

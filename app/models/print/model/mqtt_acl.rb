@@ -7,6 +7,7 @@ module Print
       attribute :permission, :string
       attribute :action, :string
       attribute :topic, :string
+      attribute :ip, :string
 
       enum :permission, {
         allow: 'allow',
