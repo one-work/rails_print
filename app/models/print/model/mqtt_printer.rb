@@ -98,10 +98,6 @@ module Print
       api.publish "#{dev_imei}/confirm", "#{kind}##{id}"
     end
 
-    def confirm_complete(payload)
-
-    end
-
     def print(task)
       pr = BaseEsc.new
       yield pr

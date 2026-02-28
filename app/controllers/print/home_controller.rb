@@ -20,12 +20,10 @@ module Print
 
     # cloudPrinter/ready
     def ready
-      if @mqtt_printer
-        @mqtt_printer.confirm(params[:payload], kind: 'ready')
-      else
-        mqtt_printer = MqttPrinter.new(dev_imei: params[:clientid])
-        mqtt_printer.confirm(params[:payload], kind: 'ready')
-        mqtt_printer.clear_user
+      @mqtt_printer.confirm(params[:payload], kind: 'ready')
+      if @mqtt_printer.new_record?
+        # 数据库不存在记录，则清除账号密码后触发重设
+        @mqtt_printer.clear_user
       end
 
       head :ok
@@ -50,7 +48,7 @@ module Print
 
     private
     def set_mqtt_printer
-      @mqtt_printer = MqttPrinter.find_by(dev_imei: params[:clientid])
+      @mqtt_printer = MqttPrinter.find_or_initialize_by(dev_imei: params[:clientid])
     end
 
   end
