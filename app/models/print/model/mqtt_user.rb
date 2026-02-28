@@ -9,7 +9,7 @@ module Print
       attribute :password, :string
       attribute :is_superuser, :boolean, default: false
 
-      has_many :mqtt_acls, primary_key: :username, foreign_key: :username
+      has_many :mqtt_acls, primary_key: :username, foreign_key: :username, dependent: :delete_all
 
       before_validation :set_pass, if: -> { password_changed? && password.present? }
       before_create :init_acls
