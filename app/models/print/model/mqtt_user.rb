@@ -10,7 +10,7 @@ module Print
       attribute :password, :string
       attribute :is_superuser, :boolean, default: false
 
-      has_many :mqtt_acls, primary_key: :username, foreign_key: :username, dependent: :delete_all
+      has_many :mqtt_acls, primary_key: [:username, :ip], foreign_key: [:username, :ip], dependent: :delete_all
 
       before_validation :set_pass, if: -> { password_changed? && password.present? }
       before_create :init_acls
@@ -52,8 +52,7 @@ module Print
         'cloudPrinter/exception',
         'cloudPrinter/heartbeat',
         'cloudPrinter/complete',
-        'cloudPrinter/pull',
-        'lwtt'
+        'cloudPrinter/pull'
       ].each do |topic|
         mqtt_acls.find_or_initialize_by(topic: topic) do |acl|
           acl.action = 'publish'
