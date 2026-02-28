@@ -1,28 +1,9 @@
-# RailsJiaBo
-Short description and motivation.
+### Print
 
-## Usage
-How to use my plugin.
-
-## Installation
-Add this line to your application's Gemfile:
-
-```ruby
-gem "rails_jia_bo"
+```sql
+SELECT password_hash, is_superuser FROM mqtt_user WHERE username = ${username} OR ip = ${peerhost} LIMIT 1
 ```
 
-And then execute:
-```bash
-$ bundle
+```sql
+SELECT action, permission, topic FROM mqtt_acl WHERE username = ${username} OR ip = ${peerhost}
 ```
-
-Or install it yourself as:
-```bash
-$ gem install rails_jia_bo
-```
-
-## Contributing
-Contribution directions go here.
-
-## License
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
