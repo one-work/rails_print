@@ -70,7 +70,7 @@ class BaseEsc
   end
 
   def render_raw
-    @data.map(&:to_16_str).join('')
+    @data.map(&:to_16_str).join
   end
 
   def render_0x

@@ -102,10 +102,10 @@ module Print
     def print(task)
       pr = BaseEsc.new
       yield pr
-      task.body = pr.render_raw
+      task.raw = pr.render
       task.save
 
-      print_cmd(pr.render, task.id)
+      print_cmd(task.raw, task.id)
     end
 
     def print_cmd(payload, task_id)
@@ -135,7 +135,12 @@ module Print
       )
       print_cmd(CLEAR_USER, raw_task.id)
 
-      DeferredTask.create(body: 'ddd')
+      set_deferred_task('密码重置成功!')
+    end
+
+    def set_deferred_task(text)
+      task = DeferredTask.new(imei: dev_imei)
+      task.set_raw!(text)
     end
 
     def check_deferred_tasks

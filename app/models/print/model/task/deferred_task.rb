@@ -6,11 +6,9 @@ module Print
       belongs_to :mqtt_printer, optional: true
     end
 
-    def print(text = '密码设置成功')
+    def print
       if mqtt_printer
-        mqtt_printer.print(id) do |pr|
-          pr.text text
-        end
+        mqtt_printer.print_cmd(raw, task.id)
       end
     end
 

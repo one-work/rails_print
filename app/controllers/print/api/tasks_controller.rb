@@ -4,7 +4,7 @@ module Print
 
     def create
       @task = @printer.raw_tasks.build(task_params)
-      @task.body = params[:body]
+      @task.raw = params[:raw]
       @task.save
 
       render json: { task_id: @task.id }
@@ -26,7 +26,7 @@ module Print
 
     def task_params
       params.permit(
-        :body,
+        :raw,
         :uid,
         :print_at
       )

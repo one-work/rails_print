@@ -8,8 +8,24 @@ module Print
       attribute :uid, :string
       attribute :print_at, :datetime
       attribute :completed_at, :datetime
-      attribute :body, :text
+      attribute :raw, :string, comment: '经过Base64压缩的字节码'
       attribute :imei, :string, index: true
+    end
+
+    def body
+      Base64.decode64(raw)
+    end
+
+    def set_raw(text)
+      pr = BaseEsc.new
+      pr.text text
+
+      self.raw = Base64.encode64(pr.render.pack('C*'))
+    end
+
+    def set_raw!(text)
+      set_raw(text)
+      save
     end
 
   end
