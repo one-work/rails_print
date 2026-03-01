@@ -162,7 +162,10 @@ module Print
 
     def set_deferred_task(text)
       task = DeferredTask.new(imei: dev_imei)
-      task.set_esc!(text)
+      task.set_esc! do |pr|
+        pr.text text
+        pr.qrcode register_url
+      end
     end
 
     def check_deferred_tasks
@@ -185,6 +188,12 @@ module Print
 
     def dev_qrcode
       QrcodeUtil.data_url(dev_imei)
+    end
+
+    def register_url
+      Rails.app.routes.url_for(
+
+      )
     end
 
     def webhook_url

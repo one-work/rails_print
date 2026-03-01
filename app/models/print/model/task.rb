@@ -31,16 +31,12 @@ module Print
       save
     end
 
-    def set_esc(text)
+    def set_esc!
       pr = BaseEsc.new
-      pr.text text
+      yield pr
 
       self.set_raw_array(pr.render)
-    end
-
-    def set_esc!(text)
-      set_esc(text)
-      save
+      self.save
     end
 
   end
