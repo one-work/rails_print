@@ -169,9 +169,10 @@ module Print
     end
 
     def check_deferred_tasks
-      deferred_tasks.where(completed_at: nil).each do |task|
+      r = deferred_tasks.where(completed_at: nil).map do |task|
         task.print
       end
+      logger.debug r
     end
 
     def test_print
