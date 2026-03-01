@@ -15,8 +15,11 @@ module Print
       attribute :dev_spec, :string
       attribute :dev_cut, :boolean
       attribute :dev_desc, :string
+      attribute :dev_version, :string
       attribute :dev_ip, :string
       attribute :online, :boolean
+      attribute :registered_at, :datetime
+      attribute :ready_at, :datetime
       attribute :username, :string
       attribute :password, :string
       attribute :extra, :json, default: {}
@@ -36,6 +39,8 @@ module Print
       before_validation :init_username, if: :dev_imei_changed?
       after_save :init_mqtt_user, if: :saved_change_to_username?
       after_save :clear_devices, if: -> { saved_change_to_organ_id? && organ_id.blank? }
+
+      after_save_commit :check_deferred_tasks, if: -> { ready_at.present? && registered_at.present? }
     end
 
     def init_username
@@ -61,10 +66,10 @@ module Print
         '终端类型' => infos[0],
         '注册期限' => infos[3],
         '方案提供商编号' => infos[4],
-        '方案编号' => infos[6],
-        '版本序号' => infos[7],
-        '版本描述' => infos[8]
+        '方案编号' => infos[6]
       }
+      self.dev_version = infos[7]
+      self.dev_desc = infos[8]
       self.dev_vendor = infos[2]
       self.dev_network = infos[5]
       self.dev_tel = infos[9]
@@ -95,9 +100,27 @@ module Print
       api.publish "#{dev_imei}/unregistered", 'registerFail@401'
     end
 
-    def confirm(payload, kind: 'ready')
+    def confirm_exception(payload)
       _, id = payload.split('#')
-      api.publish "#{dev_imei}/confirm", "#{kind}##{id}"
+      api.publish "#{dev_imei}/confirm", "exception##{id}"
+    end
+
+    def confirm_ready!(payload)
+      items = payload.split('#')
+      api.publish "#{dev_imei}/confirm", "ready##{items[1]}"
+
+      # 数据库不存在记录，则清除账号密码后触发重设
+      clear_user if new_record?
+      self.ready_at = Time.current
+      self.dev_version = items[2] if items[2].present? # 第三位如果存在，则为版本号
+      self.save
+    end
+
+    def confirm_complete(payload)
+      _, task_id = payload.split('#')
+      task = Task.find_by id: task_id
+      task.update completed_at: Time.current if task
+      api.publish "#{dev_imei}/confirm", "complete##{task_id}"
     end
 
     def print(task)
