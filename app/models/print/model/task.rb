@@ -10,10 +10,12 @@ module Print
       attribute :completed_at, :datetime
       attribute :raw, :string, comment: '经过Base64压缩的字节码'
       attribute :imei, :string, index: true
+
+      belongs_to :mqtt_printer, foreign_key: :imei, primary_key: :dev_imei, optional: true
     end
 
     def body
-      Base64.decode64(raw)
+      raw_arr.map(&:to_16_str).join
     end
 
     def raw_arr

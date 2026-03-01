@@ -6,7 +6,6 @@ module Print
       attribute :payload, :json, default: {}
 
       belongs_to :template
-      belongs_to :mqtt_printer
     end
 
     def body
