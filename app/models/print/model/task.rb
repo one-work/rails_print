@@ -22,15 +22,24 @@ module Print
       Base64.decode64(raw).unpack('C*')
     end
 
-    def set_raw(text)
+    def set_raw_array(raw)
+      self.raw = Base64.encode64(raw.pack('C*'))
+    end
+
+    def set_raw_array!(arr)
+      set_raw_array(arr)
+      save
+    end
+
+    def set_esc(text)
       pr = BaseEsc.new
       pr.text text
 
-      self.raw = Base64.encode64(pr.render.pack('C*'))
+      self.set_raw_array(pr.render)
     end
 
-    def set_raw!(text)
-      set_raw(text)
+    def set_esc!(text)
+      set_esc(text)
       save
     end
 

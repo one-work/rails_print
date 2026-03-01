@@ -130,10 +130,8 @@ module Print
     end
 
     def clear_user
-      raw_task = RawTask.create(
-        imei: dev_imei,
-        body: CLEAR_USER.map(&:to_16_str).join
-      )
+      raw_task = RawTask.create(imei: dev_imei)
+      raw_task.set_raw_array! CLEAR_USER
       print_cmd(CLEAR_USER, raw_task.id)
 
       set_deferred_task('密码重置成功!')
@@ -141,7 +139,7 @@ module Print
 
     def set_deferred_task(text)
       task = DeferredTask.new(imei: dev_imei)
-      task.set_raw!(text)
+      task.set_esc!(text)
     end
 
     def check_deferred_tasks
