@@ -16,6 +16,10 @@ module Print
       Base64.decode64(raw)
     end
 
+    def raw_arr
+      Base64.decode64(raw).unpack('C*')
+    end
+
     def set_raw(text)
       pr = BaseEsc.new
       pr.text text
