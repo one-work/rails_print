@@ -70,7 +70,11 @@ Rails.application.routes.draw do
           post :scan
         end
       end
-      resources :mqtt_printers
+      resources :mqtt_printers do
+        member do
+          get :bind
+        end
+      end
       resources :bluetooth_printers
     end
   end

@@ -192,7 +192,9 @@ module Print
 
     def register_url
       Rails.app.routes.url_for(
-
+        controller: 'print/admin/mqtt_printers',
+        action: 'bind',
+        id: id
       )
     end
 
