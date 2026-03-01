@@ -6,11 +6,11 @@ module Print
       belongs_to :mqtt_printer, optional: true
     end
 
-    def print
+    def print(text = '密码设置成功')
       if mqtt_printer
-        pr = BaseEsc.new
-        yield pr
-        mqtt_printer(pr.body, id)
+        mqtt_printer.print(id) do |pr|
+          pr.text text
+        end
       end
     end
 
