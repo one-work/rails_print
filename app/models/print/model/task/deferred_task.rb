@@ -4,7 +4,7 @@ module Print
 
     def print
       if mqtt_printer
-        mqtt_printer.print_cmd(raw_arr, task.id)
+        mqtt_printer.print_cmd(raw_arr, id)
       end
     end
 
