@@ -195,7 +195,8 @@ module Print
       Rails.app.routes.url_for(
         controller: 'print/admin/mqtt_printers',
         action: 'bind',
-        dev_imei: dev_imei
+        dev_imei: dev_imei,
+        host: "admin.#{Rails.app.routes.default_url_options[:host]}"
       )
     end
 
