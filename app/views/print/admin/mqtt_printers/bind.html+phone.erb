@@ -1,5 +1,7 @@
-
-
-<%= button_to({ action: 'create' }, params: { dev_imei: @mqtt_printer.dev_imei }, class: 'button is-fullwidth is-primary') do %>
-  <span>确认绑定</span>
+<% if @mqtt_printer %>
+  <%= button_to({ action: 'create' }, params: { dev_imei: @mqtt_printer.dev_imei }, class: 'button is-fullwidth is-primary') do %>
+    <span>确认绑定</span>
+  <% end %>
+<% else %>
+  
 <% end %>

@@ -71,8 +71,8 @@ Rails.application.routes.draw do
         end
       end
       resources :mqtt_printers do
-        member do
-          get :bind
+        collection do
+          get 'bind/:dev_imei' => :bind
         end
       end
       resources :bluetooth_printers

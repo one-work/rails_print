@@ -194,7 +194,7 @@ module Print
       Rails.app.routes.url_for(
         controller: 'print/admin/mqtt_printers',
         action: 'bind',
-        id: id
+        dev_imei: dev_imei
       )
     end
 
