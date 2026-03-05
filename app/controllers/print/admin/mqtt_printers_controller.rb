@@ -1,6 +1,6 @@
 module Print
   class Admin::MqttPrintersController < Admin::BaseController
-    before_action :set_mqtt_printer, only: [:show, :edit, :update, :destroy, :actions]
+    before_action :set_mqtt_printer, only: [:show, :edit, :update, :destroy, :actions, :test_print]
     before_action :set_new_mqtt_printer, only: [:new]
 
     def index
