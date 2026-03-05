@@ -42,16 +42,16 @@ module Print
 
     # 订阅事件
     def subscribe
-      if sub_params[:clientid] == sub_params[:topic]
-        @mqtt_printer.online = true
+      if params[:clientid] == params[:topic]
+        @mqtt_printer.update online: true
       end
 
       head :ok
     end
 
     def unsubscribe
-      if sub_params[:clientid] == sub_params[:topic]
-        @mqtt_printer.online = false
+      if params[:clientid] == params[:topic]
+        @mqtt_printer.update online: false
       end
 
       head :ok
@@ -60,13 +60,6 @@ module Print
     private
     def set_mqtt_printer
       @mqtt_printer = MqttPrinter.find_or_initialize_by(dev_imei: params[:clientid])
-    end
-
-    def sub_params
-      params.fetch(:sub_props, {}).permit(
-        :clientid,
-        :topic
-      )
     end
 
   end
