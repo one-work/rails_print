@@ -164,7 +164,8 @@ module Print
     def set_deferred_task(text)
       task = DeferredTask.new(imei: dev_imei)
       task.set_esc! do |pr|
-        pr.text text
+        pr.set_pad
+        pr.center text
         pr.qrcode register_url
       end
     end
