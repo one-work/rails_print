@@ -7,12 +7,12 @@ module Print
       @mqtt_printers = MqttPrinter.default_where(default_params).page(params[:page])
     end
 
-    def test
+    def test_print
       @mqtt_printer.test_print
     end
 
     def bind
-      @mqtt_printer = MqttPrinter.where(organ_id: nil).find_by(dev_imei: params[:dev_imei])
+      @mqtt_printer = MqttPrinter.find_by(dev_imei: params[:dev_imei])
     end
 
     def create

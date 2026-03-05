@@ -76,6 +76,9 @@ Rails.application.routes.draw do
         collection do
           get 'bind/:dev_imei' => :bind
         end
+        member do
+          post :test_print
+        end
       end
       resources :bluetooth_printers
     end

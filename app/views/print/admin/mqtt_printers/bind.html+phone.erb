@@ -1,7 +1,9 @@
-<% if @mqtt_printer %>
+<% if @mqtt_printer && @mqtt_printer.organ_id.blank? %>
   <%= button_to({ action: 'create' }, params: { dev_imei: @mqtt_printer.dev_imei }, class: 'button is-fullwidth is-primary') do %>
     <span>确认绑定</span>
   <% end %>
 <% else %>
-
+  <%= button_to({ action: 'test_print', id: @mqtt_printer.id }, class: 'button is-fullwidth is-primary') do %>
+    <span>打印自检</span>
+  <% end %>
 <% end %>
