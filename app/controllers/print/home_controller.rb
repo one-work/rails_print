@@ -1,7 +1,7 @@
 module Print
   class HomeController < BaseController
     skip_before_action :verify_authenticity_token, only: [:message, :ready, :exception, :complete]
-    before_action :set_mqtt_printer, only: [:ready, :exception, :complete, :subscribe]
+    before_action :set_mqtt_printer, only: [:ready, :exception, :complete, :subscribe, :unsubscribe]
 
     def message
       @mqtt_printer = MqttPrinter.find_or_initialize_by(dev_imei: params[:clientid])
@@ -42,7 +42,7 @@ module Print
 
     # 订阅事件
     def subscribe
-      if params[:clientid] == params[:topic]
+      if sub_params[:clientid] == sub_params[:topic]
         @mqtt_printer.online = true
       end
 
@@ -50,7 +50,7 @@ module Print
     end
 
     def unsubscribe
-      if params[:clientid] == params[:topic]
+      if sub_params[:clientid] == sub_params[:topic]
         @mqtt_printer.online = false
       end
 
@@ -60,6 +60,13 @@ module Print
     private
     def set_mqtt_printer
       @mqtt_printer = MqttPrinter.find_or_initialize_by(dev_imei: params[:clientid])
+    end
+
+    def sub_params
+      params.fetch(:sub_props, {}).permit(
+        :clientid,
+        :topic
+      )
     end
 
   end
