@@ -6,6 +6,8 @@ Rails.application.routes.draw do
       post :ready
       post :exception
       post :complete
+      post :subscribe
+      post :unsubscribe
     end
     resources :devices do
       collection do

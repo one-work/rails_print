@@ -1,7 +1,7 @@
 module Print
   class HomeController < BaseController
     skip_before_action :verify_authenticity_token, only: [:message, :ready, :exception, :complete]
-    before_action :set_mqtt_printer, only: [:ready, :exception, :complete]
+    before_action :set_mqtt_printer, only: [:ready, :exception, :complete, :subscribe]
 
     def message
       @mqtt_printer = MqttPrinter.find_or_initialize_by(dev_imei: params[:clientid])
@@ -36,6 +36,23 @@ module Print
     # cloudPrinter/complete
     def complete
       @mqtt_printer.confirm_complete(params[:payload])
+
+      head :ok
+    end
+
+    # 订阅事件
+    def subscribe
+      if params[:clientid] == params[:topic]
+        @mqtt_printer.online = true
+      end
+
+      head :ok
+    end
+
+    def unsubscribe
+      if params[:clientid] == params[:topic]
+        @mqtt_printer.online = false
+      end
 
       head :ok
     end

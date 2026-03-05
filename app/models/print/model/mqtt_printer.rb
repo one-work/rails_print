@@ -37,10 +37,11 @@ module Print
       has_many :deferred_tasks, primary_key: :dev_imei, foreign_key: :imei
 
       before_validation :init_username, if: :dev_imei_changed?
+      #before_save :sync_online, if: -> { ready_at.present? && registered_at.present? }
       after_save :init_mqtt_user, if: -> { saved_change_to_username? && registered_at.present? }
       after_save :clear_devices, if: -> { saved_change_to_organ_id? && organ_id.blank? }
 
-      after_save_commit :check_deferred_tasks, if: -> { ready_at.present? && registered_at.present? }
+      after_save_commit :check_deferred_tasks, if: -> { online && saved_change_to_online? }
     end
 
     def init_username
