@@ -1,7 +1,8 @@
 module Print
   class HomeController < BaseController
     skip_before_action :verify_authenticity_token, only: [:message, :ready, :exception, :complete]
-    before_action :set_mqtt_printer, only: [:ready, :exception, :complete, :subscribe, :unsubscribe]
+    before_action :sure_mqtt_printer, only: [:ready, :exception, :complete]
+    before_action :set_mqtt_printer, only: [:subscribe, :unsubscribe]
 
     def message
       @mqtt_printer = MqttPrinter.find_or_initialize_by(dev_imei: params[:clientid])
@@ -58,8 +59,12 @@ module Print
     end
 
     private
-    def set_mqtt_printer
+    def sure_mqtt_printer
       @mqtt_printer = MqttPrinter.find_or_initialize_by(dev_imei: params[:clientid])
+    end
+
+    def set_mqtt_printer
+      @mqtt_printer = MqttPrinter.find_by(dev_imei: params[:clientid])
     end
 
   end
