@@ -44,6 +44,7 @@ module Print
     # 订阅事件
     def authorized
       @mqtt_printer.update authorized_at: Time.current
+      @mqtt_printer.set_deferred_task!('欢迎使用打印机!')
 
       head :ok
     end
