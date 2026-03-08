@@ -7,9 +7,8 @@ module Print
     end
 
     def print
-      if mqtt_printer
-        mqtt_printer.print_cmd(raw_arr, id)
-      end
+      mqtt_printer || build_mqtt_printer
+      mqtt_printer.print_cmd(raw_arr, id)
     end
   end
 end
