@@ -1,9 +1,22 @@
-<% if @mqtt_printer && @mqtt_printer.organ_id.blank? %>
-  <%= button_to({ action: 'create' }, params: { dev_imei: @mqtt_printer.dev_imei }, class: 'button is-fullwidth is-primary') do %>
-    <span>确认绑定</span>
+<div class="mt-3">
+<% if @mqtt_printer %>
+  <div class="my-3 px-3">
+    <p class="size-7 text-grey">打印机编号：</p>
+    <p><%= @mqtt_printer.dev_imei %></p>
+  </div>
+  <% if @mqtt_printer.organ_id.blank? %>
+    <%= button_to({ action: 'create' }, params: { dev_imei: @mqtt_printer.dev_imei }, form: { class: 'is-fullwidth' }, class: 'button is-fullwidth is-primary') do %>
+      <span>确认绑定</span>
+    <% end %>
+  <% else %>
+    <%= button_to({ action: 'test_print', id: @mqtt_printer.id }, form: { class: 'is-fullwidth mb-3' }, class: 'button is-fullwidth is-primary') do %>
+      <span>打印自检</span>
+    <% end %>
+    <%= link_to('/doc', form: { class: 'display-block mt-3' }, class: 'button is-fullwidth is-warning') do %>
+      <span>打印文档</span>
+    <% end %>
   <% end %>
 <% else %>
-  <%= button_to({ action: 'test_print', id: @mqtt_printer.id }, class: 'button is-fullwidth is-primary') do %>
-    <span>打印自检</span>
-  <% end %>
+  <p>打印机未注册！</p>
 <% end %>
+</div>

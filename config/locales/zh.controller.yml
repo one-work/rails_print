@@ -55,6 +55,8 @@ zh:
       mqtt_printers:
         index:
           title: 打印机设置
+        bind:
+          title: 绑定打印机
         destroy:
           title: 解绑
       jia_bo_printers:
