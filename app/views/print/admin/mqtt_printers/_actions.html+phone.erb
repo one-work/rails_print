@@ -2,3 +2,7 @@
   <%= svg_tag 'trash' %>
   <span><%= t('.destroy.title') %></span>
 <% end %>
+<%= button_to({ action: 'test_print' }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'print' %>
+  <span>打印自测</span>
+<% end %>
