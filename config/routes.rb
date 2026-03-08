@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       post :complete
       post :subscribe
       post :unsubscribe
+      post :authorized
     end
     resources :devices do
       collection do
