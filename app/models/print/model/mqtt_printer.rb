@@ -180,7 +180,7 @@ module Print
       task.set_esc! do |pr|
         pr.set_pad
         pr.text text
-        pr.qrcode register_url
+        pr.qrcode dev_imei
       end
     end
 
