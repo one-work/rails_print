@@ -170,7 +170,6 @@ module Print
     def clear_user
       raw_task = RawTask.create(imei: dev_imei)
       raw_task.set_raw_array! CLEAR_USER
-      print_cmd(CLEAR_USER, raw_task.id)
 
       set_deferred_task('密码重置成功!')
       set_deferred_test
@@ -206,7 +205,8 @@ module Print
     end
 
     def test_print
-      print_cmd([0x12, 0x54], '1003')
+      task = RawTask.new(imei: dev_imei)
+      task.set_raw_array!([0x12, 0x54])
     end
 
     def cmd_plain(r)
