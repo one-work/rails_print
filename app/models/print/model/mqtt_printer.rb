@@ -112,7 +112,11 @@ module Print
       api.publish "#{dev_imei}/confirm", "ready##{items[1]}"
 
       # 数据库不存在记录，则清除账号密码后触发重设
-      clear_user if new_record?
+      if new_record?
+        clear_user
+      else
+        set_raw_task('欢迎使用打印机!')
+      end
       self.ready_at = Time.current
       self.dev_version = items[2] if items[2].present? # 第三位如果存在，则为版本号
       self.save
@@ -164,6 +168,15 @@ module Print
 
     def set_deferred_task(text)
       task = DeferredTask.new(imei: dev_imei)
+      task.set_esc! do |pr|
+        pr.set_pad
+        pr.text text
+        pr.qrcode register_url
+      end
+    end
+
+    def set_raw_task(text)
+      task = RawTask.new(imei: dev_imei)
       task.set_esc! do |pr|
         pr.set_pad
         pr.text text
