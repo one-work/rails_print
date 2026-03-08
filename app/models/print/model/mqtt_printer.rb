@@ -171,7 +171,7 @@ module Print
       task.set_esc! do |pr|
         pr.set_pad
         pr.text text
-        pr.qrcode register_url
+        pr.data_push 0x12, 0x54
       end
     end
 
