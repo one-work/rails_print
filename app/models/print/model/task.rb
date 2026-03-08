@@ -10,6 +10,9 @@ module Print
       attribute :completed_at, :datetime
       attribute :raw, :string, comment: '经过Base64压缩的字节码'
       attribute :imei, :string, index: true
+      attribute :note, :string
+
+      scope :todo, -> { where(completed: nil) }
 
       belongs_to :mqtt_printer, foreign_key: :imei, primary_key: :dev_imei, optional: true
     end

@@ -179,7 +179,7 @@ module Print
     end
 
     def set_deferred_task(text)
-      task = DeferredTask.new(imei: dev_imei)
+      task = DeferredTask.new(imei: dev_imei, note: text)
       task.set_esc! do |pr|
         pr.set_pad
         pr.text text
@@ -187,7 +187,7 @@ module Print
     end
 
     def set_raw_task(text)
-      task = RawTask.new(imei: dev_imei)
+      task = RawTask.new(imei: dev_imei, note: text)
       task.set_esc! do |pr|
         pr.set_pad
         pr.text text
@@ -203,12 +203,12 @@ module Print
     end
 
     def set_deferred_test
-      task = DeferredTask.new(imei: dev_imei)
+      task = DeferredTask.new(imei: dev_imei, note: '自测页')
       task.set_raw_array!([0x12, 0x54])
     end
 
     def test_print
-      task = RawTask.new(imei: dev_imei)
+      task = RawTask.new(imei: dev_imei, note: '自测页')
       task.set_raw_array!([0x12, 0x54])
     end
 
