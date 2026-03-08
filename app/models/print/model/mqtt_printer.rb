@@ -117,6 +117,8 @@ module Print
     def confirm_exception(payload)
       _, id = payload.split('#')
       api.publish "#{dev_imei}/confirm", "exception##{id}"
+
+      self.update online: false
     end
 
     def confirm_ready!(payload)
@@ -196,7 +198,7 @@ module Print
     end
 
     def check_deferred_tasks
-      r = deferred_tasks.where(completed_at: nil).map do |task|
+      r = deferred_tasks.todo.map do |task|
         task.print
       end
       logger.debug r
