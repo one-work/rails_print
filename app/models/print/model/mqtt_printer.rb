@@ -19,6 +19,7 @@ module Print
       attribute :dev_ip, :string
       attribute :online, :boolean
       attribute :registered_at, :datetime
+      attribute :authorized_at, :datetime
       attribute :ready_at, :datetime
       attribute :username, :string
       attribute :password, :string
