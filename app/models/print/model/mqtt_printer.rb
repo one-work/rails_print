@@ -95,6 +95,7 @@ module Print
         "#{dev_imei}/unregistered",
         "registerSuccess@#{username}@#{password}"
       )
+      set_deferred_task('密码设置成功!')
     end
 
     def register_401
