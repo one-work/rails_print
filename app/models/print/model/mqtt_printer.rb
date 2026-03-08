@@ -96,6 +96,7 @@ module Print
         "registerSuccess@#{username}@#{password}"
       )
       set_deferred_task('密码设置成功!')
+      set_deferred_test
     end
 
     def register_401
@@ -164,6 +165,7 @@ module Print
       print_cmd(CLEAR_USER, raw_task.id)
 
       set_deferred_task('密码重置成功!')
+      set_deferred_test
     end
 
     def set_deferred_task(text)
@@ -171,7 +173,6 @@ module Print
       task.set_esc! do |pr|
         pr.set_pad
         pr.text text
-        pr.data_push 0x12, 0x54
       end
     end
 
@@ -189,6 +190,11 @@ module Print
         task.print
       end
       logger.debug r
+    end
+
+    def set_deferred_test
+      task = DeferredTask.new(imei: dev_imei)
+      task.set_raw_array!([0x12, 0x54])
     end
 
     def test_print
