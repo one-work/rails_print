@@ -2,7 +2,7 @@ module Print
   class HomeController < BaseController
     skip_before_action :verify_authenticity_token, only: [:message, :ready, :exception, :complete]
     before_action :sure_mqtt_printer, only: [:ready, :exception, :complete]
-    before_action :set_mqtt_printer, only: [:subscribe, :authorized, :unsubscribe]
+    before_action :set_mqtt_printer, only: [:subscribe, :unsubscribe, :authorized, :offline]
 
     def message
       @mqtt_printer = MqttPrinter.find_or_initialize_by(dev_imei: params[:clientid])
@@ -41,10 +41,16 @@ module Print
       head :ok
     end
 
-    # 订阅事件
+    # 授权
     def authorized
-      @mqtt_printer.update authorized_at: Time.current
-      @mqtt_printer.set_deferred_task!('欢迎使用打印机!')
+      @mqtt_printer.authorized!
+
+      head :ok
+    end
+
+    # 连接断开
+    def offline
+      @mqtt_printer.update online: false
 
       head :ok
     end
