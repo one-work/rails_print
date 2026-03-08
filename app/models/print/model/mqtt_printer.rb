@@ -103,8 +103,11 @@ module Print
         "#{dev_imei}/unregistered",
         "registerSuccess@#{username}@#{password}"
       )
-      set_deferred_task('密码设置成功!')
-      set_deferred_test
+
+      if ready_at.blank?
+        set_deferred_task('密码设置成功!')
+        set_deferred_test
+      end
     end
 
     def register_401
