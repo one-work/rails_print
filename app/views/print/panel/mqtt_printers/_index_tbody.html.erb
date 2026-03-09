@@ -2,6 +2,10 @@
   <p><%= model.dev_imei %></p>
   <p><time data-controller="time"><%= model.created_at.to_fs(:iso8601) %></time></p>
 </td>
+<td>
+  <p><time data-controller="time"><%= model.registered_at.to_fs(:iso8601) %></time></p>
+  <p><time data-controller="time"><%= model.authorized_at.to_fs(:iso8601) %></time></p>
+</td>
 <td><%= model.dev_desc %></td>
 <td><%= model.online %></td>
 <td>
