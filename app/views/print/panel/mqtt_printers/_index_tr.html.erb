@@ -2,7 +2,7 @@
   tr_tag(
     model,
     {
-      href: { controller: 'tasks', mqtt_printer_id: model.id },
+      href: url_for(controller: 'tasks', mqtt_printer_id: model.id),
       icon: 'list',
       title: t('.tasks.index.title')
     }
