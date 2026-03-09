@@ -32,7 +32,7 @@ module Print
       has_many :devices, as: :printer, dependent: :delete_all
       accepts_nested_attributes_for :devices, allow_destroy: true
 
-      has_many :tasks, through: :devices
+      has_many :tasks, primary_key: :dev_imei, foreign_key: :imei
       has_many :template_tasks, primary_key: :dev_imei, foreign_key: :imei
       has_many :raw_tasks, primary_key: :dev_imei, foreign_key: :imei
       has_many :deferred_tasks, primary_key: :dev_imei, foreign_key: :imei
