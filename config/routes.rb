@@ -41,7 +41,11 @@ Rails.application.routes.draw do
         member do
           post :organ
         end
-        resources :tasks
+        resources :tasks do
+          collection do
+            delete :clear
+          end
+        end
       end
       resources :jia_bo_apps do
         resources :jia_bo_printers do
