@@ -66,9 +66,6 @@ Rails.application.routes.draw do
         resources :template_tasks
         resources :template_items
       end
-      resources :devices do
-        resources :tasks
-      end
       resources :jia_bo_printers do
         collection do
           post :scan
