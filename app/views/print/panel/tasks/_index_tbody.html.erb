@@ -1,0 +1,15 @@
+<td>
+  <p><%= model.type_i18n %></p>
+</td>
+<td>
+  <p class="text-grey">
+    <time data-controller="time" data-format="human"><%= model.created_at.to_fs(:iso8601) %></time>
+  </p>
+  <% if model.completed_at %>
+    <p class="text-success">
+      <time data-controller="time" data-format="human"><%= model.completed_at.to_fs(:iso8601) %></time>
+    </p>
+  <% end %>
+</td>
+<td><%= model.note %></td>
+<td><%= model.raw %></td>

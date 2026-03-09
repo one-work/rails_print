@@ -32,6 +32,9 @@ zh:
       mqtt_users:
         index:
           title: MQTT 用户
+      tasks:
+        index:
+          title: 打印任务
       templates:
         index:
           title: 模版
