@@ -45,6 +45,9 @@ Rails.application.routes.draw do
           collection do
             delete :clear
           end
+          member do
+            post :resend
+          end
         end
       end
       resources :jia_bo_apps do

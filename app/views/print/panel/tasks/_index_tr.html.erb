@@ -1,0 +1,10 @@
+<%=
+  tr_tag(
+    model,
+    {
+      action: url_for({ action: 'resend', id: model.id }),
+      icon: 'paper-plane',
+      title: t('.resend.title')
+    }
+  ) { yield }
+%>

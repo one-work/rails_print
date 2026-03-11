@@ -35,6 +35,8 @@ zh:
       tasks:
         index:
           title: 打印任务
+        resend:
+          title: 重新下发
       templates:
         index:
           title: 模版
