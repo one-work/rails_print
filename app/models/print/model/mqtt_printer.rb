@@ -42,7 +42,7 @@ module Print
       after_save :init_mqtt_user, if: -> { (saved_changes.keys & ['registered_at', 'username']).present? && registered_at.present? }
       after_save :clear_devices, if: -> { saved_change_to_organ_id? && organ_id.blank? }
 
-      after_save_commit :check_deferred_tasks, if: -> { online && saved_change_to_online? }
+      after_save_commit :check_undo_tasks, if: -> { online && saved_change_to_online? }
     end
 
     def init_username
@@ -130,7 +130,11 @@ module Print
       api.publish "#{dev_imei}/confirm", "ready##{items[1]}"
 
       # 数据库不存在记录，则清除账号密码后触发重设
-      clear_user if new_record?
+      if new_record?
+        clear_user
+      else
+
+      end
       self.ready_at = Time.current
       self.dev_version = items[2] if items[2].present? # 第三位如果存在，则为版本号
       self.save
@@ -198,11 +202,11 @@ module Print
       end
     end
 
-    def check_deferred_tasks
-      r = deferred_tasks.todo.map do |task|
-        task.print
+    def check_undo_tasks
+      tasks.todo.map do |task|
+        r = task.print
+        logger.debug r
       end
-      logger.debug r
     end
 
     def set_deferred_test
