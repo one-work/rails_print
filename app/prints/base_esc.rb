@@ -40,6 +40,7 @@ class BaseEsc
   def initialize
     @data = []
     data_push 0x1b, 0x40  # 初始化打印机：清除打印缓存，各参数恢复默认值
+    set_pad
   end
 
   def set_pad
