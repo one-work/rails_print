@@ -210,9 +210,21 @@ module Print
       task.set_raw_array!([0x12, 0x54])
     end
 
-    def test_print
-      task = RawTask.new(imei: dev_imei, note: '自测页')
-      task.set_raw_array!([0x12, 0x54])
+    def test_print(type = nil)
+      task = RawTask.new(imei: dev_imei, note: '测试')
+
+      case type
+      when 'text'
+        task.set_esc! { |pr| pr.text '文字打印' }
+      when 'qrcode'
+        task.set_esc! { |pr| pr.qrcode dev_imei }
+      when 'bar'
+        task.set_esc! { |pr| pr.barcode dev_imei }
+      when 'image'
+        task.set_esc! { |pr| }
+      else
+        task.set_raw_array!([0x12, 0x54])
+      end
     end
 
     def cmd_plain(r)

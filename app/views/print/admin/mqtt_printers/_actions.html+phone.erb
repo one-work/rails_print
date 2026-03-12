@@ -6,3 +6,19 @@
   <%= svg_tag 'print' %>
   <span>打印自测</span>
 <% end %>
+<%= button_to({ action: 'test_print' }, params: { type: 'text' }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'print' %>
+  <span>打印文字</span>
+<% end %>
+<%= button_to({ action: 'test_print' }, params: { type: 'qrcode' }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'print' %>
+  <span>打印二维码</span>
+<% end %>
+<%= button_to({ action: 'test_print' }, params: { type: 'bar' }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'print' %>
+  <span>打印条形码</span>
+<% end %>
+<%= button_to({ action: 'test_print' }, params: { type: 'image' }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'print' %>
+  <span>打印图像</span>
+<% end %>

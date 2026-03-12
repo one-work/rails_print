@@ -8,7 +8,7 @@ module Print
     end
 
     def test_print
-      @mqtt_printer.test_print
+      @mqtt_printer.test_print(params[:type])
     end
 
     def bind
