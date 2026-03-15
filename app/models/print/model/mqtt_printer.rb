@@ -244,10 +244,8 @@ module Print
 
     def test_image_data
       r = []
-      Rails.root.join('public/100.txt').read.split("\r\n").each do |line|
-        line.split(' ').each do |c|
-          r << c.to_i(16)
-        end
+      Rails.root.join('public/100.txt').read.gsub(/\r\n/, '').split(' ').each do |c|
+        r << c.to_i(16)
       end
 
       r
