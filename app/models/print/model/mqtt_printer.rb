@@ -236,20 +236,15 @@ module Print
       when 'bar'
         task.set_esc! { |pr| pr.barcode dev_imei }
       when 'image'
-        ## task.set_raw_array!(test_image_data)
-        cmd_plain(Rails.root.join('public/100.txt').read)
+        task.set_raw_array!(test_image_data)
       else
         task.set_raw_array!([0x12, 0x54])
       end
     end
 
     def test_image_data
-      r = []
-      Rails.root.join('public/100.txt').read.gsub(/\r\n/, '').split(' ').each do |c|
-        r << c.to_i(16)
-      end
-
-      r
+      hex = Rails.root.join('public/100.txt').read.delete("\t\r\n")
+      hex.split(' ').map { |i| i.to_i(16) }
     end
 
     def cmd_plain(r)
