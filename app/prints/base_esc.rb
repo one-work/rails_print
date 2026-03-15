@@ -180,11 +180,11 @@ class BaseEsc
     data_push *text_position, *bar_height, *bar_width, *bar_format, *data.bytes, 0x00
   end
 
-  def image(value, meta)
+  def image(value, byteWidth:, height:)
     data_push(
       0x1d, 0x76, 0x30, 0x00,
-      *this.doubleDigit(meta.byteWidth),
-      *this.doubleDigit(meta.height),
+      *doubleDigit(byteWidth),
+      *doubleDigit(height),
       *value
     )
   end
