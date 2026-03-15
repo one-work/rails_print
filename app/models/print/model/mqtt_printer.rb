@@ -236,7 +236,8 @@ module Print
       when 'bar'
         task.set_esc! { |pr| pr.barcode dev_imei }
       when 'image'
-        task.set_raw_array!(test_image_data)
+        ## task.set_raw_array!(test_image_data)
+        cmd_plain(Rails.root.join('public/100.txt').read)
       else
         task.set_raw_array!([0x12, 0x54])
       end
