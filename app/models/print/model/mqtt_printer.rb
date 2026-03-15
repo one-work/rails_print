@@ -184,6 +184,17 @@ module Print
       set_deferred_test
     end
 
+    def download_os(url = 'http://images.one.work/printer/printer_os_260312.bin')
+      task = RawTask.new(imei: dev_imei, note: url)
+      arr = [0x1f, 0x28, 0x75]
+      size = url.bytes.size + 2
+      arr.push size % 256, (size / 256.0).floor
+      arr.push 0x55, 0x48
+      arr.concat url.bytes
+
+      task.set_raw_array!(arr)
+    end
+
     def set_deferred_task!(text)
       task = DeferredTask.new(imei: dev_imei, note: text)
       task.set_esc! do |pr|
