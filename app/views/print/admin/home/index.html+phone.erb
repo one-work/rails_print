@@ -4,4 +4,4 @@
 
 <%= render layout: 'bluetooth_list' do %>
   <%= render partial: 'bluetooth_item', layout: 'bluetooth_item_actions', collection: @bluetooth_printers, as: :model %>
-<% end %>
+<% end if @bluetooth_printers.present? %>

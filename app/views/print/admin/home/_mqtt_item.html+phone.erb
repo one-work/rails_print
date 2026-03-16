@@ -1,18 +1,23 @@
-<p>
+<p class="size-7 is-wrap">
   <%= link_to({ controller: 'mqtt_printers', action: 'show', id: model.id }) do %>
     <span>IMEI:</span>
     <span><%= model.dev_imei %></span>
   <% end %>
 </p>
-<div data-controller="clipboard" data-action="click->clipboard#copyInner" class="clipboard">
-  <div class="truncate">
+<div data-controller="clipboard" data-action="click->clipboard#copyInner" class="clipboard size-7 is-wrap">
+  <div>
     <span>打印任务地址：</span>
     <span data-clipboard-target="source"><%= model.webhook_url %></span>
   </div>
-  <%= svg_tag 'clone', class: 'icon is-small ml-1 text-grey copy' %>
+  <%= svg_tag 'clone', class: 'icon ml-1 text-warning copy' %>
 </div>
 <p>
   <%= link_to('/doc', form: { class: 'display-block mt-3' }, class: 'button is-fullwidth is-warning') do %>
     <span>打印文档</span>
   <% end %>
 </p>
+<div class="fixed-grid has-3-cols p-3">
+  <div class="grid gap-2 as-actions">
+    <%= render partial: 'test_actions', locals: { model: model } %>
+  </div>
+</div>
