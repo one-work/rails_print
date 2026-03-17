@@ -35,7 +35,11 @@ module Print
     end
 
     def set_esc!
-      pr = BaseEsc.new
+      if mqtt_printer.dev_type_esc?
+        pr = BaseEsc.new
+      else
+        pr = BaseCpcl.new
+      end
       yield pr
 
       self.set_raw_array(pr.render)
