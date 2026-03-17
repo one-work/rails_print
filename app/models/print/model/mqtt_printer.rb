@@ -27,8 +27,8 @@ module Print
       attribute :extra, :json, default: {}
 
       enum :dev_type, {
-        esc: 1,
-        cpcl: 2
+        cpcl: 1,
+        esc: 2
       }, prefix: true
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
