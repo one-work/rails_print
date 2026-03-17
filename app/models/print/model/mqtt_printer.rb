@@ -9,7 +9,7 @@ module Print
 
     included do
       attribute :dev_imei, :string, index: true
-      attribute :dev_type, :string
+      attribute :dev_type, :integer
       attribute :dev_vendor, :string
       attribute :dev_network, :string
       attribute :dev_tel, :string
@@ -25,6 +25,11 @@ module Print
       attribute :username, :string
       attribute :password, :string
       attribute :extra, :json, default: {}
+
+      enum :dev_type, {
+        esc: 1,
+        cpcl: 2
+      }, prefix: true
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
@@ -44,6 +49,7 @@ module Print
       after_save :clear_devices, if: -> { saved_change_to_organ_id? && organ_id.blank? }
 
       after_save_commit :check_undo_tasks, if: -> { online && saved_change_to_online? }
+      after_save_commit :set_dev_type, if: -> { saved_change_to_dev_type? }
     end
 
     def init_username
@@ -177,9 +183,9 @@ module Print
       print_cmd(payload, '1001')
     end
 
-    def set_type(type = 0x01)
+    def set_dev_type
       raw_task = RawTask.new(imei: dev_imei)
-      raw_task.set_raw_array! TYPE + [type]
+      raw_task.set_raw_array! TYPE + [dev_type_before_type_cast]
     end
 
     def clear_user
