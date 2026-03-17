@@ -5,6 +5,7 @@ module Print
     TAG = [0x1b, 0x63]
     VOICE = [0x1b, 0x23, 0x23, 0x50, 0x4c, 0x4d, 0x43]
     CLEAR_USER = [0x1f, 0x28, 0x75, 0x02, 0x00, 0x43, 0x55]
+    TYPE_ESC = [0x1f, 0x2d, 0x4d, 0x01]
 
     included do
       attribute :dev_imei, :string, index: true
@@ -174,6 +175,11 @@ module Print
     def voice(type = 0xc1)
       payload = VOICE + [type]
       print_cmd(payload, '1001')
+    end
+
+    def set_type(type = 0x01)
+      raw_task = RawTask.new(imei: dev_imei)
+      raw_task.set_raw_array! TYPE + [type]
     end
 
     def clear_user
