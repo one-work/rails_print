@@ -57,6 +57,7 @@ module Print
     def mqtt_printer_params
       params.fetch(:mqtt_printer, {}).permit(
         :dev_type,
+        :dev_cut_type,
         devices_attributes: [:aim, :id, :_destroy]
       )
     end

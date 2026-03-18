@@ -15,6 +15,7 @@ module Print
       attribute :dev_tel, :string
       attribute :dev_spec, :string
       attribute :dev_cut, :boolean
+      attribute :dev_cut_type, :integer
       attribute :dev_desc, :string
       attribute :dev_version, :string
       attribute :dev_ip, :string
@@ -29,6 +30,11 @@ module Print
       enum :dev_type, {
         cpcl: 1,
         esc: 2
+      }, prefix: true
+
+      enum :dev_cut_type, {
+        full: 0,
+        partial: 1
       }, prefix: true
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true

@@ -38,14 +38,20 @@ module Print
       if mqtt_printer.dev_type_esc?
         pr = BaseEsc.new
         yield pr
-        self.set_raw_array(pr.render)
+        bytes = pr.render
       else
         pr = BaseCpcl.new
         yield pr
-        arr = pr.render.bytes + [0x1d, 0x56, 0x00]
-        self.set_raw_array(arr)
+        bytes = pr.render.bytes
       end
 
+      if mqtt_printer.dev_cut_type_full?
+        arr = bytes + [0x1d, 0x56, 0x00]
+      else
+        arr = bytes + [0x1d, 0x56, 0x01]
+      end
+
+      self.set_raw_array(arr)
       self.save
     end
 
