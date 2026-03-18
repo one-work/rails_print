@@ -115,6 +115,16 @@ class BaseCpcl
     ].join("\n")
   end
 
+  def qrcode(data, y: PADDING_TOP, u: 6)
+    size = RQRCode::QRCode.new(data, level: :m).qrcode.module_count
+    x = @width - (u * size) - 16
+    @qrcodes << [
+      "B QR #{x} #{y} M 2 U #{u}",
+      "MA,#{data}",
+      'ENDQR'
+    ].join("\n")
+  end
+
   def line_x(x0: 0, x1: 40 * 8, width: 2, height: 36)
     @texts << "L #{x0} #{@current_y} #{x1} #{@current_y} #{width}"
     @current_y += height
