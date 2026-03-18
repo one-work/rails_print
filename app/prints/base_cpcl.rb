@@ -52,6 +52,11 @@ class BaseCpcl
     @current_y += y if line_add
   end
 
+  def text_big_center(data, font: 8, size: 0, x: 0, y: 36, line_add: true)
+    @texts << "T #{font} #{size} #{x} #{@current_y} #{data}"
+    @current_y += y if line_add
+  end
+
   def text_box(font: 8, size: 0, x: 0, y: 36, line_add: true, **data)
     max_width = data.keys.map(&->(title){ title.display_width }).max
     texts = []
