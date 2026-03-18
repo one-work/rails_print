@@ -121,7 +121,7 @@ class BaseCpcl
   end
 
   def barcode(data, width: 1, ratio: 1, height: 50, x: 0)
-    @texts << "B 39 #{width} #{ratio} #{height} #{x} #{@current_y} #{data}"
+    @texts << "B 128 #{width} #{ratio} #{height} #{x} #{@current_y} #{data}"
     @current_y += height
   end
 

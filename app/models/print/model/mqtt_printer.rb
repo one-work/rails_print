@@ -226,14 +226,17 @@ module Print
     end
 
     def test_print(type = nil)
-      task = RawTask.new(imei: dev_imei, note: '测试')
+      task = RawTask.new(imei: dev_imei)
 
       case type
       when 'text'
+        task.note = '文字测试'
         task.set_esc! { |pr| pr.text '文字打印' }
       when 'qrcode'
+        task.note = '二维码测试'
         task.set_esc! { |pr| pr.qrcode dev_imei }
       when 'bar'
+        task.note = '条码测试'
         task.set_esc! { |pr| pr.barcode dev_imei }
       when 'image'
         task.set_raw_array!(test_image_data)
