@@ -11,6 +11,10 @@ module Print
       @mqtt_printer.test_print(params[:type])
     end
 
+    def xx
+      @mqtt_printer.test_print(params[:type])
+    end
+
     def bind
       @mqtt_printer = MqttPrinter.find_by(dev_imei: params[:dev_imei])
     end
@@ -52,6 +56,7 @@ module Print
 
     def mqtt_printer_params
       params.fetch(:mqtt_printer, {}).permit(
+        :dev_type,
         devices_attributes: [:aim, :id, :_destroy]
       )
     end

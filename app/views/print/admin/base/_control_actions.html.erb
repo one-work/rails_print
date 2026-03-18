@@ -1,0 +1,8 @@
+<%= button_to({ controller: 'mqtt_printers', action: 'update', id: model.id }, params: { 'mqtt_printer[dev_type]': 'esc' }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'print' %>
+  <span>ESC</span>
+<% end %>
+<%= button_to({ controller: 'mqtt_printers', action: 'update', id: model.id }, params: { 'mqtt_printer[dev_type]': 'cpcl' }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'print' %>
+  <span>CPCL</span>
+<% end %>
