@@ -12,8 +12,6 @@ class BaseEsc
   CTL_VT = [ 0x0b ]                   # Vertical tab
 
   # Paper
-  PAPER_FULL_CUT = [ 0x1d, 0x56, 0x00 ]			   # 全切纸
-  PAPER_PARTIAL_CUT = [ 0x1d, 0x56, 0x01 ]			   # 半切纸（中间还有部分相连）
   PAPER_CUT_A = [ 0x1d, 0x56, 0x41 ]			   # Paper cut A
   PAPER_CUT_B = [ 0x1d, 0x56, 0x42 ]			   # Paper cut B
 
@@ -52,12 +50,8 @@ class BaseEsc
     data_push 0x1c, 0x21, 0x00  # 中文字间距为 0 点
   end
 
-  def partial_cut!
-    data_push *PAPER_PARTIAL_CUT
-  end
-
-  def cut!
-    data_push *PAPER_FULL_CUT
+  def partial_cut
+    data_push 0x1d, 0x56, 0x01  # 半切纸（中间还有部分相连）
   end
 
   def break_line
@@ -66,7 +60,7 @@ class BaseEsc
 
   def render
     data_push *(CTL_LF * 10)
-    cut!
+    cut
     @data
   end
 
@@ -200,10 +194,6 @@ class BaseEsc
     cols.each do |col|
       data_push *col.map { |h| h.encode('gb18030').bytes << 0x09 }.flatten, 0x0d
     end
-  end
-
-  def partial_cut
-    data_push *PAPER_PARTIAL_CUT
   end
 
   def cut
