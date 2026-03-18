@@ -42,7 +42,8 @@ module Print
       else
         pr = BaseCpcl.new
         yield pr
-        self.set_raw_array(pr.render.bytes)
+        arr = pr.render.bytes + [0x1d, 0x56, 0x00]
+        self.set_raw_array(arr)
       end
 
       self.save
