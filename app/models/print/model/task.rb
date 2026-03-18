@@ -46,9 +46,9 @@ module Print
       end
 
       if mqtt_printer.dev_cut_type_full?
-        arr = bytes + [0x1d, 0x56, 0x00]
+        arr = bytes + [0x1b, 0x69]
       else
-        arr = bytes + [0x1d, 0x56, 0x01]
+        arr = bytes + [0x1b, 0x6d]
       end
 
       self.set_raw_array(arr)
