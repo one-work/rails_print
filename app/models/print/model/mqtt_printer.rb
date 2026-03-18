@@ -216,7 +216,6 @@ module Print
     def set_deferred_task!(text)
       task = DeferredTask.new(imei: dev_imei, note: text)
       task.set_esc! do |pr|
-        pr.set_pad
         pr.text_big_center text
         pr.qrcode dev_imei
       end
@@ -225,7 +224,6 @@ module Print
     def set_raw_task!(text)
       task = RawTask.new(imei: dev_imei, note: text)
       task.set_esc! do |pr|
-        pr.set_pad
         pr.text text
         pr.qrcode dev_imei
       end
