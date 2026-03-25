@@ -5,6 +5,10 @@ module Print
     extend self
     BASE = "#{Rails.application.credentials.dig(:emqx, :host)}/api/v5/"
 
+    def base_url
+      BASE
+    end
+
     def clients(**options)
       r = get 'clients', origin: BASE, **options
       r['data']
