@@ -10,6 +10,10 @@ module Print
       r['data']
     end
 
+    def getways(name)
+      get "gateways/#{name}/authentication"
+    end
+
     def publish(topic, payload, retain = false, qos = 2, **options)
       post 'publish', topic: topic, payload: payload, retain: retain, qos: qos, origin: BASE, **options
     end

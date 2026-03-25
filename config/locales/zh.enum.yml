@@ -8,3 +8,7 @@ zh:
         printer_type:
           Print::DeviceJiaBo: 佳博打印机
           Print::DeviceIp: IP 打印机
+      print/mqtt_printer:
+        online:
+          true: 在线
+          false: 离线
