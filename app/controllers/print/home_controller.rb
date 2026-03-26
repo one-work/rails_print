@@ -43,7 +43,7 @@ module Print
 
     # 授权
     def authorized
-      @mqtt_printer.authorized!
+      @mqtt_printer&.authorized!
 
       head :ok
     end
