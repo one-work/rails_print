@@ -6,6 +6,10 @@ module Print
       @bluetooth_printers = BluetoothPrinter.where(default_params).page(params[:page])
     end
 
+    def bind
+      @mqtt_printers = MqttPrinter.where(default_params).page(params[:page])
+    end
+
     def scan
       if params[:result].include?('&')
         name, _ = params[:result].split('&')
