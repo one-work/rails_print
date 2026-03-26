@@ -8,6 +8,7 @@ module Print
       attribute :ip, :string
       attribute :password_hash, :string
       attribute :password, :string
+      attribute :note, :string
       attribute :is_superuser, :boolean, default: false
 
       has_many :mqtt_acls, primary_key: [:username, :ip], foreign_key: [:username, :ip], dependent: :delete_all

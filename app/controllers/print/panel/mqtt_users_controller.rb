@@ -5,6 +5,7 @@ module Print
     def mqtt_user_params
       params.fetch(:mqtt_user, {}).permit(
         :username,
+        :note,
         :password,
         :ip,
         :is_superuser
