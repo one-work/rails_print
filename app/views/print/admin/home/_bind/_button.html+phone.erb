@@ -1,0 +1,9 @@
+<div
+  data-controller="scan"
+  data-action="click->scan#report"
+  class="button is-rounded is-primary"
+  data-report-url="<%= url_for(action: 'scan') %>"
+>
+  <%= svg_tag 'plus' %>
+  <span class="ml-1"><%= t('.scan.title') %></span>
+</div>
