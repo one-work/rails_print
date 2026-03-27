@@ -9,13 +9,11 @@ module Print
 
     included do
       attribute :dev_imei, :string, index: true
-      attribute :dev_type, :integer
       attribute :dev_vendor, :string
       attribute :dev_network, :string
       attribute :dev_tel, :string
       attribute :dev_spec, :string
       attribute :dev_cut, :boolean
-      attribute :dev_cut_type, :integer
       attribute :dev_desc, :string
       attribute :dev_version, :string
       attribute :dev_ip, :string
@@ -31,11 +29,13 @@ module Print
         cpcl: 1,
         esc: 2
       }, prefix: true
+      attribute :dev_type, :integer
 
       enum :dev_cut_type, {
         full: 0,
         partial: 1
       }, prefix: true
+      attribute :dev_cut_type, :integer
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
