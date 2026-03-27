@@ -17,6 +17,8 @@ module Print
       attribute :dev_desc, :string
       attribute :dev_version, :string
       attribute :dev_ip, :string
+      attribute :dev_type, :integer
+      attribute :dev_cut_type, :integer
       attribute :online, :boolean
       attribute :registered_at, :datetime
       attribute :authorized_at, :datetime
@@ -29,13 +31,11 @@ module Print
         cpcl: 1,
         esc: 2
       }, prefix: true
-      attribute :dev_type, :integer
 
       enum :dev_cut_type, {
         full: 0,
         partial: 1
       }, prefix: true
-      attribute :dev_cut_type, :integer
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
