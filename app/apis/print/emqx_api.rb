@@ -18,12 +18,12 @@ module Print
       get 'authentication'
     end
 
-    def auth_ips(*ips)
+    def auth_ips(*ips, **options)
       checks = ips.each_with_object([]) do |ip, arr|
         arr << { is_match: "str_eq(peerhost, '#{ip}')", result: 'allow' }
       end
 
-      put 'authentication/cinfo', checks: checks, mechanism: 'cinfo'
+      put 'authentication/cinfo', checks: checks, mechanism: 'cinfo', **options
     end
 
     def publish(topic, payload, retain = false, qos = 2, **options)
