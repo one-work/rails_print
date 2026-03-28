@@ -76,7 +76,11 @@ module Print
 
     def authorized!
       self.update authorized_at: Time.current
-      set_deferred_task!('欢迎使用打印机!')
+
+      text = '欢迎使用打印机!'
+      unless deferred_tasks.todo.where(note: text).exists?
+        set_deferred_task!(text)
+      end
     end
 
     def init_mqtt_user
