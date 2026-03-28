@@ -35,14 +35,14 @@ module Print
     end
 
     def set_esc!
-      if mqtt_printer.dev_type_esc?
-        pr = BaseEsc.new
-        yield pr
-        bytes = pr.render
-      else
+      if mqtt_printer.dev_type_cpcl?
         pr = BaseCpcl.new
         yield pr
         bytes = pr.render.bytes
+      else
+        pr = BaseEsc.new
+        yield pr
+        bytes = pr.render
       end
 
       if mqtt_printer.dev_cut_type_full?
