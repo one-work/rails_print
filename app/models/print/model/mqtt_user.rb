@@ -15,6 +15,7 @@ module Print
 
       before_validation :set_pass, if: -> { password_changed? && password.present? }
       before_create :init_acls
+      after_save_commit :sync_to_emqx, if: -> { saved_change_to_ip? }
     end
 
     def set_pass!(pass = password, cost: 10)
@@ -24,6 +25,11 @@ module Print
 
     def set_pass(pass = password, cost: 10)
       self.password_hash = BCrypt::Password.create(pass, cost: cost)
+    end
+
+    def sync_to_emqx
+      ips = self.class.where.not(ip: nil).pluck(:ip).compact_blank
+      EmqxApi.auth_ips *ips
     end
 
     def api
