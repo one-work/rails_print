@@ -9,16 +9,16 @@ module Print
 
     included do
       attribute :dev_imei, :string, index: true
-      attribute :dev_type, :integer
       attribute :dev_vendor, :string
       attribute :dev_network, :string
       attribute :dev_tel, :string
       attribute :dev_spec, :string
       attribute :dev_cut, :boolean
-      attribute :dev_cut_type, :integer
       attribute :dev_desc, :string
       attribute :dev_version, :string
       attribute :dev_ip, :string
+      attribute :dev_type, :integer
+      attribute :dev_cut_type, :integer
       attribute :online, :boolean
       attribute :registered_at, :datetime
       attribute :authorized_at, :datetime
