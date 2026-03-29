@@ -69,6 +69,7 @@ Rails.application.routes.draw do
       root 'home#index'
       controller :home do
         post :scan
+        post :replace
         get :bind
       end
       resources :templates do

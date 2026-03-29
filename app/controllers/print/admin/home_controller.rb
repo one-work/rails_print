@@ -28,6 +28,8 @@ module Print
     end
 
     def replace
+      Device.where(aim: 'demo', **default_params).delete_all
+
       mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
       mqtt_printer.organ = current_organ
       mqtt_printer.devices.find_or_initialize_by(aim: 'demo')
