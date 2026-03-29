@@ -47,6 +47,8 @@ zh:
           title: 打印机
         scan:
           title: 扫码添加
+        replace:
+          title: 扫码绑定
       bluetooth_printers:
         index:
           title: 蓝牙打印
