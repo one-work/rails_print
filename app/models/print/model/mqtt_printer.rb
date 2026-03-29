@@ -23,6 +23,7 @@ module Print
       attribute :registered_at, :datetime
       attribute :authorized_at, :datetime
       attribute :ready_at, :datetime
+      attribute :offline_at, :datetime
       attribute :username, :string
       attribute :password, :string
       attribute :extra, :json, default: {}
@@ -71,6 +72,7 @@ module Print
     def sync_online
       if ready_at > authorized_at
         self.online = true
+        self.offline_at = nil
       end
     end
 
@@ -139,7 +141,7 @@ module Print
       _, id = payload.split('#')
       api.publish "#{dev_imei}/confirm", "exception##{id}"
 
-      self.update online: false
+      self.update online: false, offline_at: Time.current
     end
 
     def confirm_ready!(payload)

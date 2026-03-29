@@ -50,7 +50,7 @@ module Print
 
     # 连接断开
     def offline
-      @mqtt_printer.update online: false
+      @mqtt_printer.update online: false, offline_at: Time.at_milli(params[:disconnected_at])
 
       head :ok
     end
@@ -58,7 +58,7 @@ module Print
     # 订阅事件
     def subscribe
       if params[:clientid] == params[:topic]
-        @mqtt_printer.update online: true
+        @mqtt_printer.update online: true, offline_at: nil
       end
 
       head :ok
@@ -66,7 +66,7 @@ module Print
 
     def unsubscribe
       if params[:clientid] == params[:topic]
-        @mqtt_printer.update online: false
+        @mqtt_printer.update online: false, offline_at: Time.current
       end
 
       head :ok

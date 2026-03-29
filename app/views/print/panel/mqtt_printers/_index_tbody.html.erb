@@ -15,7 +15,21 @@
   </p>
 </td>
 <td><%= model.dev_desc %></td>
-<td><%= model.online %></td>
+<td>
+  <% if model.online %>
+    <p>
+      <div class="tags has-addons">
+        <span class="tag">在线</span>
+        <%= svg_tag 'check' %>
+      </div>
+    </p>
+  <% elsif model.offline_at %>
+    <p>
+      <span class="text-grey"><%= Print::MqttPrinter.human_attribute_name(:offline_at) %></span>
+      <time data-controller="time"><%= model.offline_at.to_fs(:iso8601) %></time>
+    </p>
+  <% end %>
+</td>
 <td>
   <p><%= model.organ.name if model.organ %></p>
   <p>
