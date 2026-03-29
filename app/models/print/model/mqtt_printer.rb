@@ -223,6 +223,7 @@ module Print
       task = DeferredTask.new(imei: dev_imei, note: text)
       task.set_esc! do |pr|
         pr.text_big_center text
+        pr.break_line
         pr.qrcode_center dev_imei
       end
     end

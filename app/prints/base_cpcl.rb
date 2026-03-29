@@ -33,6 +33,10 @@ class BaseCpcl
     ]
   end
 
+  def break_line
+    @texts << 'PREFEED 64'
+  end
+
   def text_bold(data, size: 1, **options)
     @texts << 'SETBOLD 2'
     @texts << "SETMAG #{size} #{size}"

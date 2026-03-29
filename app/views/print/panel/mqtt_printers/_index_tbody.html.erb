@@ -18,10 +18,7 @@
 <td>
   <% if model.online %>
     <p>
-      <div class="tags has-addons">
-        <span class="tag">在线</span>
-        <%= svg_tag 'check' %>
-      </div>
+      <%= svg_tag 'check', class: 'icon text-success' %>
     </p>
   <% elsif model.offline_at %>
     <p>
