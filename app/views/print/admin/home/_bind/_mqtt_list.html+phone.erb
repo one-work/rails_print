@@ -1,3 +1,9 @@
 <div class="box">
   <%= yield %>
 </div>
+
+<p>
+  <%= link_to({ controller: 'doc/subjects', action: 'code', meta_controller: 'print/api/tasks', meta_action: 'create' } , class: 'button is-fullwidth is-warning') do %>
+    <span>打印文档</span>
+  <% end %>
+</p>
