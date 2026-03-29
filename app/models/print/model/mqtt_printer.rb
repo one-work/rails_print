@@ -223,7 +223,7 @@ module Print
       task = DeferredTask.new(imei: dev_imei, note: text)
       task.set_esc! do |pr|
         pr.text_big_center text
-        pr.qrcode dev_imei
+        pr.qrcode_center dev_imei
       end
     end
 
@@ -231,7 +231,7 @@ module Print
       task = RawTask.new(imei: dev_imei, note: text)
       task.set_esc! do |pr|
         pr.text text
-        pr.qrcode dev_imei
+        pr.qrcode_center dev_imei
       end
     end
 
@@ -256,7 +256,7 @@ module Print
         task.set_esc! { |pr| pr.text '文字打印' }
       when 'qrcode'
         task.note = '二维码测试'
-        task.set_esc! { |pr| pr.qrcode dev_imei }
+        task.set_esc! { |pr| pr.qrcode_center dev_imei }
       when 'bar'
         task.note = '条码测试'
         task.set_esc! { |pr| pr.barcode dev_imei }

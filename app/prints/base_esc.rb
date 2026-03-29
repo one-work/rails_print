@@ -150,6 +150,12 @@ class BaseEsc
     data_push *(CTL_LF * 2)
   end
 
+  def qrcode_center(data, y: nil)
+    data_push 0x1b, 0x61, 0x01
+    qrcode(data, y: y)
+    data_push *TXT_ALIGN_LT
+  end
+
   # 0 不显示数据，只显示条码
   # 1 数据在条码上方显示
   # 2 数据在条码下方显示
