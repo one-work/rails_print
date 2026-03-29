@@ -7,7 +7,8 @@ module Print
 
       enum :aim, {
         produce: 'produce',
-        receipt: 'receipt'
+        receipt: 'receipt',
+        demo: 'demo'
       }, prefix: true
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true

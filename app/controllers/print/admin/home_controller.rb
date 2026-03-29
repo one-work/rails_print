@@ -7,7 +7,7 @@ module Print
     end
 
     def bind
-      @mqtt_printers = MqttPrinter.where(default_params).page(params[:page])
+      @mqtt_printers = MqttPrinter.includes(:devices).where(default_params).where(devices: { aim: 'demo' }).page(params[:page])
     end
 
     def scan
@@ -25,6 +25,13 @@ module Print
         mqtt_printer.devices.find_or_initialize_by(aim: 'receipt')
         mqtt_printer.save!
       end
+    end
+
+    def replace
+      mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
+      mqtt_printer.organ = current_organ
+      mqtt_printer.devices.find_or_initialize_by(aim: 'demo')
+      mqtt_printer.save!
     end
 
   end
