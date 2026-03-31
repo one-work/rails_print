@@ -3,11 +3,25 @@
 </div>
 
 <p>
+  <div data-controller="clipboard" data-action="click->clipboard#copyInner" class="clipboard size-7 is-wrap">
+    <div>
+      <span>打印任务地址：</span>
+      <span data-clipboard-target="source"><%= model.webhook_url %></span>
+    </div>
+    <%= svg_tag 'clone', class: 'icon ml-1 text-warning copy' %>
+  </div>
   <%= link_to({ controller: 'doc/subjects', action: 'code', meta_controller: 'print/api/tasks', meta_action: 'create' } , class: 'button is-fullwidth is-warning') do %>
     <span>文档：普通打印</span>
   <% end %>
 </p>
 <p>
+  <div data-controller="clipboard" data-action="click->clipboard#copyInner" class="clipboard size-7 is-wrap">
+    <div>
+      <span>打印任务地址：</span>
+      <span data-clipboard-target="source"><%= model.webhook_url %></span>
+    </div>
+    <%= svg_tag 'clone', class: 'icon ml-1 text-warning copy' %>
+  </div>
   <%= link_to({ controller: 'doc/subjects', action: 'code', meta_controller: 'print/api/tasks', meta_action: 'template' } , class: 'button is-fullwidth is-warning') do %>
     <span>文档：模板打印</span>
   <% end %>

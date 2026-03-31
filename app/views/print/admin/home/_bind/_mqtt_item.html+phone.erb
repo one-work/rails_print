@@ -1,0 +1,14 @@
+<p class="size-7 is-wrap">
+  <%= link_to({ controller: 'mqtt_printers', action: 'show', id: model.id }) do %>
+    <span>IMEI:</span>
+    <span><%= model.dev_imei %></span>
+  <% end %>
+</p>
+<div class="fixed-grid has-3-cols p-3">
+  <div class="grid gap-2 as-actions">
+    <%= render partial: 'control_actions', locals: { model: model } %>
+  </div>
+  <div class="grid gap-2 as-actions">
+    <%= render partial: 'test_actions', locals: { model: model } %>
+  </div>
+</div>
