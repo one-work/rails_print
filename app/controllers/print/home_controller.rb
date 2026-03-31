@@ -50,7 +50,10 @@ module Print
 
     # 连接断开
     def offline
-      @mqtt_printer.update online: false, offline_at: Time.at_milli(params[:disconnected_at])
+      off_at = Time.at_milli(params[:disconnected_at])
+      if (@mqtt_printer.ready_at - off_at).abs > 30
+        @mqtt_printer.update online: false, offline_at: off_at
+      end
 
       head :ok
     end
