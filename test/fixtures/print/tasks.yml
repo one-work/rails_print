@@ -1,5 +1,6 @@
 default: &default
   uid: MyString
+  imei: MyString
   print_at: 2026-01-02 19:25:32 # 打印时间
 create:
   <<: *default
