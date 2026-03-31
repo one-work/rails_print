@@ -5,6 +5,7 @@ zh:
         aim:
           produce: 生产
           receipt: 收款
+          demo: Demo
         printer_type:
           Print::DeviceJiaBo: 佳博打印机
           Print::DeviceIp: IP 打印机

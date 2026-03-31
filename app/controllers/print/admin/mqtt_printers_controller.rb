@@ -35,7 +35,7 @@ module Print
     end
 
     def edit
-      ['produce', 'receipt'].each do |aim|
+      ['produce', 'receipt', 'demo'].each do |aim|
         @mqtt_printer.devices.load.find { |i| i.aim == aim } || @mqtt_printer.devices.build(aim: aim)
       end
     end
