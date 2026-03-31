@@ -1,6 +1,6 @@
 module Print
   class HomeController < BaseController
-    skip_before_action :verify_authenticity_token, only: [:message, :ready, :exception, :complete]
+    skip_before_action :verify_authenticity_token, only: [:message, :ready, :exception, :complete, :authorized, :offline, :subscribe, :unsubscribe]
     before_action :sure_mqtt_printer, only: [:ready, :exception, :complete]
     before_action :set_mqtt_printer, only: [:subscribe, :unsubscribe, :authorized, :offline]
 
