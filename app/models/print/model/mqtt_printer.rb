@@ -55,7 +55,7 @@ module Print
       after_save :init_mqtt_user, if: -> { (saved_changes.keys & ['registered_at', 'username']).present? && registered_at.present? }
       after_save :clear_devices, if: -> { saved_change_to_organ_id? && organ_id.blank? }
 
-      after_save_commit :check_undo_tasks, if: -> { online && saved_change_to_online? }
+      after_save_commit :check_undo_tasks, if: -> { online && (saved_changes.keys & ['online', 'ready_at']).present? }
       after_save_commit :set_dev_type, if: -> { saved_change_to_dev_type? }
     end
 
