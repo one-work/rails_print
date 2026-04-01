@@ -1,12 +1,18 @@
 <div class="box">
-  <div class="tags">
+  <div class="has-block-space-around">
   <% if model.online %>
-    <div class="tags has-addons mx-auto">
+    <div class="tags has-addons mb-0">
       <span class="tag is-success">在线</span>
     </div>
   <% else %>
-    <div class="tags has-addons mx-auto">
+    <div class="tags has-addons mb-0">
       <span class="tag is-danger">离线</span>
+    </div>
+  <% end %>
+  <% if model.dev_type %>
+    <div class="tags has-addons">
+      <span class="tag"><%= Print::MqttPrinter.human_attribute_name(:dev_type) %></span>
+      <span class="tag is-dark"><%= model.dev_type %></span>
     </div>
   <% end %>
   </div>

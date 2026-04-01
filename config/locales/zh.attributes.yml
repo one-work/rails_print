@@ -1,0 +1,5 @@
+zh:
+  activerecord:
+    attributes:
+      print/mqtt_printer:
+        dev_type: 指令类型
