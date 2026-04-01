@@ -1,0 +1,9 @@
+<div class="as-bar">
+  <i class="px-5"></i>
+  <div class="bar-title"><%= t('.title', default: '') %></div>
+  <% if @mqtt_printers.present? %>
+  <%= button_to({ controller: 'mqtt_printers', action: 'actions', id: @mqtt_printers[0].id }, class: 'px-4') do %>
+    <%= svg_tag 'ellipsis-vertical' %>
+  <% end %>
+  <% end %>
+</div>
