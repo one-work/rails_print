@@ -1,5 +1,5 @@
 default: &default
-  uid: MyString
+  uid: MyString # 任务唯一标识，用于对接业务系统
   imei: MyString
   print_at: 2026-01-02 19:25:32 # 打印时间
 create:
