@@ -1,7 +1,7 @@
 default: &default
   uid: MyString # 任务唯一标识，用于对接业务系统
   imei: MyString
-  print_at: 2026-01-02 19:25:32 # 打印时间
+  print_at: 2026-01-02 19:25:32 # 定时打印时间，未传值则立即打印
 create:
   <<: *default
   type: Print::RawTask
