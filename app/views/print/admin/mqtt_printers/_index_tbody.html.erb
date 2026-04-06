@@ -1,4 +1,15 @@
 <td class="family-monospace"><%= model.dev_imei %></td>
+<td><%= model.dev_desc %></td>
+<td>
+  <% if model.online %>
+    <p>
+      <%= svg_tag 'check', class: 'icon text-success' %>
+    </p>
+  <% elsif model.offline_at %>
+    <p class="size-7 text-grey text-centered"><%= Print::MqttPrinter.human_attribute_name(:offline_at) %></p>
+    <p class="text-centered"><time data-controller="time"><%= model.offline_at.to_fs(:iso8601) %></time></p>
+  <% end %>
+</td>
 <td>
   <div class="tags">
   <% model.devices.each do |device| %>
