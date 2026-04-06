@@ -57,6 +57,7 @@ module Print
     def set_esc!(&block)
       set_esc(&block)
       self.save
+      self
     end
 
   end
