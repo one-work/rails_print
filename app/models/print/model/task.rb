@@ -34,7 +34,7 @@ module Print
       save
     end
 
-    def set_esc!
+    def set_esc
       if mqtt_printer.dev_type_cpcl?
         pr = BaseCpcl.new
         yield pr
@@ -52,6 +52,10 @@ module Print
       end
 
       self.set_raw_array(arr)
+    end
+
+    def set_esc!(&block)
+      set_esc(&block)
       self.save
     end
 

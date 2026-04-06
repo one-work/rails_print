@@ -6,18 +6,26 @@ module Print
       attribute :payload, :json, default: {}
 
       belongs_to :template
+
+      before_create :set_raw
+      after_create_commit :print
     end
 
     def body
     end
 
-    def print
-      mqtt_printer.print(self) do |pr|
+    def set_raw
+      set_esc do |pr|
         template.code_kinds.each do |code, kind|
           value = payload[code]
           pr.public_send kind, value if value.present?
         end
       end
+    end
+
+    def print
+      mqtt_printer || build_mqtt_printer
+      mqtt_printer.print_cmd(raw_arr, id)
     end
 
   end
