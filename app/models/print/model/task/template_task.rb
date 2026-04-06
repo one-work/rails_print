@@ -19,10 +19,10 @@ module Print
         template.code_kinds.each do |code, kind|
           value = payload[code]
           method = pr.method(kind)
-          if method.arity == 1
-            method.call(value)
-          else
+          if method.arity == 0
             method.call
+          else
+            method.call(value)
           end
         end
       end
