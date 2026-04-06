@@ -18,7 +18,12 @@ module Print
       set_esc do |pr|
         template.code_kinds.each do |code, kind|
           value = payload[code]
-          pr.public_send kind, value if value.present?
+          method = pr.method(kind)
+          if method.arity == 1
+            method.call(value)
+          else
+            method.call
+          end
         end
       end
     end
