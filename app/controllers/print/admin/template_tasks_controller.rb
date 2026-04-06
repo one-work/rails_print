@@ -23,7 +23,7 @@ module Print
 
     def template_task_params
       params.fetch(:template_task, {}).permit(
-        :mqtt_printer_id,
+        :imei,
         payload: {}
       )
     end
