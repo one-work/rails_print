@@ -18,7 +18,7 @@ module Print
     end
 
     def set_mqtt_printers
-      @mqtt_printers = MqttPrinter.default_where(default_params)
+      @mqtt_printers = MqttPrinter.where(online: true).default_where(default_params)
     end
 
     def template_task_params
