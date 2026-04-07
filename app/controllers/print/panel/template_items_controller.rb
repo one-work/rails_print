@@ -4,7 +4,7 @@ module Print
     before_action :set_create_template_item, only: [:create]
 
     def index
-      @template_items = @template.template_items.page(params[:page])
+      @template_items = @template.template_items.order(position: :asc).page(params[:page])
     end
 
     private

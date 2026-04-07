@@ -61,7 +61,11 @@ Rails.application.routes.draw do
         end
       end
       resources :templates do
-        resources :template_items
+        resources :template_items do
+          member do
+            patch :reorder
+          end
+        end
       end
     end
 
@@ -74,7 +78,11 @@ Rails.application.routes.draw do
       end
       resources :templates do
         resources :template_tasks
-        resources :template_items
+        resources :template_items do
+          member do
+            patch :reorder
+          end
+        end
       end
       resources :devices do
         resources :tasks

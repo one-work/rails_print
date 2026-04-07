@@ -1,0 +1,9 @@
+<%=
+  tr_tag(
+    model,
+    data: {
+      url: url_for(action: 'reorder', id: model.id),
+      id: model.id
+    }
+  ) { yield }
+%>
