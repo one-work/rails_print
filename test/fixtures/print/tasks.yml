@@ -10,4 +10,5 @@ template:
   <<: *default
   type: Print::TemplateTask
   template: default
-  payload: {}
+  payload:
+    a: 1

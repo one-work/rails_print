@@ -29,8 +29,8 @@ module Print
         :raw,
         :uid,
         :template_id,
-        :payload,
-        :print_at
+        :print_at,
+        payload: {}
       )
     end
 
