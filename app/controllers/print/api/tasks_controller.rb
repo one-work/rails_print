@@ -28,6 +28,8 @@ module Print
       params.permit(
         :raw,
         :uid,
+        :template_id,
+        :payload,
         :print_at
       )
     end
