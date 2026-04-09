@@ -17,4 +17,8 @@
 <%= button_to({ controller: 'mqtt_printers', action: 'test_print', id: model.id }, params: { type: 'image' }, class: 'cell has-column-centered') do %>
   <%= svg_tag 'print' %>
   <span>打印图像</span>
+<% end if false %>
+<%= link_to({ controller: 'templates' }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'print' %>
+  <span>模板打印</span>
 <% end %>
