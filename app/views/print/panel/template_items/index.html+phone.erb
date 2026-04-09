@@ -1,0 +1,7 @@
+<%= render 'filter_bar' %>
+
+<%= render layout: 'index_list' do %>
+  <%= render partial: 'index_item', layout: 'index_item_actions', collection: @template_items, as: :model %>
+<% end %>
+
+<%= paginate @template_items %>
