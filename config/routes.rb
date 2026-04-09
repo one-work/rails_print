@@ -95,6 +95,7 @@ Rails.application.routes.draw do
       resources :mqtt_printers do
         collection do
           get 'bind/:dev_imei' => :bind
+          post :scan
         end
         member do
           post :test_print

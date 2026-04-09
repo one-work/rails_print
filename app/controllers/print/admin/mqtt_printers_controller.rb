@@ -19,6 +19,22 @@ module Print
       @mqtt_printer = MqttPrinter.find_by(dev_imei: params[:dev_imei])
     end
 
+    def scan
+      @mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
+
+      if @mqtt_printer
+        mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
+        mqtt_printer.organ = current_organ
+        mqtt_printer.devices.find_or_initialize_by(aim: 'produce')
+        mqtt_printer.devices.find_or_initialize_by(aim: 'receipt')
+        mqtt_printer.save!
+      else
+        @mqtt_printer = MqttPrinter.new
+        @mqtt_printer.errors.add :base, '该打印机未注册'
+        render :new, locals: { model: @mqtt_printer }, status: :unprocessable_entity
+      end
+    end
+
     def create
       @mqtt_printer = MqttPrinter.find_by(dev_imei: params[:dev_imei])
 

@@ -62,6 +62,8 @@ zh:
       mqtt_printers:
         index:
           title: 打印机设置
+        scan:
+          title: 扫码绑定
         bind:
           title: 绑定打印机
         destroy:
