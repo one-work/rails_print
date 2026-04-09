@@ -42,6 +42,7 @@ module Print
       else
         pr = BaseEsc.new
         yield pr
+        pr.line_x10
         bytes = pr.render
       end
 
