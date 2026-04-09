@@ -100,6 +100,9 @@ Rails.application.routes.draw do
         member do
           post :test_print
         end
+        resources :templates, controller: 'printer/templates' do
+          resources :template_tasks, controller: 'printer/template_tasks'
+        end
       end
       resources :bluetooth_printers
     end

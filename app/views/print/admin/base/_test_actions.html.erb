@@ -18,7 +18,7 @@
   <%= svg_tag 'print' %>
   <span>打印图像</span>
 <% end if false %>
-<%= link_to({ controller: 'templates' }, class: 'cell has-column-centered') do %>
+<%= link_to({ controller: 'printer/templates', mqtt_printer_id: model.id }, class: 'cell has-column-centered') do %>
   <%= svg_tag 'print' %>
   <span>模板打印</span>
 <% end %>

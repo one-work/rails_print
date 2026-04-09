@@ -1,0 +1,8 @@
+<%= button_to({ controller: 'printer/template_tasks', action: 'new', template_id: model.id }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'plus' %>
+  <span><%= t('.template_tasks.new.title') %></span>
+<% end %>
+<%= link_to({ action: 'show' }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'circle-info' %>
+  <span><%= t('.show.title') %></span>
+<% end %>
