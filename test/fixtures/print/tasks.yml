@@ -5,7 +5,7 @@ default: &default
 create:
   <<: *default
   type: Print::RawTask
-  raw: Mytext
+  raw: G0AdTBIA\n
 template:
   <<: *default
   type: Print::TemplateTask
