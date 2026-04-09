@@ -59,8 +59,11 @@ class BaseEsc
     data_push *CTL_LF
   end
 
-  def render
+  def line_x10
     data_push *(CTL_LF * 10)
+  end
+
+  def render
     @data
   end
 
