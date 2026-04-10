@@ -1,0 +1,11 @@
+<div id="tr_<%= model.id %>" class="media">
+  <div class="media-content">
+    <%= yield %>
+  </div>
+  <div class="media-right">
+    <%= button_to({ controller: 'printer/template_tasks', action: 'new', template_id: model.id }, class: 'button is-borderless') do %>
+      <%= svg_tag 'plus' %>
+      <span><%= t('.template_tasks.new.title') %></span>
+    <% end %>
+  </div>
+</div>
