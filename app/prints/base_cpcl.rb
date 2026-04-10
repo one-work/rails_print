@@ -150,6 +150,11 @@ class BaseCpcl
     @current_y += height
   end
 
+  def dash(x0: 0, x1: 40 * 8, width: 2, height: 36)
+    @texts << "L #{x0} #{@current_y} #{x1} #{@current_y} #{width}"
+    @current_y += height
+  end
+
   def barcode(data, width: 1, ratio: 1, height: 50, x: 0)
     @texts << "B 128 #{width} #{ratio} #{height} #{x} #{@current_y} #{data}"
     @current_y += height
