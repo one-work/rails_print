@@ -19,7 +19,7 @@ module Print
         template.code_kinds.each do |code, kind|
           value = payload[code]
           method = pr.method(kind)
-          if method.arity == 0
+          if [0, -1].include? method.arity
             method.call
           else
             method.call(value)
