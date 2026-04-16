@@ -150,7 +150,10 @@ module Print
 
       # 数据库不存在记录，则清除账号密码后触发重设
       if new_record?
-        clear_user
+        set_raw_test(text: '清除', arr: CLEAR_USER)
+
+        set_deferred_task!('密码重置成功!')
+        set_deferred_test
       else
 
       end
@@ -187,44 +190,50 @@ module Print
     end
 
     def set_dev_type
-      raw_task = RawTask.new(imei: dev_imei)
-      raw_task.set_raw_array! TYPE + [dev_type_before_type_cast]
-    end
-
-    def clear_user
-      raw_task = RawTask.new(imei: dev_imei)
-      raw_task.set_raw_array! CLEAR_USER
-
-      set_deferred_task!('密码重置成功!')
-      set_deferred_test
+      set_raw_test! text: '', arr: TYPE + [dev_type_before_type_cast]
     end
 
     def download_os(url = 'http://images.one.work/printer/printer_os_260312.bin')
-      task = RawTask.new(imei: dev_imei, note: url)
       arr = [0x1f, 0x28, 0x75]
       size = url.bytes.size + 2
       arr.push size % 256, (size / 256.0).floor
       arr.push 0x55, 0x48
       arr.concat url.bytes
 
-      task.set_raw_array!(arr)
+      set_raw_test!(text: url, arr: arr)
     end
 
     def set_deferred_task!(text)
-      task = DeferredTask.new(imei: dev_imei, note: text)
-      task.set_esc! do |pr|
+      task = deferred_tasks.build(note: text)
+      task.set_esc do |pr|
         pr.text_big_center text
         pr.break_line
         pr.qrcode_center dev_imei
       end
     end
 
+    def set_deferred_test(text = '自测页')
+      task = deferred_tasks.build(note: text)
+      task.set_raw_array([0x12, 0x54])
+    end
+
     def set_raw_task!(text)
-      task = RawTask.new(imei: dev_imei, note: text)
+      task = raw_tasks.build(note: text)
       task.set_esc! do |pr|
         pr.text text
         pr.qrcode_center dev_imei
       end
+    end
+
+    def set_raw_test(text:, arr:)
+      raw_task = raw_tasks.build(note: text)
+      raw_task.set_raw_array arr
+      raw_task
+    end
+
+    def set_raw_test!(text:, arr:)
+      task = set_raw_test(text: text, arr: arr)
+      task.save
     end
 
     def check_undo_tasks
@@ -234,13 +243,8 @@ module Print
       end
     end
 
-    def set_deferred_test
-      task = DeferredTask.new(imei: dev_imei, note: '自测页')
-      task.set_raw_array!([0x12, 0x54])
-    end
-
     def test_print(type = nil)
-      task = RawTask.new(imei: dev_imei)
+      task = raw_tasks.build
 
       case type
       when 'text'

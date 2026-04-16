@@ -6,6 +6,5 @@ module Print
       after_create_commit :print
     end
 
-
   end
 end
