@@ -15,8 +15,7 @@ module Print
 
       before_validation :set_pass, if: -> { password_changed? && password.present? }
       before_create :init_acls
-      after_save_commit :sync_to_emqx, if: -> { saved_change_to_ip? }
-      after_destroy_commit :sync_to_emqx, if: -> { ip.present? }
+      after_commit :sync_to_emqx, if: -> { saved_change_to_ip? || ip.present? }
     end
 
     def set_pass!(pass = password, cost: 10)
@@ -58,7 +57,6 @@ module Print
         'cloudPrinter/register',
         'cloudPrinter/ready',
         'cloudPrinter/exception',
-        'cloudPrinter/heartbeat',
         'cloudPrinter/complete',
         'cloudPrinter/pull'
       ].each do |topic|
