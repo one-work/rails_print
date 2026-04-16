@@ -237,7 +237,7 @@ module Print
     end
 
     def check_undo_tasks
-      deferred_tasks.todo.map do |task|
+      tasks.todo.map do |task|
         r = task.print
         logger.debug r
       end
