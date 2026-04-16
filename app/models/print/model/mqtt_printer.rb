@@ -152,7 +152,7 @@ module Print
       if new_record?
         set_raw_test(text: '清除', arr: CLEAR_USER)
 
-        set_deferred_task!('密码重置成功!')
+        set_deferred_task('密码重置成功!')
         set_deferred_test
       else
 
@@ -203,13 +203,19 @@ module Print
       set_raw_test!(text: url, arr: arr)
     end
 
-    def set_deferred_task!(text)
+    def set_deferred_task(text)
       task = deferred_tasks.build(note: text)
       task.set_esc do |pr|
         pr.text_big_center text
         pr.break_line
         pr.qrcode_center dev_imei
       end
+      task
+    end
+
+    def set_deferred_task!(text)
+      task = set_deferred_task(text)
+      task.save
     end
 
     def set_deferred_test(text = '自测页')
