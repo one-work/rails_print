@@ -28,10 +28,5 @@ module Print
       end
     end
 
-    def print
-      mqtt_printer || build_mqtt_printer
-      mqtt_printer.print_cmd(raw_arr, id)
-    end
-
   end
 end
