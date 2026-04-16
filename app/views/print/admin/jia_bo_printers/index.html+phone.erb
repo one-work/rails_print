@@ -1,7 +1,0 @@
-<%= render 'filter_bar' %>
-<%= render 'filter_table' %>
-
-<%= render layout: 'index_list' do %>
-  <%= render partial: 'index_item', layout: 'index_item_actions', collection: @jia_bo_printers, as: :model %>
-  <%= render partial: 'app_item', layout: 'app_item_actions', collection: @jia_bo_apps, as: :model %>
-<% end %>

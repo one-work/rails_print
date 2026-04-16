@@ -1,8 +1,0 @@
-<%= render 'index_bar' %>
-<%= render 'index_actions' %>
-
-<%= render layout: 'index_table' do %>
-  <%= render partial: 'index_tbody', layout: 'index_tr', collection: @jia_bo_printers, as: :model %>
-<% end %>
-
-<%= paginate @jia_bo_printers %>

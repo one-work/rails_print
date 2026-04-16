@@ -50,16 +50,6 @@ Rails.application.routes.draw do
           end
         end
       end
-      resources :jia_bo_apps do
-        resources :jia_bo_printers do
-          collection do
-            post :sync
-          end
-          member do
-            patch :test
-          end
-        end
-      end
       resources :templates do
         resources :template_items do
           member do
