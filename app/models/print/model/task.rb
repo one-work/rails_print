@@ -14,7 +14,7 @@ module Print
 
       scope :todo, -> { where(completed_at: nil) }
 
-      belongs_to :mqtt_printer, foreign_key: :imei, primary_key: :dev_imei, optional: true
+      belongs_to :printer, polymorphic: true
     end
 
     def body
@@ -35,7 +35,7 @@ module Print
     end
 
     def set_esc
-      if mqtt_printer.dev_type_cpcl?
+      if printer.dev_type_cpcl?
         pr = BaseCpcl.new
         yield pr
         bytes = pr.render.bytes
@@ -46,7 +46,7 @@ module Print
         bytes = pr.render
       end
 
-      if mqtt_printer.dev_cut_type_full?
+      if printer.dev_cut_type_full?
         arr = bytes + [0x1b, 0x69]
       else
         arr = bytes + [0x1b, 0x6d]
@@ -62,8 +62,7 @@ module Print
     end
 
     def print
-      mqtt_printer || build_mqtt_printer
-      mqtt_printer.print_cmd(raw_arr, id)
+      printer.print_cmd(raw_arr, id)
     end
 
   end
