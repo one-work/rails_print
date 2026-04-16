@@ -9,7 +9,6 @@ module Print
       attribute :print_at, :datetime
       attribute :completed_at, :datetime
       attribute :raw, :string, comment: '经过Base64压缩的字节码'
-      attribute :imei, :string, index: true
       attribute :note, :string
 
       scope :todo, -> { where(completed_at: nil) }
