@@ -166,15 +166,6 @@ module Print
       api.publish "#{dev_imei}/confirm", "complete##{task_id}"
     end
 
-    def print(task)
-      pr = BaseEsc.new
-      yield pr
-      task.raw = pr.render
-      task.save
-
-      print_cmd(task.raw, task.id)
-    end
-
     def print_cmd(payload, task_id)
       task_bytes = task_id.bytes
       task_size = task_bytes.size
