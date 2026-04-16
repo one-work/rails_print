@@ -45,10 +45,10 @@ module Print
       has_many :devices, as: :printer, dependent: :delete_all
       accepts_nested_attributes_for :devices, allow_destroy: true
 
-      has_many :tasks, primary_key: :dev_imei, foreign_key: :imei
-      has_many :template_tasks, primary_key: :dev_imei, foreign_key: :imei
-      has_many :raw_tasks, primary_key: :dev_imei, foreign_key: :imei
-      has_many :deferred_tasks, primary_key: :dev_imei, foreign_key: :imei
+      has_many :tasks, as: :printer, dependent: :delete_all
+      has_many :template_tasks, as: :printer, dependent: :delete_all
+      has_many :raw_tasks, as: :printer, dependent: :delete_all
+      has_many :deferred_tasks, as: :printer, dependent: :delete_all
 
       before_validation :init_username, if: :dev_imei_changed?
       before_save :sync_online, if: -> { ready_at_changed? && ready_at.present? && authorized_at.present? }
