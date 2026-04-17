@@ -77,11 +77,6 @@ Rails.application.routes.draw do
       resources :devices do
         resources :tasks
       end
-      resources :jia_bo_printers do
-        collection do
-          post :scan
-        end
-      end
       resources :mqtt_printers do
         collection do
           get 'bind/:dev_imei' => :bind
