@@ -21,8 +21,8 @@
       <%= svg_tag 'check', class: 'icon text-success' %>
     </p>
   <% elsif model.offline_at %>
-    <p class="size-7 text-grey text-centered"><%= Print::MqttPrinter.human_attribute_name(:offline_at) %></p>
-    <p class="text-centered"><time data-controller="time"><%= model.offline_at.to_fs(:iso8601) %></time></p>
+    <p class="size-7 text-grey"><%= Print::MqttPrinter.human_attribute_name(:offline_at) %></p>
+    <p><time data-controller="time"><%= model.offline_at.to_fs(:iso8601) %></time></p>
   <% end %>
 </td>
 <td>
