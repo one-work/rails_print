@@ -14,6 +14,8 @@ module Print
       scope :todo, -> { where(completed_at: nil) }
 
       belongs_to :printer, polymorphic: true
+
+      has_one_attached :file
     end
 
     def body
