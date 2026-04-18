@@ -5,12 +5,13 @@ module Print
     included do
       attribute :gid, :string
 
-      belongs_to :device
+      belongs_to :device, optional: true
 
       after_save_commit :sync_to_locator, if: :saved_change_to_completed_at?
     end
 
     def sync_to_locator
+      return unless model
       _model = model
       _model.print_info ||= {}
       _model.print_info.merge! aim => completed_at.to_fs(:iso8601)

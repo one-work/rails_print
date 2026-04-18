@@ -49,6 +49,7 @@ module Print
       has_many :template_tasks, as: :printer, dependent: :delete_all
       has_many :raw_tasks, as: :printer, dependent: :delete_all
       has_many :deferred_tasks, as: :printer, dependent: :delete_all
+      has_many :inner_tasks, as: :printer, dependent: :delete_all
 
       before_validation :init_username, if: :dev_imei_changed?
       before_save :sync_online, if: -> { ready_at_changed? && ready_at.present? && authorized_at.present? }
