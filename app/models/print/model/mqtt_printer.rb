@@ -79,11 +79,6 @@ module Print
 
     def authorized!
       self.update authorized_at: Time.current
-
-      text = '欢迎使用打印机!'
-      unless deferred_tasks.todo.where(note: text).exists?
-        set_deferred_task!(text)
-      end
     end
 
     def init_mqtt_user
@@ -156,7 +151,7 @@ module Print
         set_deferred_task('密码重置成功!')
         set_deferred_test
       else
-
+        set_raw_task('欢迎使用打印机!')
       end
       self.ready_at = Time.current
       self.dev_version = items[2] if items[2].present? # 第三位如果存在，则为版本号
@@ -224,12 +219,17 @@ module Print
       task.set_raw_array([0x12, 0x54])
     end
 
-    def set_raw_task!(text)
+    def set_raw_task(text)
       task = raw_tasks.build(note: text)
-      task.set_esc! do |pr|
+      task.set_esc do |pr|
         pr.text text
         pr.qrcode_center dev_imei
       end
+    end
+
+    def set_raw_task!(text)
+      task = set_raw_task(text)
+      task.save
     end
 
     def set_raw_test(text:, arr:)
