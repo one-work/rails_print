@@ -151,7 +151,7 @@ module Print
         set_deferred_task('密码重置成功!')
         set_deferred_test
       else
-        set_raw_task('欢迎使用打印机!')
+        set_deferred_task('欢迎使用打印机!')
       end
       self.ready_at = Time.current
       self.dev_version = items[2] if items[2].present? # 第三位如果存在，则为版本号
