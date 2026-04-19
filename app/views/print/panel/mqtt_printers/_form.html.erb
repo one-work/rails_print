@@ -1,1 +1,1 @@
-<%= f.text_field :dev_imei, autofocus: true %>
+<%= f.select :dev_type, options_for_select(Print::MqttPrinter.options_i18n(:dev_type), f.object.dev_type) %>
