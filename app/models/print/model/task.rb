@@ -66,14 +66,13 @@ module Print
       printer.print_cmd(raw_arr, id)
     end
 
-    def xx
-      a = []
-      file.open do |f|
-        a = BmpUtil.to_bitmap_bytes(f.path)
-        #a = Vips::Image.new_from_file(f.path)
+    def print_img
+      set_esc! do |pr|
+        file.open do |f|
+          a = BmpUtil.to_bitmap_bytes(f.path)
+          pr.image(a, byteWidth:4, height: 144)
+        end
       end
-
-      a
     end
 
   end
