@@ -222,7 +222,8 @@ module Print
     def set_raw_task(text)
       task = raw_tasks.build(note: text)
       task.set_esc do |pr|
-        pr.text text
+        pr.text_big_center text
+        pr.break_line
         pr.qrcode_center dev_imei
       end
     end
