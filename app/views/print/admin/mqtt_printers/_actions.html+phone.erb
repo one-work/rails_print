@@ -2,4 +2,7 @@
   <%= svg_tag 'trash' %>
   <span><%= t('.destroy.title') %></span>
 <% end %>
-
+<%= link_to({ action: 'show' }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'circle-info' %>
+  <span><%= t('.show.title') %></span>
+<% end %>

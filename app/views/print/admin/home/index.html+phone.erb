@@ -1,6 +1,6 @@
 <%= render layout: 'mqtt_list' do %>
   <%= render partial: 'mqtt_item', layout: 'mqtt_item_actions', collection: @mqtt_printers, as: :model %>
-<% end %>
+<% end if @mqtt_printers.present? %>
 
 <%= render layout: 'bluetooth_list' do %>
   <%= render partial: 'bluetooth_item', layout: 'bluetooth_item_actions', collection: @bluetooth_printers, as: :model %>
