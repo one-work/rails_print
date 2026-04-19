@@ -69,8 +69,8 @@ module Print
     def print_img
       set_esc! do |pr|
         file.open do |f|
-          a = BmpUtil.to_bitmap_bytes(f.path)
-          pr.image(a, byteWidth:4, height: 144)
+          data, row, height = BmpUtil.to_bitmap_bytes(f.path)
+          pr.image(data, byteWidth: row, height: height)
         end
       end
     end
