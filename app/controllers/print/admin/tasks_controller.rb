@@ -13,12 +13,12 @@ module Print
     end
 
     def set_new_task
-      @task = @device.printer.raw_tasks.build(task_params)
+      @task = @device.printer.inner_tasks.build(task_params)
     end
 
     def task_params
       params.fetch(:task, {}).permit(
-        :raw
+        :file
       )
     end
 

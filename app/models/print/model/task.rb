@@ -15,7 +15,7 @@ module Print
 
       belongs_to :printer, polymorphic: true
 
-      has_one_attached :file
+      has_one_attached :file, service: :local
     end
 
     def body
@@ -64,6 +64,16 @@ module Print
 
     def print
       printer.print_cmd(raw_arr, id)
+    end
+
+    def xx
+      a = []
+      file.open do |f|
+        a = BmpUtil.to_bitmap_bytes(f.path)
+        #a = Vips::Image.new_from_file(f.path)
+      end
+
+      a
     end
 
   end
