@@ -35,17 +35,19 @@ module Print
       save
     end
 
-    def set_esc
+    def print_base
       if printer.dev_type_cpcl?
-        pr = BaseCpcl.new
-        yield pr
-        bytes = pr.render
+        BaseCpcl.new
       else
-        pr = BaseEsc.new
-        yield pr
-        pr.line_x10
-        bytes = pr.render
+        BaseEsc.new
       end
+    end
+
+    def set_esc
+      yield pr
+
+      pr.line_x10
+      bytes = pr.render
 
       if printer.dev_cut_type_full?
         arr = bytes + [0x1b, 0x69]
