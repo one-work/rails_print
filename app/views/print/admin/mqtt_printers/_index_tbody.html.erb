@@ -12,8 +12,8 @@
 </td>
 <td>
   <div class="tags">
-  <% model.devices.each do |device| %>
-    <%= link_to({ controller: 'tasks', device_id: device.id }, text: true) do %>
+  <% model.printer_organs.each do |device| %>
+    <%= link_to({ controller: 'tasks', printer_id: device.printer_id, aim: device.aim }, text: true) do %>
       <span class="tag"><%= device.aim_i18n %></span>
     <% end %>
   <% end %>

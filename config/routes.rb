@@ -75,7 +75,7 @@ Rails.application.routes.draw do
           end
         end
       end
-      resources :devices do
+      resources :printers, only: [] do
         resources :tasks
       end
       resources :mqtt_printers do
