@@ -15,7 +15,7 @@ module Print
 
     end
 
-   
+
 
     def print(gid, &block)
       task = printer.inner_tasks.build(gid: gid, aim: aim)

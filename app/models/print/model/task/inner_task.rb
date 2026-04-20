@@ -5,8 +5,6 @@ module Print
     included do
       attribute :gid, :string
 
-      belongs_to :device, optional: true
-
       after_save_commit :sync_to_locator, if: :saved_change_to_completed_at?
     end
 
@@ -21,6 +19,10 @@ module Print
     def model
       return @model if defined? @model
       @model = GlobalID::Locator.locate gid
+    end
+
+    def generate_raw
+      model.to_esc
     end
 
   end
