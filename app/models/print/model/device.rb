@@ -16,15 +16,10 @@ module Print
     end
 
 
-
     def print(gid, &block)
-      task = printer.inner_tasks.build(gid: gid, aim: aim)
+
       task.set_esc!(&block)
       task
-    end
-
-    def print_later
-      PrintJob.perform_later(self)
     end
 
   end

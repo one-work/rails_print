@@ -31,8 +31,6 @@ module Print
         partial: 1
       }, default: 'full', prefix: true
 
-      belongs_to :organ, class_name: 'Org::Organ', optional: true
-
       has_many :devices, dependent: :delete_all
       accepts_nested_attributes_for :devices, allow_destroy: true
 
@@ -52,9 +50,6 @@ module Print
     def clear_devices
       devices.delete_all
     end
-
-
-
 
     def assign_info(payload)
       infos = payload.split('#')
