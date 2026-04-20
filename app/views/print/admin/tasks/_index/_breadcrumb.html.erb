@@ -1,7 +1,8 @@
 <li>
-<% if @device.printer_type == 'Print::MqttPrinter' %>
+<% if @printer.is_a? Print::MqttPrinter %>
   <%= link_to t('.mqtt_printers.index.title'), { controller: 'mqtt_printers' } %>
+<% else %>
+  <%= link_to t('.bluetooth_printers.index.title'), { controller: 'bluetooth_printers' } %>
 <% end %>
 </li>
-<li><%= link_to t('.devices.index.title'), { controller: 'devices' } %></li>
 <li class="is-active"><%= t('.title') %></li>

@@ -23,7 +23,7 @@ module Print
     end
 
     def raw_arr
-      Base64.decode64(raw).unpack('C*')
+      Base64.decode64(raw.to_s).unpack('C*')
     end
 
     def set_raw_array(raw)

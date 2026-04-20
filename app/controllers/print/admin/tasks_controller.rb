@@ -1,19 +1,19 @@
 module Print
   class Admin::TasksController < Admin::BaseController
-    before_action :set_device
+    before_action :set_printer
     before_action :set_new_task, only: [:new, :create]
 
     def index
-      @tasks = @device.inner_tasks.order(id: :desc).page(params[:page])
+      @tasks = @printer.inner_tasks.order(id: :desc).page(params[:page])
     end
 
     private
-    def set_device
-      @device = Device.find params[:device_id]
+    def set_printer
+      @printer = Printer.find params[:printer_id]
     end
 
     def set_new_task
-      @task = @device.printer.inner_tasks.build(task_params)
+      @task = @printer.inner_tasks.build(task_params)
     end
 
     def task_params
