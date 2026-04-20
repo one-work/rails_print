@@ -54,14 +54,13 @@ module Print
 
       validates :name, uniqueness: { scope: :organ_id }
 
-      before_validation :init_username, if: :dev_imei_changed?
+
       before_save :sync_online, if: -> { ready_at_changed? && ready_at.present? && authorized_at.present? }
       after_save :init_mqtt_user, if: -> { (saved_changes.keys & ['registered_at', 'username']).present? && registered_at.present? }
       after_save :clear_devices, if: -> { saved_change_to_organ_id? && organ_id.blank? }
 
       after_save_commit :check_undo_tasks, if: -> { online && (saved_changes.keys & ['online', 'ready_at']).present? }
       after_save_commit :set_dev_type, if: -> { saved_change_to_dev_type? }
-
     end
 
     def init_username
@@ -107,66 +106,6 @@ module Print
       self.dev_tel = infos[9]
       self.dev_spec = infos[10]
       self.dev_cut = infos[11]
-    end
-
-    def api
-      return @api if defined? @api
-      @api = EmqxApi
-    end
-
-    def register_success
-      api.publish(
-        "#{dev_imei}/unregistered",
-        'registerSuccess'
-      )
-    end
-
-    def register_success_with_user
-      api.publish(
-        "#{dev_imei}/unregistered",
-        "registerSuccess@#{username}@#{password}"
-      )
-
-      if ready_at.blank?
-        set_deferred_task!('密码设置成功!')
-        set_deferred_test
-      end
-    end
-
-    def register_401
-      api.publish "#{dev_imei}/unregistered", 'registerFail@401'
-    end
-
-    def confirm_exception(payload)
-      _, id = payload.split('#')
-      api.publish "#{dev_imei}/confirm", "exception##{id}"
-
-      self.update online: false, offline_at: Time.current
-    end
-
-    def confirm_ready!(payload)
-      items = payload.split('#')
-      api.publish "#{dev_imei}/confirm", "ready##{items[1]}"
-
-      # 数据库不存在记录，则清除账号密码后触发重设
-      if new_record?
-        set_raw_test(text: '清除', arr: CLEAR_USER)
-
-        set_deferred_task('密码重置成功!')
-        set_deferred_test
-      else
-        set_deferred_task('欢迎使用打印机!')
-      end
-      self.ready_at = Time.current
-      self.dev_version = items[2] if items[2].present? # 第三位如果存在，则为版本号
-      self.save
-    end
-
-    def confirm_complete(payload)
-      _, task_id = payload.split('#')
-      task = Task.find_by id: task_id
-      task.update completed_at: Time.current if task
-      api.publish "#{dev_imei}/confirm", "complete##{task_id}"
     end
 
     def print_cmd(payload, task_id)
@@ -275,37 +214,15 @@ module Print
       end
     end
 
-    def test_image_data
-      hex = Rails.root.join('public/100.txt').read.delete("\t\r\n")
-      hex.split(' ').map { |i| i.to_i(16) }
-    end
-
-    def cmd_plain(r)
-      api.publish dev_imei, r
-    end
-
-    def cmd(r)
-      api.publish dev_imei, Base64.encode64(r.pack('C*')), payload_encoding: 'base64'
-    end
-
     def dev_qrcode
       QrcodeUtil.data_url(dev_imei)
-    end
-
-    def register_url
-      Rails.app.routes.url_for(
-        controller: 'print/admin/mqtt_printers',
-        action: 'bind',
-        dev_imei: dev_imei,
-        host: "admin.#{Rails.app.routes.default_url_options[:host]}"
-      )
     end
 
     def webhook_url(action: 'create')
       Rails.app.routes.url_for(
         controller: 'print/api/tasks',
         action: action,
-        mqtt_printer_id: id
+        printer_id: id
       )
     end
 
