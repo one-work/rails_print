@@ -8,6 +8,7 @@ module Print
     TYPE = [0x1f, 0x2d, 0x4d, 0x01]
 
     included do
+      attribute :name, :string
       attribute :dev_imei, :string, index: true
       attribute :dev_vendor, :string
       attribute :dev_network, :string
@@ -42,14 +43,16 @@ module Print
 
       has_one :mqtt_user, primary_key: :username, foreign_key: :username, dependent: :destroy
 
-      has_many :devices, as: :printer, dependent: :delete_all
+      has_many :devices, dependent: :delete_all
       accepts_nested_attributes_for :devices, allow_destroy: true
 
-      has_many :tasks, as: :printer, dependent: :delete_all
-      has_many :template_tasks, as: :printer, dependent: :delete_all
-      has_many :raw_tasks, as: :printer, dependent: :delete_all
-      has_many :deferred_tasks, as: :printer, dependent: :delete_all
-      has_many :inner_tasks, as: :printer, dependent: :delete_all
+      has_many :tasks, dependent: :delete_all
+      has_many :template_tasks, dependent: :delete_all
+      has_many :raw_tasks, dependent: :delete_all
+      has_many :deferred_tasks, dependent: :delete_all
+      has_many :inner_tasks, dependent: :delete_all
+
+      validates :name, uniqueness: { scope: :organ_id }
 
       before_validation :init_username, if: :dev_imei_changed?
       before_save :sync_online, if: -> { ready_at_changed? && ready_at.present? && authorized_at.present? }
@@ -58,6 +61,7 @@ module Print
 
       after_save_commit :check_undo_tasks, if: -> { online && (saved_changes.keys & ['online', 'ready_at']).present? }
       after_save_commit :set_dev_type, if: -> { saved_change_to_dev_type? }
+
     end
 
     def init_username
