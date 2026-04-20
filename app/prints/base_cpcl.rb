@@ -14,7 +14,7 @@ class BaseCpcl
     @qrcodes = []
   end
 
-  def render
+  def render_raw
     [
       *head,
       *@texts,
@@ -23,6 +23,10 @@ class BaseCpcl
       'PRINT',
       ''
     ].join("\n").encode!('gb18030')
+  end
+
+  def render
+    render_raw.bytes
   end
 
   def head

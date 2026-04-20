@@ -39,7 +39,7 @@ module Print
       if printer.dev_type_cpcl?
         pr = BaseCpcl.new
         yield pr
-        bytes = pr.render.bytes
+        bytes = pr.render
       else
         pr = BaseEsc.new
         yield pr
