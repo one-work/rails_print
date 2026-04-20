@@ -7,10 +7,6 @@ module Print
       @devices = current_organ.devices.includes(:printer)
     end
 
-    def test
-      @device.test_print
-    end
-
     private
     def set_device
       @device = Device.find params[:id]

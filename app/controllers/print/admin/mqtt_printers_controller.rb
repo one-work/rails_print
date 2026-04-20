@@ -4,7 +4,7 @@ module Print
     before_action :set_new_mqtt_printer, only: [:new]
 
     def index
-      @mqtt_printers = MqttPrinter.default_where(default_params).page(params[:page])
+      @mqtt_printers = MqttPrinter.where(default_params).page(params[:page])
     end
 
     def test_print

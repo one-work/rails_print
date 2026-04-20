@@ -29,7 +29,7 @@
   <% end %>
 </td>
 <td>
-  <p><%= model.organ.name if model.organ %></p>
+  <p><%= model.organ.name %></p>
   <p>
     <%= button_to({ action: 'organ', id: model.id }) do %>
       <%= svg_tag 'pencil' %>
