@@ -25,7 +25,7 @@ module Print
 
     def print(gid, &block)
       task = inner_tasks.build(gid: gid, aim: aim)
-      printer.print(task, &block)
+      task.set_esc!(&block)
     end
 
     def print_later
