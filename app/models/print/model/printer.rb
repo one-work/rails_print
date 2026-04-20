@@ -32,6 +32,7 @@ module Print
       }, default: 'full', prefix: true
 
       has_many :printer_organs, dependent: :delete_all
+      has_many :organs, through: :printer_organs
       accepts_nested_attributes_for :printer_organs, allow_destroy: true
 
       has_many :tasks, dependent: :delete_all

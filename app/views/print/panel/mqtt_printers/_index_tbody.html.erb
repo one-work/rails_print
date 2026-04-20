@@ -29,12 +29,9 @@
   <% end %>
 </td>
 <td>
-  <p><%= model.organ.name %></p>
-  <p>
-    <%= button_to({ action: 'organ', id: model.id }) do %>
-      <%= svg_tag 'pencil' %>
-    <% end %>
-  </p>
+<% model.organs.each do |organ| %>
+  <p><%= organ.name %></p>
+<% end %>
 </td>
 <td>
   <p><%= model.username %></p>
