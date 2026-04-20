@@ -31,12 +31,12 @@ module Print
       enum :dev_type, {
         cpcl: 1,
         esc: 2
-      }, prefix: true
+      }, default: 'cpcl', prefix: true
 
       enum :dev_cut_type, {
         full: 0,
         partial: 1
-      }, prefix: true
+      }, default: 'full', prefix: true
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
