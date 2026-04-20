@@ -13,7 +13,7 @@ module Print
 
       scope :todo, -> { where(completed_at: nil) }
 
-      belongs_to :printer, polymorphic: true
+      belongs_to :printer
 
       has_one_attached :file, service: :local
     end

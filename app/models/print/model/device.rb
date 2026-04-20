@@ -12,7 +12,7 @@ module Print
       }, prefix: true
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
-      belongs_to :printer, polymorphic: true
+      belongs_to :printer
 
       before_validation :sync_organ_from_printer, if: :new_record?
     end

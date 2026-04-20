@@ -1,5 +1,5 @@
 module Print
   class BluetoothPrinter < Printer
-    include Model::Task::BluetoothPrinter
+    include Model::Printer::BluetoothPrinter
   end
 end
