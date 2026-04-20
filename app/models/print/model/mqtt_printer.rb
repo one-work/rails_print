@@ -8,25 +8,17 @@ module Print
     TYPE = [0x1f, 0x2d, 0x4d, 0x01]
 
     included do
+      attribute :type, :string
       attribute :name, :string
       attribute :dev_imei, :string, index: true
       attribute :dev_vendor, :string
-      attribute :dev_network, :string
       attribute :dev_tel, :string
       attribute :dev_spec, :string
       attribute :dev_cut, :boolean
       attribute :dev_desc, :string
       attribute :dev_version, :string
-      attribute :dev_ip, :string
       attribute :dev_type, :integer
       attribute :dev_cut_type, :integer
-      attribute :online, :boolean
-      attribute :registered_at, :datetime
-      attribute :authorized_at, :datetime
-      attribute :ready_at, :datetime
-      attribute :offline_at, :datetime
-      attribute :username, :string
-      attribute :password, :string
       attribute :extra, :json, default: {}
 
       enum :dev_type, {
@@ -41,8 +33,6 @@ module Print
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
 
-      has_one :mqtt_user, primary_key: :username, foreign_key: :username, dependent: :destroy
-
       has_many :devices, dependent: :delete_all
       accepts_nested_attributes_for :devices, allow_destroy: true
 
@@ -54,41 +44,17 @@ module Print
 
       validates :name, uniqueness: { scope: :organ_id }
 
-
-      before_save :sync_online, if: -> { ready_at_changed? && ready_at.present? && authorized_at.present? }
-      after_save :init_mqtt_user, if: -> { (saved_changes.keys & ['registered_at', 'username']).present? && registered_at.present? }
       after_save :clear_devices, if: -> { saved_change_to_organ_id? && organ_id.blank? }
-
       after_save_commit :check_undo_tasks, if: -> { online && (saved_changes.keys & ['online', 'ready_at']).present? }
       after_save_commit :set_dev_type, if: -> { saved_change_to_dev_type? }
-    end
-
-    def init_username
-      r = Digest::MD5.hexdigest("linlishenghuo-#{dev_imei}").upcase
-      self.username = r[0..11]
-      self.password = r[-16..-1]
     end
 
     def clear_devices
       devices.delete_all
     end
 
-    def sync_online
-      if ready_at > authorized_at
-        self.online = true
-        self.offline_at = nil
-      end
-    end
 
-    def authorized!
-      self.update authorized_at: Time.current
-    end
 
-    def init_mqtt_user
-      mqtt_user || build_mqtt_user
-      mqtt_user.set_pass(password)
-      mqtt_user.save
-    end
 
     def assign_info(payload)
       infos = payload.split('#')

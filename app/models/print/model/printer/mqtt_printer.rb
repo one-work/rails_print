@@ -3,7 +3,45 @@ module Print
     extend ActiveSupport::Concern
 
     included do
+      attribute :dev_network, :string
+      attribute :dev_ip, :string
+      attribute :online, :boolean
+      attribute :registered_at, :datetime
+      attribute :authorized_at, :datetime
+      attribute :ready_at, :datetime
+      attribute :offline_at, :datetime
+      attribute :username, :string
+      attribute :password, :string
+
+      has_one :mqtt_user, primary_key: :username, foreign_key: :username, dependent: :destroy
+
       before_validation :init_username, if: :dev_imei_changed?
+      before_save :sync_online, if: -> { ready_at_changed? && ready_at.present? && authorized_at.present? }
+      after_save :init_mqtt_user, if: -> { (saved_changes.keys & ['registered_at', 'username']).present? && registered_at.present? }
+
+    end
+
+    def init_username
+      r = Digest::MD5.hexdigest("linlishenghuo-#{dev_imei}").upcase
+      self.username = r[0..11]
+      self.password = r[-16..-1]
+    end
+
+    def sync_online
+      if ready_at > authorized_at
+        self.online = true
+        self.offline_at = nil
+      end
+    end
+
+    def authorized!
+      self.update authorized_at: Time.current
+    end
+
+    def init_mqtt_user
+      mqtt_user || build_mqtt_user
+      mqtt_user.set_pass(password)
+      mqtt_user.save
     end
 
     def api
