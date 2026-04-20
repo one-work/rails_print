@@ -14,8 +14,6 @@ module Print
       belongs_to :organ, class_name: 'Org::Organ', optional: true
       belongs_to :printer, polymorphic: true
 
-      has_many :inner_tasks
-
       before_validation :sync_organ_from_printer, if: :new_record?
     end
 
@@ -24,7 +22,7 @@ module Print
     end
 
     def print(gid, &block)
-      task = inner_tasks.build(gid: gid, aim: aim)
+      task = printer.inner_tasks.build(gid: gid, aim: aim)
       task.set_esc!(&block)
     end
 
