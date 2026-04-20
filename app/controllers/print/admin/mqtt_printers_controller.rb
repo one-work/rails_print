@@ -21,8 +21,8 @@ module Print
       if @mqtt_printer
         mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
         mqtt_printer.organ = current_organ
-        mqtt_printer.devices.find_or_initialize_by(aim: 'produce')
-        mqtt_printer.devices.find_or_initialize_by(aim: 'receipt')
+        mqtt_printer.printer_organs.find_or_initialize_by(aim: 'produce')
+        mqtt_printer.printer_organs.find_or_initialize_by(aim: 'receipt')
         mqtt_printer.save!
       else
         @mqtt_printer = MqttPrinter.new
@@ -36,8 +36,8 @@ module Print
 
       if @mqtt_printer
         @mqtt_printer.organ = current_organ
-        @mqtt_printer.devices.find_or_initialize_by(aim: 'produce')
-        @mqtt_printer.devices.find_or_initialize_by(aim: 'receipt')
+        @mqtt_printer.printer_organs.find_or_initialize_by(aim: 'produce')
+        @mqtt_printer.printer_organs.find_or_initialize_by(aim: 'receipt')
         @mqtt_printer.save!
       else
         @mqtt_printer = MqttPrinter.new
@@ -48,7 +48,7 @@ module Print
 
     def edit
       ['produce', 'receipt', 'demo'].each do |aim|
-        @mqtt_printer.devices.load.find { |i| i.aim == aim } || @mqtt_printer.devices.build(aim: aim)
+        @mqtt_printer.printer_organs.load.find { |i| i.aim == aim } || @mqtt_printer.printer_organs.build(aim: aim)
       end
     end
 
