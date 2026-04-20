@@ -11,15 +11,6 @@ zh:
       home:
         index:
           title: 云打印
-      jia_bo_apps:
-        index:
-          title: 佳博商户
-      jia_bo_printers:
-        index:
-          title: 设备列表
-        test:
-          title: 打印测试
-          confirm: 确认打印
       mqtt_apps:
         index:
           title: MQTT 服务器
@@ -61,16 +52,13 @@ zh:
           title: 打印机设置
       mqtt_printers:
         index:
-          title: 打印机设置
+          title: 云打印
         scan:
           title: 扫码绑定
         bind:
           title: 绑定打印机
         destroy:
           title: 解绑
-      jia_bo_printers:
-        index:
-          title: 佳博云打印
       tasks:
         index:
           title: 打印任务
