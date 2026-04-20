@@ -18,7 +18,6 @@ module Print
       before_validation :init_username, if: :dev_imei_changed?
       before_save :sync_online, if: -> { ready_at_changed? && ready_at.present? && authorized_at.present? }
       after_save :init_mqtt_user, if: -> { (saved_changes.keys & ['registered_at', 'username']).present? && registered_at.present? }
-
     end
 
     def init_username
@@ -48,7 +47,6 @@ module Print
       return @api if defined? @api
       @api = EmqxApi
     end
-
 
     def confirm_exception(payload)
       _, id = payload.split('#')
@@ -112,7 +110,6 @@ module Print
     def cmd(r)
       api.publish dev_imei, Base64.encode64(r.pack('C*')), payload_encoding: 'base64'
     end
-
 
     def register_url
       Rails.app.routes.url_for(
