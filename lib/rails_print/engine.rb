@@ -7,10 +7,13 @@ module RailsPrint
     end
 
     config.autoload_paths += Dir[
+      "#{config.root}/app/models/printer",
       "#{config.root}/app/models/task",
       "#{config.root}/test/controllers"
     ]
+
     config.eager_load_paths += Dir[
+      "#{config.root}/app/models/printer",
       "#{config.root}/app/models/task"
     ]
 

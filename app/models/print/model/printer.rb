@@ -1,5 +1,5 @@
 module Print
-  module Model::MqttPrinter
+  module Model::Printer
     extend ActiveSupport::Concern
     PREFIX = [0x1e, 0x10]
     TAG = [0x1b, 0x63]
