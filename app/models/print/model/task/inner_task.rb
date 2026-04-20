@@ -22,7 +22,8 @@ module Print
     end
 
     def generate_raw
-      model.to_esc
+      pr = x
+      model.to_esc(aim: aim, pr)
     end
 
   end
