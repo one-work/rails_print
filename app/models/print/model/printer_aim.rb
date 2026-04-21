@@ -7,6 +7,8 @@ module Print
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
       belongs_to :printer
+
+      has_many :inner_tasks, primary_key: [:printer_id, :aim], foreign_key: [:printer_id, :aim]
     end
 
   end
