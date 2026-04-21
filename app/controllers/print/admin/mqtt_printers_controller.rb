@@ -47,13 +47,11 @@ module Print
     end
 
     def edit
-      ['produce', 'receipt', 'demo'].each do |aim|
-        @mqtt_printer.printer_organs.load.find { |i| i.aim == aim } || @mqtt_printer.printer_organs.build(aim: aim)
-      end
+      @mqtt_printer.printer_aims.build
     end
 
     def destroy
-      @mqtt_printer.organ_id = nil
+      @printer_organ = nil
       @mqtt_printer.save
     end
 
@@ -70,7 +68,7 @@ module Print
       params.fetch(:mqtt_printer, {}).permit(
         :dev_type,
         :dev_cut_type,
-        devices_attributes: [:aim, :id, :_destroy]
+        printer_aims_attributes: [:aim, :id, :_destroy]
       )
     end
 

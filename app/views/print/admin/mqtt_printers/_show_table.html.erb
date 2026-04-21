@@ -14,8 +14,8 @@
   <dt></dt>
   <dd>
     <div class="tags justify-content-flex-end">
-    <% @mqtt_printer.devices.each do |device| %>
-      <%= link_to({ controller: 'tasks', device_id: device.id }, text: true) do %>
+    <% @mqtt_printer.printer_aims.each do |device| %>
+      <%= link_to({ controller: 'tasks', printer_id: device.printer_id }, text: true) do %>
         <span class="tag"><%= device.aim_i18n %></span>
       <% end %>
     <% end %>

@@ -3,12 +3,6 @@ module Print
     before_action :set_bluetooth_printer, only: [:show, :edit, :update, :destroy, :actions]
     before_action :set_new_bluetooth_printer, only: [:new, :create]
 
-    def edit
-      ['produce', 'receipt', 'demo'].each do |aim|
-        @bluetooth_printer.devices.load.find { |i| i.aim == aim } || @bluetooth_printer.devices.build(aim: aim)
-      end
-    end
-
     private
     def set_bluetooth_printer
       @bluetooth_printer = BluetoothPrinter.find(params[:id])

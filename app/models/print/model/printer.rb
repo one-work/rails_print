@@ -33,9 +33,8 @@ module Print
 
       has_many :printer_organs, dependent: :delete_all
       has_many :organs, through: :printer_organs
-      accepts_nested_attributes_for :printer_organs, allow_destroy: true
-
       has_many :printer_aims, dependent: :delete_all
+      accepts_nested_attributes_for :printer_aims, allow_destroy: true
 
       has_many :tasks, dependent: :delete_all
       has_many :template_tasks, dependent: :delete_all
@@ -43,15 +42,8 @@ module Print
       has_many :deferred_tasks, dependent: :delete_all
       has_many :inner_tasks, dependent: :delete_all
 
-      validates :name, uniqueness: { scope: :organ_id }
-
-      after_save :clear_devices, if: -> { saved_change_to_organ_id? && organ_id.blank? }
       after_save_commit :check_undo_tasks, if: -> { online && (saved_changes.keys & ['online', 'ready_at']).present? }
       after_save_commit :set_dev_type, if: -> { saved_change_to_dev_type? }
-    end
-
-    def clear_devices
-      devices.delete_all
     end
 
     def assign_info(payload)

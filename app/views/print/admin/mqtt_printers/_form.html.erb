@@ -1,19 +1,12 @@
-<div class="field-body">
-<%= f.fields :printer_organs do |ef| %>
-  <% if ef.object.id %>
-    <label class="checkbox">
-      <span>
-        <%= hidden_field_tag "mqtt_printer[printer_organs_attributes][#{ef.index}][id]", ef.object.id %>
-        <%= hidden_field_tag "mqtt_printer[printer_organs_attributes][#{ef.index}][_destroy]", 1 %>
-        <%= check_box_tag "mqtt_printer[printer_organs_attributes][#{ef.index}][_destroy]", 0, true %>
+<%= f.fields :printer_aims do |ef| %>
+  <div class="field is-horizontal" data-controller="field" data-field-index-value="<%= ef.index %>">
+    <label class="field-label"></label>
+    <div class="field-body">
+      <%= ef.text_field :aim, placeholder: Print::PrinterAim.human_attribute_name(:aim) %>
+      <span class="field has-addons has-addons-middle">
+        <%= svg_tag 'plus', data: { action: 'click->field#add' }, class: 'icon clickable' %>
+        <%= svg_tag 'minus', data: { action: 'click->field#remove' }, class: 'icon clickable' %>
       </span>
-      <span><%= Print::PrinterOrgan.enum_i18n(:aim, ef.object.aim) %></span>
-    </label>
-  <% else %>
-    <label class="checkbox">
-      <%= check_box_tag "mqtt_printer[printer_organs_attributes][#{ef.index}][aim]", ef.object.aim %>
-      <span><%= Print::PrinterOrgan.enum_i18n(:aim, ef.object.aim) %></span>
-    </label>
-  <% end %>
+    </div>
+  </div>
 <% end %>
-</div>
