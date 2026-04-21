@@ -1,0 +1,19 @@
+<div class="tabs is-centered mb-3">
+  <ul>
+    <li class="<%= active_helper(controller: 'mqtt_printers', active: 'is-active') %>">
+      <%= link_to({ controller: 'mqtt_printers' }) do %>
+        <span><%= t('.mqtt_printers.index.title') %></span>
+      <% end %>
+    </li>
+    <li class="<%= active_helper(controller: 'bluetooth_printers', active: 'is-active') %>">
+      <%= link_to({ controller: 'bluetooth_printers' }) do %>
+        <span><%= t('.bluetooth_printers.index.title') %></span>
+      <% end %>
+    </li>
+    <li class="<%= active_helper(controller: 'templates', active: 'is-active') %>">
+      <%= link_to({ controller: 'templates' }) do %>
+        <span class="ml-1"><%= t('.templates.index.title') %></span>
+      <% end %>
+    </li>
+  </ul>
+</div>
