@@ -19,11 +19,6 @@ module Print
       render json: { task_id: @task.id }
     end
 
-    def inner
-      @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
-      @task.save
-    end
-
     private
     def set_printer
       @printer = MqttPrinter.find(params[:mqtt_printer_id])

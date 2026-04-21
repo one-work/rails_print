@@ -14,26 +14,35 @@ module Print
       if params[:result].include?('&')
         name, _ = params[:result].split('&')
 
-        bluetooth_printer = BluetoothPrinter.find_or_create_by(name: name, **default_form_params)
-        bluetooth_printer.devices.find_or_initialize_by(aim: 'produce')
-        bluetooth_printer.devices.find_or_initialize_by(aim: 'receipt')
+        bluetooth_printer = BluetoothPrinter.find_or_create_by(name: name)
         bluetooth_printer.save
       else
-        mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
-        mqtt_printer.organ = current_organ
-        mqtt_printer.devices.find_or_initialize_by(aim: 'produce')
-        mqtt_printer.devices.find_or_initialize_by(aim: 'receipt')
+        printer = MqttPrinter.find_by(dev_imei: params[:result])
+      end
+
+      printer.organ = current_organ
+      printer.printer_aims.find_or_initialize_by(aim: 'produce', **default_form_params)
+      printer.printer_aims.find_or_initialize_by(aim: 'receipt', **default_form_params)
+      printer.save!
+    end
+
+    def replace
+      printer_aim = PrinterAim.where(aim: 'demo', **default_params).take
+      mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
+
+      if printer_aim
+        printer_aim.printer = mqtt_printer
+      else
+        mqtt_printer.printer_aims.build(aim: 'demo')
         mqtt_printer.save!
       end
     end
 
-    def replace
-      Device.where(aim: 'demo', **default_params).delete_all
+    def inner
+      if
 
-      mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
-      mqtt_printer.organ = current_organ
-      mqtt_printer.devices.find_or_initialize_by(aim: 'demo')
-      mqtt_printer.save!
+      @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
+      @task.save
     end
 
   end

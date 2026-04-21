@@ -23,7 +23,6 @@ Rails.application.routes.draw do
         resources :tasks, only: [:create] do
           collection do
             post :template
-            post :inner
           end
         end
       end
@@ -63,9 +62,10 @@ Rails.application.routes.draw do
     namespace :admin, defaults: { namespace: 'admin' } do
       root 'home#index'
       controller :home do
+        get :bind
         post :scan
         post :replace
-        get :bind
+        post :inner
       end
       resources :templates do
         resources :template_tasks
