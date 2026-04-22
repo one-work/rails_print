@@ -24,7 +24,7 @@ module Print
       enum :dev_type, {
         cpcl: 1,
         esc: 2
-      }, default: 'cpcl', prefix: true
+      }, prefix: true
 
       enum :dev_cut_type, {
         full: 0,

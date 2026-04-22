@@ -3,6 +3,10 @@ module Print
     before_action :set_bluetooth_printer, only: [:show, :edit, :update, :destroy, :actions]
     before_action :set_new_bluetooth_printer, only: [:new, :create]
 
+    def index
+      @bluetooth_printers = BluetoothPrinter.includes(:printer_organs).where(printer_organs: { organ_id: current_organ.id }).page(params[:page])
+    end
+
     private
     def set_bluetooth_printer
       @bluetooth_printer = BluetoothPrinter.find(params[:id])
@@ -10,14 +14,14 @@ module Print
 
     def set_new_bluetooth_printer
       @bluetooth_printer = BluetoothPrinter.new(bluetooth_printer_params)
+      @bluetooth_printer.printer_organs.build(organ_id: current_organ.id)
     end
 
     def bluetooth_printer_params
-      p = params.fetch(:bluetooth_printer, {}).permit(
+      params.fetch(:bluetooth_printer, {}).permit(
         :name,
-        devices_attributes: [:aim, :id, :_destroy]
+        printer_aims_attributes: [:aim, :id, :_destroy]
       )
-      p.merge! default_params
     end
 
   end
