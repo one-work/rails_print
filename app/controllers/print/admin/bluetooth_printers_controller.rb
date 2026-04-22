@@ -24,6 +24,7 @@ module Print
     def bluetooth_printer_params
       params.fetch(:bluetooth_printer, {}).permit(
         :name,
+        :dev_type,
         printer_aims_attributes: [:aim, :id, :_destroy]
       )
     end

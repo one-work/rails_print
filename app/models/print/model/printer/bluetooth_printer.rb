@@ -5,5 +5,8 @@ module Print
     included do
     end
 
+    def cmd(r)
+    end
+
   end
 end

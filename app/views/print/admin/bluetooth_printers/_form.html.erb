@@ -1,4 +1,5 @@
 <%= f.text_field :name, autofocus: true %>
+<%= f.select :dev_type, options_for_select(Print::Printer.options_i18n(:dev_type), f.object.dev_type) %>
 <%= f.fields :printer_aims do |ef| %>
   <div class="field is-horizontal" data-controller="field" data-field-index-value="<%= ef.index %>">
     <div class="field-label"></div>
