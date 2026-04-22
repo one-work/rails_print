@@ -40,6 +40,8 @@ zh:
           title: 扫码添加
         replace:
           title: 扫码绑定
+        inner:
+          title: 打印
       bluetooth_printers:
         index:
           title: 蓝牙打印
