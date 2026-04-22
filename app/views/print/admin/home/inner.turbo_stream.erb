@@ -5,13 +5,8 @@
     data-mini-program-url-value="/pages/print/index"
     data-mini-program-data-value="<%=
       {
-        url: url_for(
-          controller: 'print/api/tasks',
-          action: 'inner',
-          auth_token: Current.session.once_token,
-          only_path: false
-        ),
-        device: current_organ.bluetooth_device
+        url: url_for(controller: 'print/api/tasks', action: 'show', auth_token: Current.session.once_token, only_path: false),
+        device: @printer.name
       }.to_json
     %>"
     data-action="click->mini-program#link"
