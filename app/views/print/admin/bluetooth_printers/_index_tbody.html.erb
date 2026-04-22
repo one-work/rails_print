@@ -2,8 +2,8 @@
 <td>
   <div class="tags">
     <% model.printer_aims.each do |printer_aim| %>
-      <%= link_to({ controller: 'tasks', aim: printer_aim.aim }, text: true) do %>
-        <span class="tag"><%= printer_aim.aim_i18n %></span>
+      <%= link_to({ controller: 'tasks', printer_id: model.id, aim: printer_aim.aim }, text: true) do %>
+        <span class="tag"><%= printer_aim.aim %></span>
       <% end %>
     <% end %>
   </div>

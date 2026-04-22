@@ -7,6 +7,10 @@ module Print
       @bluetooth_printers = BluetoothPrinter.includes(:printer_organs).where(printer_organs: { organ_id: current_organ.id }).page(params[:page])
     end
 
+    def edit
+      @bluetooth_printer.printer_aims.build if @bluetooth_printer.printer_aims.none?
+    end
+
     private
     def set_bluetooth_printer
       @bluetooth_printer = BluetoothPrinter.find(params[:id])
