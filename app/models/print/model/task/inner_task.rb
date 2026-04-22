@@ -25,6 +25,8 @@ module Print
     def generate_raw
       pr = print_base
       model.to_esc(pr, aim: aim)
+      bytes = pr.render
+      self.set_raw_array(bytes)
     end
 
   end

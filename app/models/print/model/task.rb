@@ -44,8 +44,8 @@ module Print
     end
 
     def set_esc
+      pr = print_base
       yield pr
-
       pr.line_x10
       bytes = pr.render
 
