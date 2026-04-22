@@ -5,6 +5,7 @@ module Print
     included do
       attribute :gid, :string
 
+      before_create :generate_raw
       after_save_commit :sync_to_locator, if: :saved_change_to_completed_at?
     end
 
