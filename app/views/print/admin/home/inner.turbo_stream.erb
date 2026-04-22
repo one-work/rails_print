@@ -1,4 +1,4 @@
-<% if request.variant.include?(:mini_program) %>
+<% if @printer.is_a? Print::BluetoothPrinter %>
   <button
     data-controller="mini-program"
     data-mini-program-nav-value="true"
@@ -8,7 +8,6 @@
         url: url_for(
           controller: 'print/api/tasks',
           action: 'inner',
-
           auth_token: Current.session.once_token,
           only_path: false
         ),

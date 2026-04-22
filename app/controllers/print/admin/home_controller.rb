@@ -42,8 +42,11 @@ module Print
       printer_aim = PrinterAim.where(aim: params[:aim], **default_params).take
 
       if printer_aim
+        @printer = printer_aim.printer
         @task = printer_aim.inner_tasks.build(gid: params[:gid], aim: params[:aim])
         @task.save
+      else
+        redirect_to action: 'index'
       end
     end
 
