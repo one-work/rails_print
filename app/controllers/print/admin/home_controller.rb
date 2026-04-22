@@ -33,7 +33,7 @@ module Print
       if printer_aim
         printer_aim.printer = mqtt_printer
       else
-        mqtt_printer.printer_aims.build(aim: 'demo')
+        mqtt_printer.printer_aims.build(aim: 'demo', **default_form_params)
         mqtt_printer.save!
       end
     end
