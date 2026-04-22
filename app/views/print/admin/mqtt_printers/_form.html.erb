@@ -1,7 +1,8 @@
 <%= f.fields :printer_aims do |ef| %>
   <div class="field is-horizontal" data-controller="field" data-field-index-value="<%= ef.index %>">
-    <label class="field-label"></label>
+    <div class="field-label"></div>
     <div class="field-body">
+      <%= ef.hidden_field :organ_id, value: current_organ.id %>
       <%= ef.text_field :aim, placeholder: Print::PrinterAim.human_attribute_name(:aim) %>
       <span class="field has-addons has-addons-middle">
         <%= svg_tag 'plus', data: { action: 'click->field#add' }, class: 'icon clickable' %>

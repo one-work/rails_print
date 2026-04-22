@@ -47,7 +47,7 @@ module Print
     end
 
     def edit
-      @mqtt_printer.printer_aims.build
+      @mqtt_printer.printer_aims.build if @mqtt_printer.printer_aims.none?
     end
 
     def destroy
@@ -68,7 +68,7 @@ module Print
       params.fetch(:mqtt_printer, {}).permit(
         :dev_type,
         :dev_cut_type,
-        printer_aims_attributes: [:aim, :id, :_destroy]
+        printer_aims_attributes: [:organ_id, :aim, :id, :_destroy]
       )
     end
 

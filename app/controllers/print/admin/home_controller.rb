@@ -42,7 +42,7 @@ module Print
       printer_aim = PrinterAim.where(aim: params[:aim], **default_params).take
 
       if printer_aim
-        @task = @printer_aim.inner_tasks.build(gid: params[:gid], aim: params[:aim])
+        @task = printer_aim.inner_tasks.build(gid: params[:gid], aim: params[:aim])
         @task.save
       end
     end
