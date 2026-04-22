@@ -45,6 +45,17 @@ module Print
         @printer = printer_aim.printer
         @task = printer_aim.inner_tasks.build(gid: params[:gid], aim: params[:aim])
         @task.save
+
+        if @printer.is_a? Print::BluetoothPrinter
+          @data = {
+            #url: url_for(controller: 'print/api/tasks', action: 'show', auth_token: Current.session.once_token, only_path: false),
+            device: @printer.name,
+            raw: @task.raw
+          }
+        else
+          @task.print
+          head :ok
+        end
       else
         redirect_to action: 'index'
       end

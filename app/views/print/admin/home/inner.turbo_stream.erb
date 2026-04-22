@@ -1,23 +1,9 @@
-<% if @printer.is_a? Print::BluetoothPrinter %>
-  <button
-    data-controller="mini-program"
-    data-mini-program-nav-value="true"
-    data-mini-program-url-value="/pages/print/index"
-    data-mini-program-data-value="<%=
-      {
-        url: url_for(controller: 'print/api/tasks', action: 'show', auth_token: Current.session.once_token, only_path: false),
-        device: @printer.name
-      }.to_json
-    %>"
-    data-action="click->mini-program#link"
-    class="cell has-column-centered"
-  >
-    <%= svg_tag 'bluetooth' %>
-    <span>打印编码</span>
-  </button>
-<% else %>
-  <%= button_to({ action: 'print' }, class: 'cell has-column-centered', form: { data: { action: 'click->weui-actionsheet#close' } }) do %>
-    <%= svg_tag 'print' %>
-    <span><%= t('space.admin.desks.print.title') %></span>
-  <% end %>
-<% end %>
+<div
+  data-controller="mini-program"
+  data-mini-program-direct-value="true"
+  data-mini-program-nav-value="true"
+  data-mini-program-url-value="/pages/print/index"
+  data-mini-program-data-value="<%= @data.to_json %>"
+  class="cell has-column-centered"
+>
+</div>
