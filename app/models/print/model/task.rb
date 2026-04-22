@@ -23,11 +23,11 @@ module Print
     end
 
     def raw_arr
-      Base64.urlsafe_decode64(raw.to_s).unpack('C*')
+      Base64.decode64(raw.to_s).unpack('C*')
     end
 
     def set_raw_array(raw)
-      self.raw = Base64.urlsafe_encode64(raw.pack('C*'), padding: false)
+      self.raw = Base64.encode64(raw.pack('C*'))
     end
 
     def set_raw_array!(arr)
