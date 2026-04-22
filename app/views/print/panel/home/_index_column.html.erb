@@ -1,7 +1,4 @@
 <div class="grid">
-  <%= link_to({ controller: 'print/panel/mqtt_apps' }, data: { turbo_frame: 'panel', action: 'menu-popup#enter' }, class: active_helper(controllers: ['mqtt_apps'], item: 'cell button is-fullwidth', active: 'cell button is-fullwidth is-active')) do %>
-    <span><%= t('print.panel.mqtt_apps.index.title') %></span>
-  <% end %>
   <%= link_to({ controller: 'print/panel/mqtt_users' }, data: { turbo_frame: 'panel', action: 'menu-popup#enter' }, class: active_helper(controllers: ['mqtt_apps'], item: 'cell button is-fullwidth', active: 'cell button is-fullwidth is-active')) do %>
     <span><%= t('print.panel.mqtt_users.index.title') %></span>
   <% end %>
