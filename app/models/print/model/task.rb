@@ -27,7 +27,7 @@ module Print
     end
 
     def set_raw_array(raw)
-      self.raw = Base64.urlsafe_encode64(raw.pack('C*'))
+      self.raw = Base64.urlsafe_encode64(raw.pack('C*'), padding: false)
     end
 
     def set_raw_array!(arr)
