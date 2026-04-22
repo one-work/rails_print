@@ -2,12 +2,12 @@ module Print
   class Admin::HomeController < Admin::BaseController
 
     def index
-      @mqtt_printers = MqttPrinter.where(default_params).page(params[:page])
-      @bluetooth_printers = BluetoothPrinter.where(default_params).page(params[:page])
+      @mqtt_printers = MqttPrinter.includes(:printer_organs).where(printer_organs: { organ_id: current_organ.id }).page(params[:page])
+      @bluetooth_printers = BluetoothPrinter.includes(:printer_organs).where(printer_organs: { organ_id: current_organ.id }).page(params[:page])
     end
 
     def bind
-      @mqtt_printers = MqttPrinter.includes(:devices).where(default_params).where(devices: { aim: 'demo' }).page(params[:page])
+      @mqtt_printers = MqttPrinter.includes(:printer_aims).where(printer_aims: { organ_id: current_organ.id, aim: 'demo' }).page(params[:page])
     end
 
     def scan
