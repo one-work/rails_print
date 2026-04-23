@@ -40,10 +40,14 @@ module Print
 
     def inner
       printer_aim = PrinterAim.where(aim: params[:aim], **default_params).take
-
       if printer_aim
         @printer = printer_aim.printer
-        @task = printer_aim.inner_tasks.build(gid: params[:gid], aim: params[:aim])
+      else
+        @printer = PrinterOrgan.where(**default_params).take
+      end
+
+      if @printer
+        @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
         @task.save
 
         if @printer.is_a? Print::BluetoothPrinter
