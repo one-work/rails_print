@@ -8,6 +8,7 @@ module Print
       before_create :generate_raw, if: -> { model.present? }
       before_save :print_img, if: -> { attachment_changes['file'].present? && file.attached? }
       after_save_commit :sync_to_locator, if: :saved_change_to_completed_at?
+      after_create_commit :print, if: -> { printer.is_a? MqttPrinter }
     end
 
     def sync_to_locator
@@ -37,7 +38,6 @@ module Print
           pr.image(data, byteWidth: row, height: height)
         end
       end
-      print
     end
 
   end
