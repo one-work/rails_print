@@ -5,7 +5,8 @@ module Print
     included do
       attribute :gid, :string
 
-      before_create :generate_raw
+      before_create :generate_raw, if: -> { model.present? }
+      before_save :print_img, if: -> { attachment_changes['file'].present? && file.attached? }
       after_save_commit :sync_to_locator, if: :saved_change_to_completed_at?
     end
 
@@ -23,11 +24,18 @@ module Print
     end
 
     def generate_raw
-      if model
-        pr = print_base
-        model.to_esc(pr, aim: aim)
-        bytes = pr.render
-        self.set_raw_array(bytes)
+      pr = print_base
+      model.to_esc(pr, aim: aim)
+      bytes = pr.render
+      self.set_raw_array(bytes)
+    end
+
+    def print_img
+      set_esc do |pr|
+        file.open do |f|
+          data, row, height = BmpUtil.to_bitmap_bytes(f.path)
+          pr.image(data, byteWidth: row, height: height)
+        end
       end
     end
 

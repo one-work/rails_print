@@ -11,14 +11,12 @@ class BaseCpcl
     @qty = 1 # 打印标签数量
     @texts = []
     @current_y = PADDING_TOP
-    @qrcodes = []
   end
 
   def render_raw
     [
       *head,
       *@texts,
-      *@qrcodes,
       'FORM',
       'PRINT',
       ''
@@ -38,6 +36,10 @@ class BaseCpcl
   end
 
   def break_line
+    @texts << 'PREFEED 64'
+  end
+
+  def line_x10
     @texts << 'PREFEED 64'
   end
 
@@ -120,7 +122,7 @@ class BaseCpcl
   def qrcode(data, y: PADDING_TOP, u: 6)
     size = RQRCode::QRCode.new(data, level: :m).qrcode.module_count
     x = @width - (u * size) - 16
-    @qrcodes << [
+    @texts << [
       "B QR #{x} #{y} M 2 U #{u}",
       "MA,#{data}",
       'ENDQR'
@@ -131,7 +133,7 @@ class BaseCpcl
   def qrcode_right(data, y: PADDING_TOP, u: 6)
     size = RQRCode::QRCode.new(data, level: :m).qrcode.module_count
     x = @width - (u * size) - 16
-    @qrcodes << [
+    @texts << [
       "B QR #{x} #{y} M 2 U #{u}",
       "MA,#{data}",
       'ENDQR'
@@ -142,7 +144,7 @@ class BaseCpcl
   def qrcode_center(data, y: PADDING_TOP, u: 6)
     size = RQRCode::QRCode.new(data, level: :m).qrcode.module_count
     x = @width - (u * size) - 16
-    @qrcodes << [
+    @texts << [
       "B QR #{x} #{y} M 2 U #{u}",
       "MA,#{data}",
       'ENDQR'
@@ -159,9 +161,22 @@ class BaseCpcl
     @current_y += height
   end
 
+  def image(value, byteWidth:, height:)
+    @texts << [
+      0x1d, 0x76, 0x30, 0x00,
+      *doubleDigit(byteWidth),
+      *doubleDigit(height),
+      *value
+    ]
+  end
+
   def barcode(data, width: 1, ratio: 1, height: 50, x: 0)
     @texts << "B 128 #{width} #{ratio} #{height} #{x} #{@current_y} #{data}"
     @current_y += height
+  end
+
+  def doubleDigit(value)
+    [value % 256, (value / 256.0).floor]
   end
 
 end

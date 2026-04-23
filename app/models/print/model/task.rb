@@ -68,14 +68,5 @@ module Print
       printer.print_cmd(raw_arr, id)
     end
 
-    def print_img
-      set_esc! do |pr|
-        file.open do |f|
-          data, row, height = BmpUtil.to_bitmap_bytes(f.path)
-          pr.image(data, byteWidth: row, height: height)
-        end
-      end
-    end
-
   end
 end
