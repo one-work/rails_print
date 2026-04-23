@@ -32,15 +32,6 @@ module Print
       EmqxApi.auth_ips *ips
     end
 
-    def api
-      return @api if defined? @api
-      @api = MQTT::Client.connect(
-        host: 'linli-emqx',
-        username: username,
-        password: password
-      )
-    end
-
     def init_acls
       [
         '${clientid}/unregistered',
