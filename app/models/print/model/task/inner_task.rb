@@ -37,6 +37,7 @@ module Print
           pr.image(data, byteWidth: row, height: height)
         end
       end
+      print
     end
 
   end
