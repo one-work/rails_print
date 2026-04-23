@@ -32,6 +32,9 @@ Rails.application.routes.draw do
       root 'home#index'
       resources :mqtt_apps
       resources :mqtt_users do
+        collection do
+          get :ip
+        end
         resources :mqtt_acls
       end
       resources :mqtt_printers do

@@ -1,0 +1,9 @@
+<%= render 'user_bar' %>
+<%= render 'index_bar' %>
+<%= render 'index_actions' %>
+
+<%= render layout: 'index_table' do %>
+  <%= render partial: 'index_tbody', layout: 'index_tr', collection: @mqtt_users, as: :model %>
+<% end %>
+
+<%= paginate @mqtt_users %>

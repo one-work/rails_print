@@ -1,10 +1,4 @@
-<td>
-<% if model.username.present? %>
-  <%= link_to model.username, { controller: 'mqtt_acls', mqtt_user_id: model.id } %>
-<% else %>
-  <%= link_to model.ip, { controller: 'mqtt_acls', mqtt_user_id: model.id }, class: 'text-warning' %>
-<% end %>
-</td>
+<td><%= link_to model.username, { controller: 'mqtt_acls', mqtt_user_id: model.id } %></td>
 <td><%= model.note %></td>
 <td><%= model.password %></td>
 <td><%= model.is_superuser %></td>
