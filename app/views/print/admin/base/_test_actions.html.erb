@@ -14,10 +14,10 @@
   <%= svg_tag 'print' %>
   <span>打印条形码</span>
 <% end %>
-<%= button_to({ controller: 'mqtt_printers', action: 'test_print', id: model.id }, params: { type: 'image' }, class: 'cell has-column-centered') do %>
+<%= link_to({ controller: 'tasks', printer_id: model.id }, class: 'cell has-column-centered') do %>
   <%= svg_tag 'print' %>
   <span>打印图像</span>
-<% end if false %>
+<% end %>
 <%= link_to({ controller: 'printer/templates', mqtt_printer_id: model.id }, class: 'cell has-column-centered') do %>
   <%= svg_tag 'print' %>
   <span>模板打印</span>
