@@ -23,10 +23,14 @@ module Print
     end
 
     def generate_raw
-      pr = print_base
-      model.to_esc(pr, aim: aim)
-      bytes = pr.render
-      self.set_raw_array(bytes)
+      if model
+        pr = print_base
+        model.to_esc(pr, aim: aim)
+        bytes = pr.render
+        self.set_raw_array(bytes)
+      else
+        print_img
+      end
     end
 
   end
