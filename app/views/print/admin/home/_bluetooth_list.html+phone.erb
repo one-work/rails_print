@@ -5,4 +5,10 @@
   <div class="p-3">
     <%= yield %>
   </div>
+  <div class="box-footer">
+    <%= button_to({ controller: 'bluetooth_printers', action: 'new' }, class: 'button is-rounded is-small is-info') do %>
+      <%= svg_tag 'plus' %>
+      <span><%= t('.bluetooth_printers.new.title') %></span>
+    <% end %>
+  </div>
 </div>
