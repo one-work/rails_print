@@ -43,7 +43,8 @@ module Print
       if printer_aim
         @printer = printer_aim.printer
       else
-        @printer = PrinterOrgan.where(**default_params).take
+        printer_organ = PrinterOrgan.where(**default_params).take
+        @printer = printer_organ&.printer
       end
 
       if @printer
