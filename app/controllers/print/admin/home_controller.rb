@@ -20,9 +20,7 @@ module Print
         printer = MqttPrinter.find_by(dev_imei: params[:result])
       end
 
-      printer.organ = current_organ
-      printer.printer_aims.find_or_initialize_by(aim: 'produce', **default_form_params)
-      printer.printer_aims.find_or_initialize_by(aim: 'receipt', **default_form_params)
+      printer.printer_organs.find_or_initialize_by(**default_form_params)
       printer.save!
     end
 
