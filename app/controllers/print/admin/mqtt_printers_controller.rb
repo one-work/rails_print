@@ -51,7 +51,7 @@ module Print
     end
 
     def destroy
-      @printer_organ = nil
+      @mqtt_printer.organ = nil
       @mqtt_printer.save
     end
 
