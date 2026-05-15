@@ -35,9 +35,9 @@ module Print
       @mqtt_printer = MqttPrinter.find_by(dev_imei: params[:dev_imei])
 
       if @mqtt_printer
-        @mqtt_printer.organ = current_organ
-        @mqtt_printer.printer_organs.find_or_initialize_by(aim: 'produce')
-        @mqtt_printer.printer_organs.find_or_initialize_by(aim: 'receipt')
+        @mqtt_printer.printer_organs.build(organ_id: current_organ.id)
+        @mqtt_printer.printer_aims.find_or_initialize_by(aim: 'produce')
+        @mqtt_printer.printer_aims.find_or_initialize_by(aim: 'receipt')
         @mqtt_printer.save!
       else
         @mqtt_printer = MqttPrinter.new
@@ -51,7 +51,7 @@ module Print
     end
 
     def destroy
-      @mqtt_printer.organ = nil
+      @mqtt_printer.printer_organs.each(&:destroy)
       @mqtt_printer.save
     end
 
