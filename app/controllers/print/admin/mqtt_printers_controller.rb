@@ -51,7 +51,7 @@ module Print
     end
 
     def destroy
-      @mqtt_printer.printer_organs.each(&:destroy)
+      @mqtt_printer.printer_organs.where(organ_id: current_organ.id).each(&:destroy)
       @mqtt_printer.save
     end
 
