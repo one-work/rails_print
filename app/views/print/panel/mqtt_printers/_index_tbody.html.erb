@@ -26,7 +26,7 @@
   <% if model.online %>
     <p>
       <%= svg_tag 'check', class: 'icon text-success' %>
-      <time data-controller="time"><%= model.online_at.to_fs(:iso8601) %></time>
+      <time data-controller="time"><%= model.ready_at.to_fs(:iso8601) %></time>
     </p>
   <% elsif model.offline_at %>
     <p class="size-7 text-grey"><%= Print::MqttPrinter.human_attribute_name(:offline_at) %></p>
