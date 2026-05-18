@@ -1,6 +1,6 @@
 module Print
   class Panel::PrinterAimsController < Panel::BaseController
-    before_action :set_printer, only: [:show, :edit, :update, :destroy, :actions, :test]
+    before_action :set_printer
     before_action :set_new_printer_aim, only: [:new, :create]
 
     def index
@@ -9,7 +9,7 @@ module Print
 
     private
     def set_printer
-      @printer = Printer.find params[:id]
+      @printer = Printer.find params[:printer_id]
     end
 
     def set_new_printer_aim
