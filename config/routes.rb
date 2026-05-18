@@ -44,6 +44,7 @@ Rails.application.routes.draw do
         member do
           post :organ
         end
+        resources :printer_aims
         resources :tasks do
           collection do
             delete :clear
