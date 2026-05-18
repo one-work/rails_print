@@ -1,5 +1,6 @@
 module Print
   class Panel::MqttUsersController < Panel::BaseController
+    before_action :set_new_mqtt_user, only: [:new, :new_ip, :create]
 
     def index
       @mqtt_users = MqttUser.where(ip: nil).page(params[:page])
@@ -10,6 +11,10 @@ module Print
     end
 
     private
+    def set_new_mqtt_user
+      @mqtt_user = MqttUser.new(mqtt_user_params)
+    end
+
     def mqtt_user_params
       params.fetch(:mqtt_user, {}).permit(
         :username,

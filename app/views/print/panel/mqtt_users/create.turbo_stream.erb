@@ -1,0 +1,6 @@
+<% if model.ip.present? %>
+  <%= turbo_stream.prepend 'tbody', partial: 'ip_tbody', layout: 'index_tr', locals: { model: model } %>
+<% else %>
+  <%= turbo_stream.prepend 'tbody', partial: 'index_tbody', layout: 'index_tr', locals: { model: model } %>
+<% end %>
+<%= turbo_stream.remove 'modal_form' %>

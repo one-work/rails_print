@@ -1,0 +1,12 @@
+<table class="table is-striped is-borderless is-fullwidth as-boxed">
+  <thead>
+    <tr>
+      <%= render 'ip_thead' %>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="tbody">
+    <%= yield %>
+  </tbody>
+  <%= render 'index_tfoot' %>
+</table>

@@ -34,6 +34,7 @@ Rails.application.routes.draw do
       resources :mqtt_users do
         collection do
           get :ip
+          post :new_ip
         end
         resources :mqtt_acls
       end
@@ -44,7 +45,6 @@ Rails.application.routes.draw do
         member do
           post :organ
         end
-        resources :printer_aims
         resources :tasks do
           collection do
             delete :clear
@@ -53,6 +53,9 @@ Rails.application.routes.draw do
             post :resend
           end
         end
+      end
+      resources :printers, only: [] do
+        resources :printer_aims
       end
       resources :templates do
         resources :template_items do

@@ -1,0 +1,9 @@
+<%= button_to({ action: 'new_ip' }, class: 'button is-rounded is-primary') do %>
+  <%= svg_tag 'plus' %>
+  <span><%= t('.new_ip.title') %></span>
+<% end %>
+<%= button_to({ action: 'create' }, params: { 'mqtt_user[ip]': request.remote_ip }, class: 'button is-rounded is-danger') do %>
+  <%= svg_tag 'plus' %>
+  <span>授权</span>
+  <span><%= request.remote_ip %></span>
+<% end %>
