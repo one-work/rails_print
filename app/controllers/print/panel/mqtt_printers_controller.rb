@@ -4,7 +4,7 @@ module Print
 
     def index
       q_params = {}
-      q_params.merge! params.permit(:dev_imei, :online)
+      q_params.merge! params.permit(:dev_imei, :online, :id)
 
       @mqtt_printers = MqttPrinter.where(q_params).page(params[:page])
     end
@@ -21,7 +21,8 @@ module Print
     def set_filter_columns
       @filter_columns = set_filter_i18n(
         'online' => { type: 'dropdown', default: true },
-        'dev_imei' => { type: 'search', default: true }
+        'dev_imei' => { type: 'search', default: true },
+        'id' => { type: 'search', default: true }
       )
     end
 
