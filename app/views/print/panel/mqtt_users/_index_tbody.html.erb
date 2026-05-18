@@ -2,3 +2,4 @@
 <td><%= model.note %></td>
 <td><%= model.password %></td>
 <td><%= model.is_superuser %></td>
+<td><time data-controller="time" data-format="human"><%= model.created_at.to_fs(:iso8601) %></time></td>
