@@ -25,6 +25,9 @@ zh:
           title: MQTT 用户
         ip:
           title: IP 白名单
+      printer_aims:
+        index:
+          title: 打印功能
       tasks:
         index:
           title: 打印任务

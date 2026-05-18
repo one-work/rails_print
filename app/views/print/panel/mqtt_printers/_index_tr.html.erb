@@ -5,6 +5,11 @@
       href: url_for(controller: 'tasks', mqtt_printer_id: model.id),
       icon: 'list',
       title: t('.tasks.index.title')
+    },
+    {
+      href: url_for(controller: 'printer_aims', printer_id: model.id),
+      icon: 'bullseye',
+      title: t('.printer_aims.index.title')
     }
   ) { yield }
 %>
