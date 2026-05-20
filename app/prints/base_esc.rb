@@ -26,8 +26,9 @@ class BaseEsc
   TXT_NORMAL = [ 0x1b, 0x21, 0x00 ]        # Normal text
   TXT_UNDERL_OFF = [ 0x1b, 0x2d, 0x00 ]        # Underline font OFF
   TXT_BOLD_OFF = [ 0x1b, 0x45, 0x00 ]        # Bold font OFF
-  TEXT_ALIGN_CENTER = [0x1b, 0x61, 0x01]  # 居中对齐
+  TXT_ALIGN_CENTER = [0x1b, 0x61, 0x01]  # 居中对齐
   TXT_ALIGN_LT = [0x1b, 0x61, 0x00]  # 左对齐
+  TXT_ALIGN_RT = [0x1b, 0x61, 0x02] # 右对齐
   TXT_COLOR_BLACK = [ 0x1b, 0x72, 0x00 ]        # Default Color
   TXT_COLOR_RED = [ 0x1b, 0x72, 0x01 ]        # Alternative Color (Usually Red)
 
@@ -94,7 +95,7 @@ class BaseEsc
   end
 
   def text_big_center(data)
-    data_push *TEXT_ALIGN_CENTER
+    data_push *TXT_ALIGN_CENTER
     data_push 0x1d, 0x21, 0x11 # Quad area text
     data_push *data.encode('gb18030').bytes
     data_push *CTL_LF
@@ -122,11 +123,11 @@ class BaseEsc
   end
 
   def right(data = '')
-    data_push 0x1b, 0x61, 0x02, *data.bytes, *TXT_ALIGN_LT
+    data_push *TXT_ALIGN_RT, *data.bytes, *TXT_ALIGN_LT
   end
 
   def center(data = '')
-    data_push *TEXT_ALIGN_CENTER, *data.bytes, *TXT_ALIGN_LT
+    data_push *TXT_ALIGN_CENTER, *data.bytes, *TXT_ALIGN_LT
   end
 
   # Inverted color text
@@ -155,7 +156,13 @@ class BaseEsc
   end
 
   def qrcode_center(data, y: nil)
-    data_push *TEXT_ALIGN_CENTER
+    data_push *TXT_ALIGN_CENTER
+    qrcode(data, y: y)
+    data_push *TXT_ALIGN_LT
+  end
+  
+  def qrcode_right(data, y: nil)
+    data_push *TXT_ALIGN_RT
     qrcode(data, y: y)
     data_push *TXT_ALIGN_LT
   end
