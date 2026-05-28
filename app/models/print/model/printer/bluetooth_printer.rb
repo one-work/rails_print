@@ -3,6 +3,7 @@ module Print
     extend ActiveSupport::Concern
 
     included do
+      attribute :online, :boolean, default: true
     end
 
     def cmd(r)
