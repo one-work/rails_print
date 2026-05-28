@@ -60,7 +60,7 @@ module Print
           head :ok
         end
       else
-        redirect_to action: 'index'
+        render :inner_blank
       end
     end
 
