@@ -37,11 +37,11 @@ module Print
     end
 
     def inner
-      printer_aim = PrinterAim.where(aim: params[:aim], **default_params).take
+      printer_aim = PrinterAim.includes(:printer).where(printer: { online: true }, aim: params[:aim], **default_params).take
       if printer_aim
         @printer = printer_aim.printer
       else
-        printer_organ = PrinterOrgan.where(**default_params).take
+        printer_organ = PrinterOrgan.includes(:printer).where(printer: { online: true }, **default_params).take
         @printer = printer_organ&.printer
       end
 
