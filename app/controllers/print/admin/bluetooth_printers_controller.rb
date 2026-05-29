@@ -8,7 +8,7 @@ module Print
     end
 
     def edit
-      @bluetooth_printer.printer_aims.build if @bluetooth_printer.printer_aims.none?
+      @bluetooth_printer.printer_aims.build(organ_id: current_organ.id) if @bluetooth_printer.printer_aims.none?
     end
 
     private
@@ -25,7 +25,7 @@ module Print
       params.fetch(:bluetooth_printer, {}).permit(
         :name,
         :dev_type,
-        printer_aims_attributes: [:aim, :id, :_destroy]
+        printer_aims_attributes: [:aim, :organ_id, :id, :_destroy]
       )
     end
 
