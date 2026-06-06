@@ -1,37 +1,14 @@
-<div class="box">
-  <div class="has-block-space-around">
-  <% if model.online %>
-    <div class="tags has-addons mb-0">
-      <span class="tag is-success">在线</span>
-    </div>
-  <% else %>
-    <div class="tags has-addons mb-0">
-      <span class="tag is-danger">离线</span>
-    </div>
-  <% end %>
-  <% if model.dev_type %>
-    <div class="tags has-addons">
-      <span class="tag"><%= Print::MqttPrinter.human_attribute_name(:dev_type) %></span>
-      <span class="tag is-dark"><%= model.dev_type %></span>
-    </div>
-  <% end %>
-  </div>
-  <div class="fixed-grid has-3-cols p-3">
-    <div class="grid gap-2 as-actions">
-      <%= render partial: 'control_actions', locals: { model: model } %>
-    </div>
-    <div class="grid gap-2 as-actions">
-      <%= render partial: 'test_actions', locals: { model: model } %>
-    </div>
-  </div>
-</div>
+<%= render 'show_table_form' %>
+<dl id="box" data-controller="single-input" class="as-show as-boxed is-striped">
+  <%= render 'show_table' %>
+</dl>
 
 <div class="box">
   <p class="size-7 has-border-left-primary">普通打印（直接发送原始打印指令）</p>
   <div data-controller="clipboard" data-action="click->clipboard#copyInner" class="clipboard size-7 is-wrap mt-2">
     <div>
       <span>打印任务地址：</span>
-      <span data-clipboard-target="source"><%= model.webhook_url %></span>
+      <span data-clipboard-target="source"><%= @mqtt_printer.webhook_url %></span>
     </div>
     <%= svg_tag 'clone', class: 'icon ml-1 text-warning copy' %>
   </div>
@@ -46,7 +23,7 @@
   <div data-controller="clipboard" data-action="click->clipboard#copyInner" class="clipboard size-7 is-wrap mt-2">
     <div>
       <span>打印任务地址：</span>
-      <span data-clipboard-target="source"><%= model.webhook_url(action: 'template') %></span>
+      <span data-clipboard-target="source"><%= @mqtt_printer.webhook_url(action: 'template') %></span>
     </div>
     <%= svg_tag 'clone', class: 'icon ml-1 text-warning copy' %>
   </div>
