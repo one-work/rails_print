@@ -4,11 +4,11 @@ module Print
     before_action :set_new_mqtt_user, only: [:new, :new_ip, :create]
 
     def index
-      @mqtt_users = MqttUser.where(ip: nil).page(params[:page])
+      @mqtt_users = MqttUser.where(ip: nil).order(id: :desc).page(params[:page])
     end
 
     def ip
-      @mqtt_users = MqttUser.where.not(ip: nil).page(params[:page])
+      @mqtt_users = MqttUser.where.not(ip: nil).order(id: :desc).page(params[:page])
     end
 
     private
