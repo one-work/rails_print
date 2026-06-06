@@ -1,3 +1,8 @@
-<li><%= link_to t('.mqtt_users.index.title'), { controller: 'mqtt_users' } %></li>
-<li><span class="px-3"><%= @mqtt_user.username %></span></li>
+<% if @mqtt_user.ip.present? %>
+  <li><%= link_to t('.mqtt_users.ip.title'), { controller: 'mqtt_users', action: 'ip' } %></li>
+  <li><span class="px-3"><%= @mqtt_user.ip %></span></li>
+<% else %>
+  <li><%= link_to t('.mqtt_users.index.title'), { controller: 'mqtt_users' } %></li>
+  <li><span class="px-3"><%= @mqtt_user.username %></span></li>
+<% end %>
 <li class="is-active"><%= t('.title') %></li>
