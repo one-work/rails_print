@@ -1,6 +1,10 @@
 <div class="box is-padding-less">
   <div class="box-header">
     <span class="size-7 has-border-left-primary">云打印机</span>
+    <%= link_to({ controller: 'mqtt_printers' }) do %>
+      <span>更多</span>
+      <%= svg_tag 'angles-right' %>
+    <% end %>
   </div>
   <div class="p-3">
     <%= yield %>
