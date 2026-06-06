@@ -36,6 +36,9 @@ Rails.application.routes.draw do
           get :ip
           post :new_ip
         end
+        member do
+          post :edit_ip
+        end
         resources :mqtt_acls
       end
       resources :mqtt_printers do

@@ -1,0 +1,10 @@
+<%= form_with theme: 'modal', model: @mqtt_user, url: { action: 'update' } do |f| %>
+  <%= render 'modal_header' %>
+  <section id="modal_card_body" class="modal-card-body">
+    <%= render 'error_messages', target: f.object if f.object.errors.present? %>
+    <div class="form-horizontal">
+      <%= f.text_field :note, autofocus: true %>
+    </div>
+  </section>
+  <%= f.submit %>
+<% end %>

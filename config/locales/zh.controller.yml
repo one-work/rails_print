@@ -27,6 +27,8 @@ zh:
           title: IP 白名单
         new_ip:
           title: 添加 IP 白名单
+        edit_ip:
+          title: 备注
       printer_aims:
         index:
           title: 打印功能

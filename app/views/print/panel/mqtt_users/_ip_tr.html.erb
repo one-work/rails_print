@@ -1,0 +1,11 @@
+<%=
+  tr_tag(
+    model,
+    {
+      action: url_for(action: 'edit_ip', id: model.id),
+      icon: 'pencil',
+      title: t('.edit_ip.title')
+    },
+    icons: ['show', 'destroy']
+  ) { yield }
+%>
