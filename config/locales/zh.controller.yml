@@ -54,10 +54,12 @@ zh:
       bluetooth_printers:
         index:
           title: 蓝牙打印
+        scan:
+          title: 扫码绑定
         new:
           title: 手动添加
         destroy:
-          title: 解除绑定
+          title: 解绑
       devices:
         index:
           title: 打印机设置
