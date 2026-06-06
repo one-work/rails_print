@@ -100,7 +100,11 @@ Rails.application.routes.draw do
           resources :template_tasks, controller: 'printer/template_tasks'
         end
       end
-      resources :bluetooth_printers
+      resources :bluetooth_printers do
+        collection do
+          post :scan
+        end
+      end
     end
   end
 end
