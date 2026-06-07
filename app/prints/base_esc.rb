@@ -200,7 +200,7 @@ class BaseEsc
   end
 
   def dash(paper_mm = 58)
-    text '-' * 30
+    text '-' * 32
   end
 
   def table_3(headers: ['商品', '单价', '数目', '小计'], cols: [])
