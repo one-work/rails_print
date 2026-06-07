@@ -40,7 +40,7 @@ class BaseEsc
   def initialize
     @data = []
     data_push 0x1b, 0x40  # 初始化打印机：清除打印缓存，各参数恢复默认值
-    set_pad
+    #set_pad
   end
 
   def set_pad
@@ -200,7 +200,7 @@ class BaseEsc
   end
 
   def dash(paper_mm = 58)
-    text '-' * 32
+    text '-' * 30
   end
 
   def table_3(headers: ['商品', '单价', '数目', '小计'], cols: [])
