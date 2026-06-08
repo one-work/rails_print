@@ -56,7 +56,6 @@ module Print
             raw: @task.raw
           }
         else
-          @task.print
           head :ok
         end
       else
