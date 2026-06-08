@@ -21,8 +21,8 @@ module Print
       if @mqtt_printer
         mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
         mqtt_printer.organ = current_organ
-        mqtt_printer.printer_organs.find_or_initialize_by(aim: 'produce')
-        mqtt_printer.printer_organs.find_or_initialize_by(aim: 'receipt')
+        mqtt_printer.printer_aims.find_or_initialize_by(aim: 'produce')
+        mqtt_printer.printer_aims.find_or_initialize_by(aim: 'receipt')
         mqtt_printer.save!
       else
         @mqtt_printer = MqttPrinter.new
@@ -68,6 +68,7 @@ module Print
     def mqtt_printer_params
       params.fetch(:mqtt_printer, {}).permit(
         :dev_type,
+        :dev_step,
         :dev_cut_type,
         printer_aims_attributes: [:organ_id, :aim, :id, :_destroy]
       )
