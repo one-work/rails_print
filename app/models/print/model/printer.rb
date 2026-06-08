@@ -97,6 +97,14 @@ module Print
       set_raw_test!(text: url, arr: arr)
     end
 
+    def set_step
+      set_raw_test!(text: '设置步进', arr: [0x1f, 0x2d, 0x35, 0x04, 0x00, 0x05, 0xc8, 0x00])
+    end
+
+    def cancel_step
+      set_raw_test!(text: '取消步进', arr: [0x1f, 0x2d, 0x35, 0x04, 0x01, 0x05, 0xc8, 0x00])
+    end
+
     def set_deferred_task(text)
       task = deferred_tasks.build(note: text)
       task.set_esc do |pr|
