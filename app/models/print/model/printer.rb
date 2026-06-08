@@ -14,6 +14,7 @@ module Print
       attribute :dev_tel, :string
       attribute :dev_spec, :string
       attribute :dev_cut, :boolean
+      attribute :dev_step, :boolean
       attribute :dev_desc, :string
       attribute :dev_version, :string
       attribute :dev_type, :integer
@@ -43,6 +44,7 @@ module Print
 
       after_save_commit :check_undo_tasks, if: -> { online && (saved_changes.keys & ['online', 'ready_at']).present? }
       after_save_commit :set_dev_type, if: -> { saved_change_to_dev_type? }
+      after_save_commit :set_step!, if: -> { saved_change_to_dev_step? }
     end
 
     def assign_info(payload)
@@ -97,12 +99,12 @@ module Print
       set_raw_test!(text: url, arr: arr)
     end
 
-    def set_step
-      set_raw_test!(text: '设置步进', arr: [0x1f, 0x2d, 0x35, 0x04, 0x00, 0x05, 0xc8, 0x00])
-    end
-
-    def cancel_step
-      set_raw_test!(text: '取消步进', arr: [0x1f, 0x2d, 0x35, 0x04, 0x01, 0x05, 0xc8, 0x00])
+    def set_step!
+      if dev_step
+        set_raw_test!(text: '设置步进', arr: [0x1f, 0x2d, 0x35, 0x04, 0x00, 0x05, 0xc8, 0x00])
+      else
+        set_raw_test!(text: '取消步进', arr: [0x1f, 0x2d, 0x35, 0x04, 0x01, 0x05, 0xc8, 0x00])
+      end
     end
 
     def set_deferred_task(text)

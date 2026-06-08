@@ -1,15 +1,15 @@
-<div class="box is-padding-less">
-  <div class="box-header">
-    <span class="size-7 has-border-left-primary">蓝牙打印机</span>
+<div class="card as-transparent">
+  <div class="card-header">
+    <span class="size-7 text-grey has-border-left-primary">蓝牙打印机</span>
     <%= link_to({ controller: 'bluetooth_printers' }) do %>
       <span>更多</span>
       <%= svg_tag 'angles-right' %>
     <% end %>
   </div>
-  <div class="p-3">
+  <div class="card-content">
     <%= yield %>
   </div>
-  <div class="box-footer">
+  <div class="card-footer">
     <%= button_to({ controller: 'bluetooth_printers', action: 'new' }, class: 'button is-rounded is-small is-info') do %>
       <%= svg_tag 'plus' %>
       <span><%= t('.bluetooth_printers.new.title') %></span>
