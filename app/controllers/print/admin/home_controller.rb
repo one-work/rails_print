@@ -12,9 +12,9 @@ module Print
 
     def scan
       if params[:result].include?('&')
-        name, _ = params[:result].split('&')
+        name, addr = params[:result].split('&')
 
-        printer = BluetoothPrinter.find_or_create_by(name: name)
+        printer = BluetoothPrinter.find_or_create_by(name: name, bluetooth_addr: addr)
         printer.save
       else
         printer = MqttPrinter.find_by(dev_imei: params[:result])
