@@ -36,13 +36,28 @@ module Print
       end
     end
 
-    def inner
-      printer_aim = PrinterAim.includes(:printer).where(printer: { online: true }, aim: params[:aim], **default_params).take
+    def replace_bluetooth
+      printer_aim = PrinterAim.where(aim: 'demo', **default_params).take
+      mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
+
       if printer_aim
-        @printer = printer_aim.printer
+        printer_aim.printer = mqtt_printer
       else
-        printer_organ = PrinterOrgan.includes(:printer).where(printer: { online: true }, **default_params).take
-        @printer = printer_organ&.printer
+        mqtt_printer.printer_aims.build(aim: 'demo', **default_form_params)
+        mqtt_printer.save!
+      end
+    end
+
+    def inner
+      printer_aims = PrinterAim.includes(:printer).where(printer: { online: true }, aim: params[:aim], **default_params)
+      if printer_aims.blank?
+        printer_aims = PrinterOrgan.includes(:printer).where(printer: { online: true }, **default_params)
+      end
+
+      if printer_aims.size == 1
+        @printer = printer_aims.first.printer
+      else
+
       end
 
       if @printer

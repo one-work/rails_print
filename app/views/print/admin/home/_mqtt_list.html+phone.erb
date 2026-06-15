@@ -1,12 +1,14 @@
 <div class="card as-transparent">
   <div class="card-header">
-    <span class="size-7 text-grey has-border-left-primary">云打印机</span>
+    <div>
+      <span class="size-7 text-grey has-border-left-primary">云打印机</span>
+    </div>
     <%= link_to({ controller: 'mqtt_printers' }) do %>
       <span>更多</span>
       <%= svg_tag 'angles-right' %>
     <% end %>
   </div>
-  <div class="card-content">
+  <div class="card-content p-0">
     <%= yield %>
   </div>
 </div>
