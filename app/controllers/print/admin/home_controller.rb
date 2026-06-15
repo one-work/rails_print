@@ -1,5 +1,6 @@
 module Print
   class Admin::HomeController < Admin::BaseController
+    before_action :set_printer, only: [:task]
 
     def index
       @mqtt_printers = MqttPrinter.includes(:printer_organs).where(printer_organs: { organ_id: current_organ.id }).page(params[:page])
@@ -49,18 +50,13 @@ module Print
     end
 
     def inner
-      printer_aims = PrinterAim.includes(:printer).where(printer: { online: true }, aim: params[:aim], **default_params)
-      if printer_aims.blank?
-        printer_aims = PrinterOrgan.includes(:printer).where(printer: { online: true }, **default_params)
+      @printer_aims = PrinterAim.includes(:printer).where(printer: { online: true }, aim: params[:aim], **default_params)
+      if @printer_aims.blank?
+        @printer_aims = PrinterOrgan.includes(:printer).where(printer: { online: true }, **default_params)
       end
 
-      if printer_aims.size == 1
-        @printer = printer_aims.first.printer
-      else
-
-      end
-
-      if @printer
+      if @printer_aims.length == 1
+        @printer = @printer_aims.take.printer
         @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
         @task.save
 
@@ -73,9 +69,32 @@ module Print
         else
           head :ok
         end
+      elsif @printer_aims.length > 1
+        render :inner_choose
       else
         render :inner_blank
       end
+    end
+
+    def task
+      @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
+      @task.save
+
+      if @printer.is_a? Print::BluetoothPrinter
+        @data = {
+          #url: url_for(controller: 'print/api/tasks', action: 'show', auth_token: Current.session.once_token, only_path: false),
+          device: @printer.name,
+          raw: @task.raw
+        }
+        render :inner
+      else
+        head :ok
+      end
+    end
+
+    private
+    def set_printer
+      @printer = Printer.find params[:printer_id]
     end
 
   end

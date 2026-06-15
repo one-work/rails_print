@@ -76,6 +76,7 @@ Rails.application.routes.draw do
         post :scan
         post :replace
         post :inner
+        post :task
       end
       resources :templates do
         resources :template_tasks
