@@ -5,7 +5,7 @@
       <%= printer_aim.printer.name %>
     </div>
     <div class="media-right">
-      <%= button_to({ action: 'actions', printer_id: model.id, **params.permit(:gid, :aim) }, class: 'button is-borderless') do %>
+      <%= button_to({ action: 'actions', printer_id: printer_aim.printer_id, **params.permit(:gid, :aim) }, class: 'button is-borderless') do %>
         <%= svg_tag 'print' %>
       <% end %>
     </div>
