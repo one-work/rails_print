@@ -46,7 +46,6 @@ module Print
     def set_esc
       pr = print_base
       yield pr
-      pr.line_x10
       bytes = pr.render
 
       if printer.dev_cut_type_full?
