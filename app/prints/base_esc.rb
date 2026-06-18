@@ -98,6 +98,7 @@ class BaseEsc
     data_push *TXT_ALIGN_CENTER
     data_push 0x1d, 0x21, 0x11 # Quad area text
     data_push *data.encode('gb18030').bytes
+    data_push *TXT_NORMAL
     data_push *CTL_LF
     data_push *TXT_ALIGN_LT
   end
