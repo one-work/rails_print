@@ -36,7 +36,7 @@
 <td>
 <% model.printer_aims.each do |po| %>
   <p>
-    <span><%= po.organ.name %></span>
+    <span><%= po.organ&.name %></span>
     <span><%= po.aim %></span>
   </p>
 <% end %>
