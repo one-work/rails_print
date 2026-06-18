@@ -4,7 +4,7 @@ module Print
     before_action :set_new_bluetooth_printer, only: [:new, :create]
 
     def index
-      @bluetooth_printers = BluetoothPrinter.includes(:printer_aims).where(printer_organs: { organ_id: current_organ.id }).page(params[:page])
+      @bluetooth_printers = BluetoothPrinter.includes(:printer_aims).where(printer_aims: { organ_id: current_organ.id }).page(params[:page])
     end
 
     def scan
