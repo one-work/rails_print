@@ -31,9 +31,8 @@ module Print
         partial: 1
       }, default: 'full', prefix: true
 
-      has_many :printer_organs, dependent: :delete_all
-      has_many :organs, through: :printer_organs
       has_many :printer_aims, dependent: :delete_all
+      has_many :organs, through: :printer_aims
       accepts_nested_attributes_for :printer_aims, allow_destroy: true
 
       has_many :tasks, dependent: :delete_all

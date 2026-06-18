@@ -4,7 +4,7 @@ module Print
     before_action :set_new_mqtt_printer, only: [:new]
 
     def index
-      @mqtt_printers = MqttPrinter.includes(:printer_organs).where(printer_organs: { organ_id: current_organ.id }).page(params[:page])
+      @mqtt_printers = MqttPrinter.includes(:printer_aims).where(printer_aims: { organ_id: current_organ.id }).page(params[:page])
     end
 
     def test_print
@@ -35,9 +35,8 @@ module Print
       @mqtt_printer = MqttPrinter.find_by(dev_imei: params[:dev_imei])
 
       if @mqtt_printer
-        @mqtt_printer.printer_organs.build(organ_id: current_organ.id)
-        @mqtt_printer.printer_aims.find_or_initialize_by(aim: 'produce')
-        @mqtt_printer.printer_aims.find_or_initialize_by(aim: 'receipt')
+        @mqtt_printer.printer_aims.find_or_initialize_by(aim: 'produce', organ_id: current_organ.id)
+        @mqtt_printer.printer_aims.find_or_initialize_by(aim: 'receipt', organ_id: current_organ.id)
         @mqtt_printer.save!
       else
         @mqtt_printer = MqttPrinter.new
@@ -52,7 +51,6 @@ module Print
 
     def destroy
       @mqtt_printer.printer_aims.where(organ_id: current_organ.id).each(&:destroy)
-      @mqtt_printer.printer_organs.where(organ_id: current_organ.id).each(&:destroy)
       @mqtt_printer.save
     end
 

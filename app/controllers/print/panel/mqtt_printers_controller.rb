@@ -6,7 +6,7 @@ module Print
       q_params = {}
       q_params.merge! params.permit(:dev_imei, :online, :id)
 
-      @mqtt_printers = MqttPrinter.includes(printer_organs: :organ).where(q_params).page(params[:page])
+      @mqtt_printers = MqttPrinter.includes(printer_aims: :organ).where(q_params).page(params[:page])
     end
 
     def search_organs

@@ -34,8 +34,11 @@
   <% end %>
 </td>
 <td>
-<% model.printer_organs.each do |po| %>
-  <p><%= po.organ.name %></p>
+<% model.printer_aims.each do |po| %>
+  <p>
+    <span><%= po.organ.name %></span>
+    <span><%= po.aim %></span>
+  </p>
 <% end %>
 </td>
 <td>

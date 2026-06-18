@@ -4,7 +4,7 @@ module Print
     before_action :set_new_bluetooth_printer, only: [:new, :create]
 
     def index
-      @bluetooth_printers = BluetoothPrinter.includes(:printer_organs).where(printer_organs: { organ_id: current_organ.id }).page(params[:page])
+      @bluetooth_printers = BluetoothPrinter.includes(:printer_aims).where(printer_organs: { organ_id: current_organ.id }).page(params[:page])
     end
 
     def scan
@@ -15,7 +15,7 @@ module Print
         @bluetooth_printer.save
       end
 
-      @bluetooth_printer.printer_organs.find_or_initialize_by(**default_form_params)
+      @bluetooth_printer.printer_aims.find_or_initialize_by(**default_form_params)
       @bluetooth_printer.save!
     end
 
@@ -32,7 +32,7 @@ module Print
 
     def set_new_bluetooth_printer
       @bluetooth_printer = BluetoothPrinter.new(bluetooth_printer_params)
-      @bluetooth_printer.printer_organs.build(organ_id: current_organ.id)
+      @bluetooth_printer.printer_aims.build(organ_id: current_organ.id)
     end
 
     def bluetooth_printer_params

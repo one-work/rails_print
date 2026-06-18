@@ -3,8 +3,8 @@ module Print
     before_action :set_printer, only: [:task]
 
     def index
-      @mqtt_printers = MqttPrinter.includes(:printer_organs).where(printer_organs: { organ_id: current_organ.id }).page(params[:page])
-      @bluetooth_printers = BluetoothPrinter.includes(:printer_organs).where(printer_organs: { organ_id: current_organ.id }).page(params[:page])
+      @mqtt_printers = MqttPrinter.includes(:printer_aims).where(printer_aims: { organ_id: current_organ.id }).page(params[:page])
+      @bluetooth_printers = BluetoothPrinter.includes(:printer_aims).where(printer_aims: { organ_id: current_organ.id }).page(params[:page])
     end
 
     def bind
@@ -21,7 +21,7 @@ module Print
         printer = MqttPrinter.find_by(dev_imei: params[:result])
       end
 
-      printer.printer_organs.find_or_initialize_by(**default_form_params)
+      printer.printer_aims.find_or_initialize_by(**default_form_params)
       printer.save!
     end
 
@@ -52,7 +52,7 @@ module Print
     def inner
       @printer_aims = PrinterAim.includes(:printer).where(printer: { online: true }, aim: params[:aim], **default_params)
       if @printer_aims.blank?
-        @printer_aims = PrinterOrgan.includes(:printer).where(printer: { online: true }, **default_params)
+        @printer_aims = PrinterAim.includes(:printer).where(printer: { online: true }, **default_params)
       end
 
       if @printer_aims.length == 1
