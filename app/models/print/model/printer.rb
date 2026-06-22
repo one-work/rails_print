@@ -97,13 +97,13 @@ module Print
         set_command_task!(
           note: '设置步进',
           arr: [0x1f, 0x2d, 0x35, 0x04, 0x00, 0x05, 0xc8, 0x00],
-          payload: { dev_type: true }
+          payload: { dev_step: true }
         )
       else
         set_command_task!(
           note: '取消步进',
           arr: [0x1f, 0x2d, 0x35, 0x04, 0x01, 0x05, 0xc8, 0x00],
-          payload: { dev_type: false }
+          payload: { dev_step: false }
         )
       end
     end
