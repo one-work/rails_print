@@ -83,15 +83,19 @@ module Print
       print_cmd(payload, '1001')
     end
 
-    def set_dev_type
-      set_raw_test! text: '', arr: TYPE + [dev_type_before_type_cast]
+    def set_dev_type(dev_type = 0)
+      set_command_task!(
+        note: '',
+        arr: TYPE + [dev_type],
+        payload: { dev_type: dev_type }
+      )
     end
 
     def set_step!
       if dev_step
-        set_raw_test!(text: '设置步进', arr: [0x1f, 0x2d, 0x35, 0x04, 0x00, 0x05, 0xc8, 0x00])
+        set_raw_task!(text: '设置步进', arr: [0x1f, 0x2d, 0x35, 0x04, 0x00, 0x05, 0xc8, 0x00])
       else
-        set_raw_test!(text: '取消步进', arr: [0x1f, 0x2d, 0x35, 0x04, 0x01, 0x05, 0xc8, 0x00])
+        set_raw_task!(text: '取消步进', arr: [0x1f, 0x2d, 0x35, 0x04, 0x01, 0x05, 0xc8, 0x00])
       end
     end
 
@@ -102,7 +106,7 @@ module Print
       arr.push 0x55, 0x48
       arr.concat url.bytes
 
-      set_raw_test!(text: url, arr: arr)
+      set_raw_task!(text: url, arr: arr)
     end
 
     def set_deferred_task(text)
@@ -125,18 +129,21 @@ module Print
       task.set_raw_array([0x12, 0x54])
     end
 
-    def set_command_task()
-
+    def set_command_task!(note:, arr:, payload:)
+      task = command_tasks.build(note: note, payload: payload)
+      task.set_raw_array arr
+      task.save!
+      task
     end
 
-    def set_raw_test(text:, arr:)
+    def set_raw_task(text:, arr:)
       raw_task = raw_tasks.build(note: text)
       raw_task.set_raw_array arr
       raw_task
     end
 
-    def set_raw_test!(text:, arr:)
-      task = set_raw_test(text: text, arr: arr)
+    def set_raw_task!(text:, arr:)
+      task = set_raw_task(text: text, arr: arr)
       task.save
     end
 

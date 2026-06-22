@@ -63,7 +63,7 @@ module Print
 
       # 数据库不存在记录，则清除账号密码后触发重设
       if new_record?
-        set_raw_test(text: '清除', arr: [0x1f, 0x28, 0x75, 0x02, 0x00, 0x43, 0x55])
+        set_raw_task(text: '清除', arr: [0x1f, 0x28, 0x75, 0x02, 0x00, 0x43, 0x55])
 
         set_deferred_task('密码重置成功!')
         set_deferred_test
