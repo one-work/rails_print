@@ -26,9 +26,16 @@ module Print
     end
 
     def replace
+      printer_aim = PrinterAim.where(aim: 'demo', **default_params).take
       mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
-      mqtt_printer.printer_aims.find_or_initialize_by(aim: 'demo', **default_form_params)
-      mqtt_printer.save!
+
+      if printer_aim
+        printer_aim.printer = mqtt_printer
+        printer_aim.save!
+      else
+        mqtt_printer.printer_aims.build(aim: 'demo', **default_form_params)
+        mqtt_printer.save!
+      end
     end
 
     def replace_bluetooth
@@ -37,6 +44,7 @@ module Print
 
       if printer_aim
         printer_aim.printer = mqtt_printer
+        printer_aim.save!
       else
         mqtt_printer.printer_aims.build(aim: 'demo', **default_form_params)
         mqtt_printer.save!
