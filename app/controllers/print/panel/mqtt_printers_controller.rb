@@ -15,10 +15,12 @@ module Print
 
     def dev_type
       @mqtt_printer.set_dev_type!(params[:dev_type])
+      @mqtt_printer.dev_type = params[:dev_type]
     end
 
     def step
-      @mqtt_printer.set_step!(params[:step])
+      @mqtt_printer.set_step!(params[:dev_step])
+      @mqtt_printer.dev_step = params[:dev_step]
     end
 
     private

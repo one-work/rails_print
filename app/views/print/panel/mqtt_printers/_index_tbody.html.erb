@@ -37,11 +37,11 @@
   <div class="has-block-left">
     <span><%= model.dev_step_i18n %></span>
     <% if model.dev_step? %>
-      <%= button_to({ action: 'step', id: model.id }, params: { step: false }, class: 'button is-small is-info') do %>
+      <%= button_to({ action: 'step', id: model.id }, params: { dev_step: false }, class: 'button is-small is-info') do %>
         <span>取消步进</span>
       <% end %>
     <% else %>
-      <%= button_to({ action: 'step', id: model.id }, params: { step: true }, class: 'button is-small is-info') do %>
+      <%= button_to({ action: 'step', id: model.id }, params: { dev_step: true }, class: 'button is-small is-info') do %>
         <span>设置步进</span>
       <% end %>
     <% end %>
