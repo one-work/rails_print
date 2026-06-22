@@ -42,8 +42,6 @@ module Print
       has_many :inner_tasks, dependent: :delete_all
 
       after_save_commit :check_undo_tasks, if: -> { online && (saved_changes.keys & ['online', 'ready_at']).present? }
-      after_save_commit :set_dev_type, if: -> { saved_change_to_dev_type? }
-      after_save_commit :set_step!, if: -> { saved_change_to_dev_step? }
     end
 
     def assign_info(payload)
