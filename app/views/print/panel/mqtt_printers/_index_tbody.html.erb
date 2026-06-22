@@ -18,7 +18,15 @@
   <p><%= model.dev_desc %></p>
   <p>
     <span><%= model.dev_type_i18n %></span>
-    <%= button_to({ action: 'dev_type'}) %>
+    <% if model.dev_type_cpcl? %>
+      <%= button_to({ action: 'dev_type', id: model.id }, params: { dev_type: 'esc' }, class: 'button is-small is-info') do %>
+        <span>切换为 ESC</span>
+      <% end %>
+    <% else %>
+      <%= button_to({ action: 'dev_type', id: model.id }, params: { dev_type: 'cpcl' }, class: 'button is-small is-info') do %>
+        <span>切换为 CPCL</span>
+      <% end %>
+    <% end %>
   </p>
 </td>
 <td>
