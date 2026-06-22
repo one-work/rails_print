@@ -47,6 +47,8 @@ Rails.application.routes.draw do
         end
         member do
           post :organ
+          post :dev_type
+          post :step
         end
         resources :tasks do
           collection do

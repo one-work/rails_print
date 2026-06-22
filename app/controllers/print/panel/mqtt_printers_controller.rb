@@ -26,5 +26,11 @@ module Print
       )
     end
 
+    def mqtt_printer_params
+      params.fetch(:mqtt_printer, {}).permit(
+        :online
+      )
+    end
+
   end
 end
