@@ -88,7 +88,7 @@ module Print
       set_command_task!(
         note: '',
         arr: TYPE + [dev_type],
-        payload: { dev_type: dev_type }
+        payload: { dev_type: type }
       )
     end
 

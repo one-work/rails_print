@@ -1,6 +1,6 @@
 module Print
   class Panel::MqttPrintersController < Panel::BaseController
-    before_action :set_mqtt_printer, only: [:show, :edit, :update, :destroy, :actions, :organ, :dev_type]
+    before_action :set_mqtt_printer, only: [:show, :edit, :update, :destroy, :actions, :organ, :dev_type, :step]
 
     def index
       q_params = {}
