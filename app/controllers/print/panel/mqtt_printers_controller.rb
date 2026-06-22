@@ -13,6 +13,14 @@ module Print
       @organs = Org::Organ.default_where('name-like': params['name-like'])
     end
 
+    def dev_type
+      @mqtt_printer.set_dev_type!(params[:dev_type])
+    end
+
+    def step
+      @mqtt_printer.set_step!(params[:step])
+    end
+
     private
     def set_mqtt_printer
       @mqtt_printer = MqttPrinter.find(params[:id])

@@ -83,7 +83,8 @@ module Print
       print_cmd(payload, '1001')
     end
 
-    def set_dev_type!(dev_type = 0)
+    def set_dev_type!(type = 'esc')
+      dev_type = self.class.dev_types[type]
       set_command_task!(
         note: '',
         arr: TYPE + [dev_type],
