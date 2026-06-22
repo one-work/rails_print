@@ -16,7 +16,7 @@
 </td>
 <td>
   <p><%= model.dev_desc %></p>
-  <p>
+  <div class="has-block-centered">
     <span><%= model.dev_type_i18n %></span>
     <% if model.dev_type_cpcl? %>
       <%= button_to({ action: 'dev_type', id: model.id }, params: { dev_type: 'esc' }, class: 'button is-small is-info') do %>
@@ -27,7 +27,7 @@
         <span>切换为 CPCL</span>
       <% end %>
     <% end %>
-  </p>
+  </div>
 </td>
 <td>
   <p><%= model.dev_spec %></p>
