@@ -40,6 +40,7 @@ module Print
       has_many :raw_tasks, dependent: :delete_all
       has_many :deferred_tasks, dependent: :delete_all
       has_many :inner_tasks, dependent: :delete_all
+      has_many :command_tasks, dependent: :delete_all
 
       after_save_commit :check_undo_tasks, if: -> { online && (saved_changes.keys & ['online', 'ready_at']).present? }
     end
@@ -86,6 +87,14 @@ module Print
       set_raw_test! text: '', arr: TYPE + [dev_type_before_type_cast]
     end
 
+    def set_step!
+      if dev_step
+        set_raw_test!(text: '设置步进', arr: [0x1f, 0x2d, 0x35, 0x04, 0x00, 0x05, 0xc8, 0x00])
+      else
+        set_raw_test!(text: '取消步进', arr: [0x1f, 0x2d, 0x35, 0x04, 0x01, 0x05, 0xc8, 0x00])
+      end
+    end
+
     def download_os(url = 'http://images.one.work/printer/printer_os_260312.bin')
       arr = [0x1f, 0x28, 0x75]
       size = url.bytes.size + 2
@@ -94,14 +103,6 @@ module Print
       arr.concat url.bytes
 
       set_raw_test!(text: url, arr: arr)
-    end
-
-    def set_step!
-      if dev_step
-        set_raw_test!(text: '设置步进', arr: [0x1f, 0x2d, 0x35, 0x04, 0x00, 0x05, 0xc8, 0x00])
-      else
-        set_raw_test!(text: '取消步进', arr: [0x1f, 0x2d, 0x35, 0x04, 0x01, 0x05, 0xc8, 0x00])
-      end
     end
 
     def set_deferred_task(text)
@@ -124,18 +125,8 @@ module Print
       task.set_raw_array([0x12, 0x54])
     end
 
-    def set_raw_task(text)
-      task = raw_tasks.build(note: text)
-      task.set_esc do |pr|
-        pr.text_big_center text
-        pr.break_line
-        pr.qrcode_center dev_imei
-      end
-    end
+    def set_command_task()
 
-    def set_raw_task!(text)
-      task = set_raw_task(text)
-      task.save
     end
 
     def set_raw_test(text:, arr:)
