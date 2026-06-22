@@ -16,7 +16,7 @@
 </td>
 <td>
   <p><%= model.dev_desc %></p>
-  <div class="has-block-centered">
+  <div class="has-block-left">
     <span><%= model.dev_type_i18n %></span>
     <% if model.dev_type_cpcl? %>
       <%= button_to({ action: 'dev_type', id: model.id }, params: { dev_type: 'esc' }, class: 'button is-small is-info') do %>
