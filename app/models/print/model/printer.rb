@@ -24,7 +24,7 @@ module Print
       enum :dev_type, {
         cpcl: 1,
         esc: 2
-      }, prefix: true
+      }, default: 'esc', prefix: true
 
       enum :dev_cut_type, {
         full: 0,
@@ -54,10 +54,10 @@ module Print
         '方案提供商编号' => infos[4],
         '方案编号' => infos[6]
       }
-      self.dev_version = infos[7]
-      self.dev_desc = infos[8]
       self.dev_vendor = infos[2]
       self.dev_network = infos[5]
+      self.dev_version = infos[7]
+      self.dev_desc = infos[8]
       self.dev_tel = infos[9]
       self.dev_spec = infos[10]
       self.dev_cut = infos[11]
