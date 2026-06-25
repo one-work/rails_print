@@ -1,11 +1,12 @@
 <div class="buttons as-bottom">
-  <div
+  <button
     data-controller="scan"
     data-action="click->scan#report"
     class="button is-rounded is-primary"
     data-report-url="<%= url_for(action: 'replace') %>"
+    disabled
   >
     <%= svg_tag 'plus' %>
     <span><%= t('.replace.title') %></span>
-  </div>
+  </button>
 </div>
