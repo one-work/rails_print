@@ -108,7 +108,7 @@ module Print
       end
     end
 
-    def download_os(url = 'http://images.one.work/printer/printer_os_260615.bin')
+    def download_os(url = 'http://images.one.work/printer/printer_os_260623.bin')
       arr = [0x1f, 0x28, 0x75]
       size = url.bytes.size + 2
       arr.push size % 256, (size / 256.0).floor
