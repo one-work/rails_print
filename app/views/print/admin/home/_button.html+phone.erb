@@ -1,13 +1,19 @@
-<div
+<button
   data-controller="scan"
   data-action="click->scan#report"
   class="button is-rounded is-primary"
   data-report-url="<%= url_for(action: 'scan') %>"
+  disabled
 >
   <%= svg_tag 'plus' %>
   <span><%= t('.scan.title') %></span>
-</div>
-<%= link_to({ controller: 'factory/our/productions', host: Rails.application.routes.default_url_options[:host] }, class: 'button is-rounded is-link') do %>
+</button>
+<%=
+  link_to(
+    { controller: 'factory/our/productions', host: Rails.application.routes.default_url_options[:host] },
+    class: 'button is-rounded is-link'
+  ) do
+%>
   <%= svg_tag 'plus' %>
   <span>购买后绑定</span>
 <% end %>
