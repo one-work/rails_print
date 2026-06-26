@@ -59,7 +59,7 @@ module Print
 
     def confirm_ready!(payload)
       items = payload.split('#')
-      api.publish "#{dev_imei}/confirm", "ready##{items[1]}"
+      api.publish "#{dev_imei}/confirm", "ready##{items[0]}"
 
       # 数据库不存在记录，则清除账号密码后触发重设
       if new_record?
@@ -73,7 +73,7 @@ module Print
       end
 
       self.ready_at = Time.current
-      self.dev_version = items[2] if items[2].present? # 第三位如果存在，则为版本号
+      self.dev_version = items[1] # 版本号
       self.save
     end
 
