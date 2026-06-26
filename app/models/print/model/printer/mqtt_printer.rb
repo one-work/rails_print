@@ -73,7 +73,7 @@ module Print
       end
 
       self.ready_at = Time.current
-      self.dev_version = items[1] # 版本号
+      self.dev_desc = items[1] # 版本号
       self.save
     end
 
