@@ -3,10 +3,12 @@
   <% if model.online %>
     <div class="tags has-addons mb-0">
       <span class="tag is-success">在线</span>
+      <time data-controller="time" class="tag"><%= model.ready_at.to_fs(:iso8601) %></time>
     </div>
   <% else %>
     <div class="tags has-addons mb-0">
       <span class="tag is-danger">离线</span>
+      <time data-controller="time" class="tag"><%= model.offline_at.to_fs(:iso8601) %></time>
     </div>
   <% end %>
   <% if model.dev_type %>
