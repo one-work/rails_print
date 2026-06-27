@@ -1,0 +1,56 @@
+<div class="box">
+  <div class="has-block-space-around">
+  <% if model.online %>
+    <div class="tags has-addons mb-0">
+      <span class="tag is-success">在线</span>
+      <time data-controller="time" class="tag"><%= model.ready_at.to_fs(:iso8601) %></time>
+    </div>
+  <% else %>
+    <div class="tags has-addons mb-0">
+      <span class="tag is-danger">离线</span>
+      <time data-controller="time" class="tag"><%= model.offline_at.to_fs(:iso8601) %></time>
+    </div>
+  <% end %>
+  <% if model.dev_type %>
+    <div class="tags has-addons">
+      <span class="tag"><%= Print::MqttPrinter.human_attribute_name(:dev_type) %></span>
+      <span class="tag is-dark"><%= model.dev_type %></span>
+    </div>
+  <% end %>
+  </div>
+  <div class="fixed-grid has-3-cols p-3">
+    <div class="grid gap-2 as-actions">
+      <%= render partial: 'test_actions', locals: { model: model } %>
+    </div>
+  </div>
+</div>
+
+<div class="box">
+  <p class="size-7 has-border-left-primary">普通打印（直接发送原始打印指令）</p>
+  <div data-controller="clipboard" data-action="click->clipboard#copyInner" class="clipboard size-7 is-wrap mt-2">
+    <div>
+      <span>打印任务地址：</span>
+      <span data-clipboard-target="source"><%= model.webhook_url %></span>
+    </div>
+    <%= svg_tag 'clone', class: 'icon ml-1 text-warning copy' %>
+  </div>
+  <%= link_to({ controller: 'doc/subjects', action: 'code', meta_controller: 'print/api/tasks', meta_action: 'create' } , class: 'text-link mt-2') do %>
+    <strong>查看文档</strong>
+    <%= svg_tag 'angles-right' %>
+  <% end %>
+</div>
+
+<div class="box">
+  <p class="size-7 has-border-left-primary">模板打印</p>
+  <div data-controller="clipboard" data-action="click->clipboard#copyInner" class="clipboard size-7 is-wrap mt-2">
+    <div>
+      <span>打印任务地址：</span>
+      <span data-clipboard-target="source"><%= model.webhook_url(action: 'template') %></span>
+    </div>
+    <%= svg_tag 'clone', class: 'icon ml-1 text-warning copy' %>
+  </div>
+  <%= link_to({ controller: 'doc/subjects', action: 'code', meta_controller: 'print/api/tasks', meta_action: 'template' } , class: 'text-link mt-2') do %>
+    <strong>查看文档</strong>
+    <%= svg_tag 'angles-right' %>
+  <% end %>
+</div>
