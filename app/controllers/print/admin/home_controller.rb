@@ -21,7 +21,7 @@ module Print
         printer = MqttPrinter.find_by(dev_imei: params[:result])
       end
 
-      printer.printer_aims.find_or_initialize_by(**default_form_params)
+      printer.printer_aims.find_or_initialize_by(aim: 'demo', **default_form_params)
       printer.save!
     end
 

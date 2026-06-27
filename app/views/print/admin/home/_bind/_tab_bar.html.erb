@@ -1,4 +1,16 @@
 <div class="buttons as-bottom">
+<% if current_organ.partnership %>
+  <button
+    data-controller="scan"
+    data-action="click->scan#report"
+    class="button is-rounded is-primary"
+    data-report-url="<%= url_for(action: 'scan') %>"
+    disabled
+  >
+    <%= svg_tag 'plus' %>
+    <span><%= t('.scan.title') %></span>
+  </button>
+<% else %>
   <button
     data-controller="scan"
     data-action="click->scan#report"
@@ -9,4 +21,5 @@
     <%= svg_tag 'plus' %>
     <span><%= t('.replace.title') %></span>
   </button>
+<% end %>
 </div>
