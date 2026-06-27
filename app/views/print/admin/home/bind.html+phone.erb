@@ -1,6 +1,6 @@
 <%= render layout: 'mqtt_list' do %>
 <% if @mqtt_printers.size > 1 %>
-  <%= render partial: 'mqtt_item_slim', layout: 'mqtt_item_actions', collection: @mqtt_printers, as: :model %>
+  <%= render partial: 'mqtt_item_slim', layout: 'mqtt_item_slim_actions', collection: @mqtt_printers, as: :model %>
 <% else %>
   <%= render partial: 'mqtt_item', layout: 'mqtt_item_actions', collection: @mqtt_printers, as: :model %>
 <% end %>
