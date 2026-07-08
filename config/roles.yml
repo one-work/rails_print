@@ -1,3 +1,6 @@
 default:
+  print/admin/home: all
   print/admin/printers: all
   print/admin/tasks: all
+  print/admin/mqtt_printers: all
+  print/admin/bluetooth_printers: all
