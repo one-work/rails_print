@@ -1,0 +1,3 @@
+default:
+  print/admin/printers: all
+  print/admin/tasks: all
