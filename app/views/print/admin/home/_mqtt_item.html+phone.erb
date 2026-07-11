@@ -1,7 +1,7 @@
 <p class="size-7 is-wrap">
-  <%= link_to({ controller: 'mqtt_printers', action: 'show', id: model.id }) do %>
-    <span>IMEI:</span>
-    <span><%= model.dev_imei %></span>
+  <%= link_to({ controller: 'mqtt_printers', action: 'show', id: model.id }, class: 'tags has-addons') do %>
+    <span class="tag is-light"><%= Print::MqttPrinter.human_attribute_name(:online) %></span>
+    <span class="tag is-primary"><%= model.online_i18n %></span>
   <% end %>
 </p>
 <div data-controller="clipboard" data-action="click->clipboard#copyInner" class="clipboard size-7 is-wrap">
