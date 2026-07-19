@@ -1,6 +1,6 @@
 <%= form_with theme: 'modal', model: model, scope: '', url: { action: 'create' } do |f| %>
   <%= render 'modal_header' %>
-  <section class="modal-card-body">
+  <section id="modal-card-body" class="modal-card-body">
     <%= render 'error_messages', target: f.object if f.object.errors.present? %>
     <%= f.text_field :dev_imei, autofocus: true %>
   </section>
