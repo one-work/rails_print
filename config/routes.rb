@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-Rails.application.routes.draw do
+Rails.app.routes.draw do
   namespace :print, defaults: { business: 'print' } do
     controller :home do
       post :message

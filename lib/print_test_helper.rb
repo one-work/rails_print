@@ -26,14 +26,14 @@ end
 
 ActiveSupport.on_load(:action_controller_test_case) do
   def before_setup
-    @routes = Rails.application.routes
+    @routes = Rails.app.routes
     super
   end
 end
 
 ActiveSupport.on_load(:action_dispatch_integration_test) do
   def before_setup
-    @routes = Rails.application.routes
+    @routes = Rails.app.routes
     super
   end
 end

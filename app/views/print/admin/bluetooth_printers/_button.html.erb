@@ -1,4 +1,4 @@
-<%= link_to({ controller: 'factory/our/productions', host: Rails.application.routes.default_url_options[:host] }, class: 'button is-rounded is-link') do %>
+<%= link_to({ controller: 'factory/our/productions', host: Rails.app.routes.default_url_options[:host] }, class: 'button is-rounded is-link') do %>
   <%= svg_tag 'plus' %>
   <span>购买后绑定</span>
 <% end %>

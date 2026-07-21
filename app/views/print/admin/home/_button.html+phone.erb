@@ -10,7 +10,7 @@
 </button>
 <%=
   link_to(
-    { controller: 'factory/our/productions', host: Rails.application.routes.default_url_options[:host] },
+    { controller: 'factory/our/productions', host: Rails.app.routes.default_url_options[:host] },
     class: 'button is-rounded is-link'
   ) do
 %>

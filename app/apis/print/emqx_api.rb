@@ -3,7 +3,7 @@ module Print
   module EmqxApi
     extend CommonApi
     extend self
-    BASE = "#{Rails.application.credentials.dig(:emqx, :host)}/api/v5/"
+    BASE = "#{Rails.app.creds.require(:emqx, :host)}/api/v5/"
 
     def base_url
       BASE
@@ -32,7 +32,7 @@ module Print
 
     private
     def with_access_token(tries: 2, params: {}, headers: {}, payload: {}, **)
-      @client = @client.plugin(:basic_auth).basic_auth(Rails.application.credentials.dig(:emqx, :key), Rails.application.credentials.dig(:emqx, :secret))
+      @client = @client.plugin(:basic_auth).basic_auth(Rails.app.creds.require(:emqx, :key), Rails.app.creds.require(:emqx, :secret))
       yield
     end
 
