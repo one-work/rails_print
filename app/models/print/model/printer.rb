@@ -84,9 +84,9 @@ module Print
     end
 
     def set_volume(value = 0x32)
-      prefix = [0x1f, 0x28, 0x57, 0x02, 0x00]
-      prefix.concat([0x56])
-      prefix << value
+      payload = [0x1f, 0x28, 0x57, 0x02, 0x00]
+      payload.concat([0x56])
+      payload << value
       print_cmd(payload, '1002')
     end
 
