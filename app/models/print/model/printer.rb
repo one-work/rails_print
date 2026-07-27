@@ -83,11 +83,13 @@ module Print
       print_cmd(payload, '1001')
     end
 
+    # 最小为 4 - 15
     def set_volume(value = 0x32)
       payload = [0x1f, 0x28, 0x57, 0x02, 0x00]
       payload.concat([0x56])
       payload << value
       print_cmd(payload, '1002')
+      
     end
 
     def set_dev_type!(type = 'esc')
