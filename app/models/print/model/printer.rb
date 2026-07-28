@@ -89,7 +89,7 @@ module Print
       payload.concat([0x56])
       payload << value
       print_cmd(payload, '1002')
-      
+
     end
 
     def set_dev_type!(type = 'esc')
