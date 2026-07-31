@@ -3,14 +3,13 @@ module Print
   module EmqxApi
     extend CommonApi
     extend self
-    BASE = "#{Rails.app.creds.require(:emqx, :host)}/api/v5/"
 
     def base_url
-      BASE
+      "#{Rails.app.creds.require(:emqx, :host)}/api/v5/"
     end
 
     def clients(**options)
-      r = get 'clients', origin: BASE, **options
+      r = get 'clients', **options
       r['data']
     end
 
@@ -27,7 +26,7 @@ module Print
     end
 
     def publish(topic, payload, retain = false, qos = 2, **options)
-      post 'publish', topic: topic, payload: payload, retain: retain, qos: qos, origin: BASE, **options
+      post 'publish', topic: topic, payload: payload, retain: retain, qos: qos, **options
     end
 
     private
