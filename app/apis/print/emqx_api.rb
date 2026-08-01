@@ -5,7 +5,8 @@ module Print
     extend self
 
     def base_url
-      "#{Rails.app.creds.require(:emqx, :host)}/api/v5/"
+      return @base_url if defined? @base_url
+      @base_url = "#{Rails.app.creds.require(:emqx, :host)}/api/v5/"
     end
 
     def clients(**options)
