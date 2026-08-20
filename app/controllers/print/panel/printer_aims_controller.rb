@@ -4,7 +4,7 @@ module Print
     before_action :set_new_printer_aim, only: [:new, :create]
 
     def index
-      @printer_aims = @printer.printer_aims.includes(:organ)
+      @printer_aims = @printer.printer_aims.includes(organ: :provider)
     end
 
     private

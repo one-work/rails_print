@@ -1,3 +1,4 @@
 <td><%= model.aim %></td>
 <td><%= model.organ.name %></td>
+<td><%= model.organ.provider&.name %></td>
 <td><time data-controller="time" data-format="human"><%= model.created_at.to_fs(:iso8601) %></time></td>
