@@ -15,7 +15,7 @@ module Print
       if printer_aims.blank?
         printer_aims = PrinterAim.includes(:printer).where(printer: { online: true }, organ_id: self.id)
       end
-      printer_aims.take.printer
+      printer_aims.take&.printer
     end
 
   end
