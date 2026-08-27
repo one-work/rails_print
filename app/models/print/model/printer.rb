@@ -45,6 +45,10 @@ module Print
       after_save_commit :check_undo_tasks, if: -> { online && (saved_changes.keys & ['online', 'ready_at']).present? }
     end
 
+    def display_name
+      name.presence || dev_imei
+    end
+
     def assign_info(payload)
       infos = payload.split('#')
 
