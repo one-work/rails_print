@@ -57,14 +57,15 @@ module Print
         @printer_aims = PrinterAim.includes(:printer).where(printer: { online: true }, **default_params)
       end
 
-      if @printer_aims.length == 1
+      if request.variant.include?(:native)
+        @task = InnerTask.new(gid: params[:gid], aim: params[:aim])
+      elsif @printer_aims.length == 1
         @printer = @printer_aims.take.printer
         @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
         @task.save
 
         if @printer.is_a? Print::BluetoothPrinter
           @data = {
-            #url: url_for(controller: 'print/api/tasks', action: 'show', auth_token: Current.session.once_token, only_path: false),
             device: @printer.name,
             raw: @task.raw
           }

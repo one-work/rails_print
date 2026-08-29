@@ -1,11 +1,3 @@
 <%= turbo_stream.append_body do %>
-  <div
-    data-controller="print-pos"
-    data-mini-program-direct-value="true"
-    data-mini-program-nav-value="true"
-    data-mini-program-url-value="/pages/print/index"
-    data-mini-program-data-value="<%= @data.to_json %>"
-    class="cell has-column-centered"
-  >
-  </div>
+  <div data-controller="print-pos" data-print-pos-data-value="<%= @task.raw %>"></div>
 <% end %>
