@@ -59,6 +59,7 @@ module Print
 
       if request.variant.include?(:native)
         @task = InnerTask.new(gid: params[:gid], aim: params[:aim])
+        @task.generate_raw
       elsif @printer_aims.length == 1
         @printer = @printer_aims.take.printer
         @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
