@@ -36,7 +36,7 @@ module Print
     end
 
     def print_base
-      if printer.dev_type_cpcl?
+      if printer&.dev_type_cpcl?
         BaseCpcl.new
       else
         BaseEsc.new
