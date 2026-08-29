@@ -1,3 +1,1 @@
-<%= turbo_stream.append_body do %>
-  <div data-controller="bridge-bluetooth print-pos" data-print-pos-data-value="<%= @task.raw %>"></div>
-<% end %>
+<%= turbo_stream.stimulus 'print-button', controller: 'print-pos', action: 'printRaw', data: @task.raw %>
