@@ -1,0 +1,20 @@
+<div class="grid">
+  <button data-action="click->bridge-bluetooth#selfTest" class="cell has-column-centered">
+    <%= svg_tag 'print', class: 'icon is-medium text-primary' %>
+    <span class="size-7 mt-1">打印自测</span>
+  </button>
+  <button data-action="click->bridge-bluetooth#printData" data-content="1f,2d,35,04,00,05,c8,00" class="cell has-column-centered">
+    <%= svg_tag 'forward-fast', class: 'icon is-medium text-primary' %>
+    <span class="size-7 mt-1">设置步进</span>
+  </button>
+  <button data-action="click->bridge-bluetooth#printData" data-content="1f,2d,35,04,01,05,c8,00" class="cell has-column-centered">
+    <%= svg_tag 'forward-step', class: 'icon is-medium text-primary' %>
+    <span class="size-7 mt-1">取消步进</span>
+  </button>
+</div>
+<div class="grid">
+  <button data-action="click->bridge-bluetooth#printData" data-content="1f,2d,35,04,01,05,c8,00" class="cell has-column-centered">
+    <%= svg_tag 'forward-step', class: 'icon is-medium text-primary' %>
+    <span class="size-7 mt-1">取消步进</span>
+  </button>
+</div>

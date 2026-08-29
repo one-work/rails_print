@@ -1,0 +1,41 @@
+<%= render 'nav_bar' %>
+
+<div data-controller="print-pos">
+  <div data-bridge-bluetooth-target="list" class="p-0 mb-3"></div>
+  <div class="fixed-grid has-3-cols as-boxed p-3">
+    <div class="grid">
+      <button data-action="click->print-pos#printInner" class="cell has-column-centered">
+        <div data-print="text_big" class="display-none">Bluetooth Printer!</div>
+        <%= svg_tag 'print', class: 'icon is-medium text-primary' %>
+        <span class="size-7 mt-1">打印文字</span>
+      </button>
+      <button data-action="click->print-pos#printInner" class="cell has-column-centered">
+        <div data-print="qrcode" class="display-none">Bluetooth Printer!</div>
+        <%= svg_tag 'print', class: 'icon is-medium text-primary' %>
+        <span class="size-7 mt-1">打印二维码</span>
+      </button>
+      <button data-action="click->print-pos#printInner" class="cell has-column-centered">
+        <div data-print="barcode" class="display-none">012345789</div>
+        <%= svg_tag 'print', class: 'icon is-medium text-primary' %>
+        <span class="size-7 mt-1">打印条形码</span>
+      </button>
+    </div>
+  </div>
+  <div class="box">
+    <p>打印图片</p>
+    <div class="picture">
+      <div class="file is-boxed is-fullwidth">
+        <label class="file-label">
+          <%= file_field_tag :xx, data: { action: 'print-pos#printPic' }, class: 'file-input' %>
+          <span class="file-cta">
+        <span class="file-icon">
+          <%= svg_tag 'upload' %>
+        </span>
+        <span>选择文件</span>
+      </span>
+        </label>
+      </div>
+      <canvas data-print-pos-target="canvas"></canvas>
+    </div>
+  </div>
+</div>

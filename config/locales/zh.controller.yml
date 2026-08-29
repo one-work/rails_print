@@ -1,4 +1,9 @@
 zh:
+  bluetooth:
+    name:
+      title: 蓝牙
+    example:
+      title: 打印示例
   print:
     api:
       tasks:

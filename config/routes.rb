@@ -1,5 +1,11 @@
-# frozen_string_literal: true
 Rails.app.routes.draw do
+  controller :bluetooth do
+    get :bluetooth
+    get 'bluetooth/config' => :config
+    get 'bluetooth/name' => :name
+    get 'bluetooth/example' => :example
+    get 'bluetooth/menus' => :menus
+  end
   namespace :print, defaults: { business: 'print' } do
     controller :home do
       post :message

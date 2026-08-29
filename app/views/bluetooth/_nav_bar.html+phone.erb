@@ -1,0 +1,10 @@
+<div class="tabs is-toggle is-toggle-rounded as-navbar is-sticky flex-shrink-0 mt-3 is-fullwidth">
+  <ul>
+    <li class="<%= active_helper(action: 'example', active: 'is-active') %>">
+      <%= link_to t(".example.title"), { action: 'example' }, data: { turbo_action: 'replace' } %>
+    </li>
+    <li class="<%= active_helper(action: 'name', active: 'is-active') %>">
+      <%= link_to t(".name.title"), { action: 'name' }, data: { turbo_action: 'replace' } %>
+    </li>
+  </ul>
+</div>

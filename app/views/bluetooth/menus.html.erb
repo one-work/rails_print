@@ -1,0 +1,43 @@
+<div
+  data-controller="bridge-bluetooth"
+  data-bridge-bluetooth-list-value="<%= ['Xc', 'XC', 'BX'].to_json %>"
+  class="p-3"
+>
+  <div class="level">
+    <h1 class="level-left">蓝牙设备管理</h1>
+    <div class="level-right">
+      <button data-bridge-bluetooth-target="filter" class="button display-none">
+        <%= svg_tag 'square-check' %>
+        <span>筛选</span>
+      </button>
+      <button data-action="click->bridge-bluetooth#search" class="button is-info">
+        <%= svg_tag 'chevrons-down' %>
+        <span>搜索设备</span>
+      </button>
+    </div>
+  </div>
+  <div data-bridge-bluetooth-target="list" class="box p-0 mb-3"></div>
+  <div class="fixed-grid has-3-cols as-boxed p-3">
+    <div class="grid">
+      <button data-action="click->bridge-bluetooth#selfTest" class="cell has-column-centered">
+        <%= svg_tag 'print', class: 'icon is-medium text-primary' %>
+        <span class="size-7 mt-1">打印自测</span>
+      </button>
+      <button data-action="click->bridge-bluetooth#printData" data-content="1f,2d,35,04,00,05,c8,00" class="cell has-column-centered">
+        <%= svg_tag 'forward-fast', class: 'icon is-medium text-primary' %>
+        <span class="size-7 mt-1">设置步进</span>
+      </button>
+      <button data-action="click->bridge-bluetooth#printData" data-content="1f,2d,35,04,01,05,c8,00" class="cell has-column-centered">
+        <%= svg_tag 'forward-step', class: 'icon is-medium text-primary' %>
+        <span class="size-7 mt-1">取消步进</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="box">
+  <%= link_to({ controller: 'auth/apps' }, class: 'button is-fullwidth') do %>
+    <%= svg_tag 'house' %>
+    <span>返回主页</span>
+  <% end %>
+</div>
