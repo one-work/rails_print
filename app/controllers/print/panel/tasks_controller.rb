@@ -1,6 +1,6 @@
 module Print
   class Panel::TasksController < Panel::BaseController
-    before_action :set_mqtt_printer, except: [:recent]
+    before_action :set_mqtt_printer, except: [:recent, :todo]
     before_action :set_task, only: [:show, :edit, :update, :destroy, :resend]
 
     def index
@@ -9,6 +9,10 @@ module Print
 
     def recent
       @tasks = Task.order(id: :desc).page(params[:page])
+    end
+
+    def todo
+      @tasks = Task.todo.order(id: :desc).page(params[:page])
     end
 
     def clear

@@ -8,4 +8,13 @@
   <%= link_to({ controller: 'print/panel/templates' }, data: { turbo_frame: 'panel', action: 'menu-popup#enter' }, class: active_helper(controllers: ['templates'], item: 'cell button is-fullwidth', active: 'cell button is-fullwidth is-active')) do %>
     <span><%= t('print.panel.templates.index.title') %></span>
   <% end %>
+  <%=
+    link_to(
+      { controller: 'print/panel/tasks', action: 'recent' },
+      data: { turbo_frame: 'panel', action: 'menu-popup#enter' },
+      class: active_helper(controller: 'print/panel/tasks', action: 'recent', item: 'cell button is-fullwidth', active: 'cell button is-fullwidth is-active')
+    ) do
+  %>
+    <span><%= t('print.panel.tasks.recent.title') %></span>
+  <% end %>
 </div>

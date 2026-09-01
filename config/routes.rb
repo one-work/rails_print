@@ -79,6 +79,7 @@ Rails.app.routes.draw do
       resources :tasks, only: [] do
         collection do
           get :recent
+          get :todo
         end
       end
     end
