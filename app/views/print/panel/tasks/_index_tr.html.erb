@@ -5,6 +5,7 @@
       action: url_for({ action: 'resend', mqtt_printer_id: model.printer_id, id: model.id }),
       icon: 'paper-plane',
       title: t('.resend.title')
-    }
+    },
+    param: { mqtt_printer_id: model.printer_id, id: model.id }
   ) { yield }
 %>
