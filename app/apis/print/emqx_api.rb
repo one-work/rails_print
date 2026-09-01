@@ -22,6 +22,7 @@ module Print
       checks = ips.each_with_object([]) do |ip, arr|
         arr << { is_match: "str_eq(peerhost, '#{ip}')", result: 'allow' }
       end
+      arr << { is_match: "regex_match(clientid, '^imsi_')", result: 'allow' }
 
       put 'authentication/cinfo', checks: checks, mechanism: 'cinfo', **options
     end
