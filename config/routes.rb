@@ -16,6 +16,7 @@ Rails.app.routes.draw do
       post :unsubscribe
       post :authorized
       post :offline
+      post :acl
     end
     resources :devices do
       collection do

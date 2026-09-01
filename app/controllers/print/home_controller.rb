@@ -75,6 +75,16 @@ module Print
       head :ok
     end
 
+    # http 授权
+    # todo 临时处理
+    def acl
+      if params[:clientid].start_with? 'imsi_'
+        head 204
+      else
+        head 401
+      end
+    end
+
     private
     def sure_mqtt_printer
       @mqtt_printer = MqttPrinter.find_or_initialize_by(dev_imei: params[:clientid])
