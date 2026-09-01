@@ -76,6 +76,11 @@ Rails.app.routes.draw do
           end
         end
       end
+      resources :tasks, only: [] do
+        collection do
+          get :recent
+        end
+      end
     end
 
     namespace :admin, defaults: { namespace: 'admin' } do
