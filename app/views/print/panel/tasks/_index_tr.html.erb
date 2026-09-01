@@ -2,7 +2,7 @@
   tr_tag(
     model,
     {
-      action: url_for({ action: 'resend', printer_id: model.printer_id, id: model.id }),
+      action: url_for({ action: 'resend', mqtt_printer_id: model.printer_id, id: model.id }),
       icon: 'paper-plane',
       title: t('.resend.title')
     }
