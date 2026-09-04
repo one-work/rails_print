@@ -43,6 +43,7 @@ module Print
       has_many :command_tasks, dependent: :delete_all
 
       after_save_commit :check_undo_tasks, if: -> { online && (saved_changes.keys & ['online', 'ready_at']).present? }
+      after_save_commit :sync_to_organs!, if: -> { saved_change_to_online? }
     end
 
     def display_name
@@ -206,6 +207,12 @@ module Print
         action: action,
         printer_id: id
       )
+    end
+
+    def sync_to_organs!
+      organs.find_each do |organ|
+        organ.set_printer_online!
+      end
     end
 
   end
