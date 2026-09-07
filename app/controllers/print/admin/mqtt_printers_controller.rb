@@ -19,6 +19,7 @@ module Print
       @mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
 
       if @mqtt_printer
+        raise
         @mqtt_printer.printer_aims.find_or_initialize_by(aim: 'produce', organ_id: current_organ.id)
         @mqtt_printer.printer_aims.find_or_initialize_by(aim: 'receipt', organ_id: current_organ.id)
         @mqtt_printer.save!
