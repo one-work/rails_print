@@ -35,7 +35,6 @@ module Print
       if @mqtt_printer
         @mqtt_printer.printer_aims.find_or_initialize_by(aim: 'produce', organ_id: current_organ.id)
         @mqtt_printer.printer_aims.find_or_initialize_by(aim: 'receipt', organ_id: current_organ.id)
-        raise
         @mqtt_printer.save!
       else
         @mqtt_printer = MqttPrinter.new
