@@ -132,7 +132,7 @@ module Print
       set_raw_task!(text: url, arr: arr)
     end
 
-    def set_server(url = 'cloud.xcprinter.com')
+    def set_server!(url = 'cloud.xcprinter.com')
       arr = [0x1f, 0x28, 0x75]
       size = url.bytes.size + 3
       arr.push size % 256, (size / 256.0).floor
@@ -141,6 +141,10 @@ module Print
       arr.push 0x00
 
       set_raw_task!(text: url, arr: arr)
+    end
+
+    def set_server_linli!
+      set_server!('cloud.linlishenghuo.com')
     end
 
     def set_deferred_task(text)
