@@ -14,9 +14,11 @@ module Print
     def sync_to_locator
       return unless model
       _model = model
-      _model.print_info ||= {}
-      _model.print_info.merge! aim => completed_at.to_fs(:iso8601)
-      _model.save
+      if _model.respond_to? :print_info
+        _model.print_info ||= {}
+        _model.print_info.merge! aim => completed_at.to_fs(:iso8601)
+        _model.save
+      end
     end
 
     def model
