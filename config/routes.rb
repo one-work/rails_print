@@ -111,6 +111,7 @@ Rails.app.routes.draw do
         end
         member do
           post :test_print
+          post :step
         end
         resources :templates, controller: 'printer/templates' do
           resources :template_tasks, controller: 'printer/template_tasks'

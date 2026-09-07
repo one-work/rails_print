@@ -51,9 +51,8 @@
 <% if model.dev_step? %>
   <%=
     button_to(
-      { controller: 'mqtt_printers', action: 'update', id: model.id },
-      method: :patch,
-      params: { 'mqtt_printer[dev_step]': 'false' },
+      { controller: 'mqtt_printers', action: 'step', id: model.id },
+      params: { dev_step: false },
       class: 'cell has-column-centered'
     ) do
   %>
@@ -63,9 +62,8 @@
 <% else %>
   <%=
     button_to(
-      { controller: 'mqtt_printers', action: 'update', id: model.id },
-      method: :patch,
-      params: { 'mqtt_printer[dev_step]': 'true' },
+      { controller: 'mqtt_printers', action: 'step', id: model.id },
+      params: { dev_step: true },
       class: 'cell has-column-centered'
     ) do
   %>
