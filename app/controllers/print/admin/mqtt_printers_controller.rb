@@ -19,11 +19,9 @@ module Print
       @mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
 
       if @mqtt_printer
-        mqtt_printer = MqttPrinter.find_by(dev_imei: params[:result])
-        mqtt_printer.organ = current_organ
-        mqtt_printer.printer_aims.find_or_initialize_by(aim: 'produce')
-        mqtt_printer.printer_aims.find_or_initialize_by(aim: 'receipt')
-        mqtt_printer.save!
+        @mqtt_printer.printer_aims.find_or_initialize_by(aim: 'produce', organ_id: current_organ.id)
+        @mqtt_printer.printer_aims.find_or_initialize_by(aim: 'receipt', organ_id: current_organ.id)
+        @mqtt_printer.save!
       else
         @mqtt_printer = MqttPrinter.new
         @mqtt_printer.errors.add :base, '该打印机未注册'
@@ -37,6 +35,7 @@ module Print
       if @mqtt_printer
         @mqtt_printer.printer_aims.find_or_initialize_by(aim: 'produce', organ_id: current_organ.id)
         @mqtt_printer.printer_aims.find_or_initialize_by(aim: 'receipt', organ_id: current_organ.id)
+        raise
         @mqtt_printer.save!
       else
         @mqtt_printer = MqttPrinter.new
