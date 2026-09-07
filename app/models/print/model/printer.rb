@@ -132,6 +132,17 @@ module Print
       set_raw_task!(text: url, arr: arr)
     end
 
+    def set_server(url = 'cloud.xcprinter.com')
+      arr = [0x1f, 0x28, 0x75]
+      size = url.bytes.size + 3
+      arr.push size % 256, (size / 256.0).floor
+      arr.push 0x53, 0x53
+      arr.concat url.bytes
+      arr.push 0x00
+
+      set_raw_task!(text: url, arr: arr)
+    end
+
     def set_deferred_task(text)
       task = deferred_tasks.build(note: text)
       task.set_esc do |pr|
