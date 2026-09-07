@@ -1,6 +1,6 @@
 module Print
   class HomeController < BaseController
-    skip_forgery_protection only: [:message, :ready, :exception, :complete, :authorized, :offline, :subscribe, :unsubscribe]
+    skip_forgery_protection only: [:message, :ready, :exception, :complete, :authorized, :offline, :subscribe, :unsubscribe, :acl]
     before_action :sure_mqtt_printer, only: [:ready, :exception, :complete]
     before_action :set_mqtt_printer, only: [:subscribe, :unsubscribe, :authorized, :offline]
 
