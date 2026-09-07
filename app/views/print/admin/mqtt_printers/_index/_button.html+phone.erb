@@ -7,6 +7,10 @@
   <%= svg_tag 'plus' %>
   <span><%= t('.scan.title') %></span>
 </div>
+<%= button_to({ action: 'new' }, class: 'button is-rounded is-info') do %>
+  <%= svg_tag 'plus' %>
+  <span><%= t('.new.title') %></span>
+<% end %>
 <%= link_to({ controller: 'factory/our/productions', host: Rails.app.routes.default_url_options[:host] }, class: 'button is-rounded is-link') do %>
   <%= svg_tag 'plus' %>
   <span>购买后绑定</span>
