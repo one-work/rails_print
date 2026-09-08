@@ -151,6 +151,7 @@ module Print
       task = deferred_tasks.build(note: text)
       task.set_esc do |pr|
         pr.text_big_center text
+        pr.text_center Time.current.to_fs(:human)
         pr.break_line
         pr.qrcode_center dev_imei
       end
