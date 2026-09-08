@@ -16,6 +16,8 @@ module Print
       belongs_to :printer
 
       has_one_attached :file, service: :local
+
+      after_save_commit :online_printer!, if: -> { saved_change_to_completed_at? }
     end
 
     def body
@@ -65,6 +67,10 @@ module Print
 
     def print
       printer.print_cmd(raw_arr, id)
+    end
+
+    def online_printer!
+      printer.update online: true unless printer.online
     end
 
   end
