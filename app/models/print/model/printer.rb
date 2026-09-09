@@ -94,7 +94,10 @@ module Print
       payload.concat([0x56])
       payload << value
       print_cmd(payload, '1002')
+    end
 
+    def open_box
+      print_cmd [0x1b,0x70, 0x00, 0x19, 0xfa], '1002'
     end
 
     def set_dev_type!(type = 'esc')
