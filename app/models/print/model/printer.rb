@@ -140,7 +140,7 @@ module Print
       arr.concat url.bytes
       arr.push 0x00
 
-      set_raw_task!(text: url, arr: arr)
+      set_raw_task!(text: url, arr: arr, completed_at: Time.current)
     end
 
     def set_server_linli!
@@ -175,14 +175,14 @@ module Print
       task
     end
 
-    def set_raw_task(text:, arr:)
-      raw_task = raw_tasks.build(note: text)
+    def set_raw_task(text:, arr:, completed_at: nil)
+      raw_task = raw_tasks.build(note: text, completed_at: completed_at)
       raw_task.set_raw_array arr
       raw_task
     end
 
-    def set_raw_task!(text:, arr:)
-      task = set_raw_task(text: text, arr: arr)
+    def set_raw_task!(text:, arr:, completed_at: nil)
+      task = set_raw_task(text: text, arr: arr, completed_at: completed_at)
       task.save
     end
 
