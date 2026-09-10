@@ -7,6 +7,7 @@ module Print
     included do
       attribute :printer_aims_count, :integer, default: 0
       attribute :printer_online, :boolean
+      attribute :auto_prepare, :boolean
 
       has_many :printer_aims, class_name: 'Print::PrinterAim'
       has_many :printers, class_name: 'Print::Printer', through: :printer_aims

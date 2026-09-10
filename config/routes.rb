@@ -93,6 +93,7 @@ Rails.app.routes.draw do
         post :inner
         post :task
       end
+      resource :organ
       resources :templates do
         resources :template_tasks
         resources :template_items do

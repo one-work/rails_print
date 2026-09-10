@@ -3,3 +3,5 @@ zh:
     attributes:
       print/mqtt_printer:
         dev_type: 指令类型
+      org/organ:
+        auto_prepare: 自动确认并打印

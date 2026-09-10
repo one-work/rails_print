@@ -1,0 +1,8 @@
+<div>
+  <dt><%= Org::Organ.human_attribute_name(:auto_prepare) %></dt>
+  <dd>
+    <%= form_with theme: 'switch', model: @organ, url: { action: 'update' }, data: { controller: 'input' } do |f| %>
+      <%= f.checkbox :auto_prepare, data: { action: 'input#submit' }, id: nil %>
+    <% end %>
+  </dd>
+</div>
