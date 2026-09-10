@@ -98,6 +98,7 @@ class BaseEsc
     data_push *TXT_ALIGN_CENTER
     data_push *data.encode('gb18030').bytes
     data_push *TXT_ALIGN_LT
+    data_push *CTL_LF
   end
 
   def text_big_center(data)
@@ -210,8 +211,11 @@ class BaseEsc
     text '-' * 32
   end
 
+  def table_1()
+
+  end
+
   def table_3(headers: ['商品', '单价', '数目', '小计'], cols: [])
-    #
     data_push 0x1b, 0x44, 16, 22, 28, 0x00
     data_push *headers.map { |h| h.encode('gb18030').bytes << 0x09 }.flatten, 0x0d
     cols.each do |col|
