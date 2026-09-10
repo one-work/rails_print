@@ -1,11 +1,8 @@
 # 此模块专为页模式设计，暂不考虑标准模式
 class BaseEsc
-  # Printer hardware
-  HW_SELECT = [ 0x1b, 0x3d, 0x01 ] # Printer select
-  HW_RESET = [ 0x1b, 0x3f, 0x0a, 0x00 ] # Reset printer hardware
+  CLEAR = [0x1b, 0x40]
+  CTL_LF = [0x0a, 0x0a]  # 换行
 
-  # Feed control sequences
-  CTL_LF = [ 0x0a ]                   # Print and line feed
   CTL_FF = [ 0x0c ]                   # Form feed
   CTL_CR = [ 0x0d ]                   # Carriage return
   CTL_HT = [ 0x09 ]                   # Horizontal tab
@@ -39,7 +36,7 @@ class BaseEsc
   attr_reader :data
   def initialize
     @data = []
-    data_push 0x1b, 0x40  # 初始化打印机：清除打印缓存，各参数恢复默认值
+    data_push *CLEAR  # 初始化打印机：清除打印缓存，各参数恢复默认值
     #set_pad
   end
 
@@ -77,9 +74,8 @@ class BaseEsc
   end
 
   def text(data)
-    data_push *TXT_NORMAL
+    data_push *CLEAR
     data_push *data.encode('gb18030').bytes
-    data_push *TXT_NORMAL
     data_push *CTL_LF
   end
 
@@ -88,25 +84,24 @@ class BaseEsc
   end
 
   def text_big(data)
+    data_push *CLEAR
     data_push 0x1d, 0x21, 0x11 # Quad area text
     data_push *data.encode('gb18030').bytes
-    data_push *TXT_NORMAL
     data_push *CTL_LF
   end
 
   def text_center(data)
+    data_push *CLEAR
     data_push *TXT_ALIGN_CENTER
     data_push *data.encode('gb18030').bytes
-    data_push *TXT_ALIGN_LT
     data_push *CTL_LF
   end
 
   def text_big_center(data)
-    data_push *TXT_ALIGN_CENTER
+    data_push *CLEAR
     data_push 0x1d, 0x21, 0x11 # Quad area text
+    data_push *TXT_ALIGN_CENTER
     data_push *data.encode('gb18030').bytes
-    data_push *TXT_NORMAL
-    data_push *TXT_ALIGN_LT
     data_push *CTL_LF
   end
 
@@ -164,15 +159,15 @@ class BaseEsc
   end
 
   def qrcode_center(data, y: nil)
+    data_push *CLEAR
     data_push *TXT_ALIGN_CENTER
     qrcode(data, y: y)
-    data_push *TXT_ALIGN_LT
   end
   
   def qrcode_right(data, y: nil)
+    data_push *CLEAR
     data_push *TXT_ALIGN_RT
     qrcode(data, y: y)
-    data_push *TXT_ALIGN_LT
   end
 
   # 0 不显示数据，只显示条码
