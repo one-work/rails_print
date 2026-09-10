@@ -103,6 +103,7 @@ class BaseEsc
   end
 
   def text_big_center(data)
+    data_push 0x1b, 0x40
     data_push *TXT_ALIGN_CENTER
     data_push 0x1d, 0x21, 0x11 # Quad area text
     data_push *data.encode('gb18030').bytes
