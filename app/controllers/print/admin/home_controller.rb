@@ -71,7 +71,7 @@ module Print
             raw: @task.raw
           }
         else
-          render 'alert_message', locals: { message: '打印成功！' }
+          render 'alert_message', locals: { message: '打印指令已下发至云打印机，网络不好可能存在一定延迟！' }
         end
       elsif @printer_aims.length > 1
         render :inner_choose
