@@ -26,8 +26,8 @@ class BaseEsc
   TXT_NORMAL = [0x1d, 0x21, 0x00]        # Normal text
   TXT_UNDERL_OFF = [ 0x1b, 0x2d, 0x00 ]        # Underline font OFF
   TXT_BOLD_OFF = [ 0x1b, 0x45, 0x00 ]        # Bold font OFF
-  TXT_ALIGN_CENTER = [0x1b, 0x61, 0x01]  # 居中对齐
   TXT_ALIGN_LT = [0x1b, 0x61, 0x00]  # 左对齐
+  TXT_ALIGN_CENTER = [0x1b, 0x61, 0x01]  # 居中对齐
   TXT_ALIGN_RT = [0x1b, 0x61, 0x02] # 右对齐
   TXT_COLOR_BLACK = [ 0x1b, 0x72, 0x00 ]        # Default Color
   TXT_COLOR_RED = [ 0x1b, 0x72, 0x01 ]        # Alternative Color (Usually Red)
@@ -106,8 +106,8 @@ class BaseEsc
     data_push 0x1d, 0x21, 0x11 # Quad area text
     data_push *data.encode('gb18030').bytes
     data_push *TXT_NORMAL
-    data_push *TXT_ALIGN_LT
     data_push *CTL_LF
+    data_push *TXT_ALIGN_LT
   end
 
   def double_width(data)
