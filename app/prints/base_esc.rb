@@ -1,7 +1,7 @@
 # 此模块专为页模式设计，暂不考虑标准模式
 class BaseEsc
   CLEAR = [0x1b, 0x40]
-  CTL_LF = [0x0a, 0x0a]  # 换行
+  CTL_LF = [0x0d, 0x0a]  # 换行
 
   CTL_FF = [ 0x0c ]                   # Form feed
   CTL_CR = [ 0x0d ]                   # Carriage return
