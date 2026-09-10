@@ -212,15 +212,25 @@ class BaseEsc
   end
 
   def table_1()
-
   end
 
-  def table_3(headers: ['商品', '单价', '数目', '小计'], cols: [])
-    data_push 0x1b, 0x44, 16, 22, 28, 0x00
-    data_push *headers.map { |h| h.encode('gb18030').bytes << 0x09 }.flatten, 0x0d
-    cols.each do |col|
-      data_push *col.map { |h| h.encode('gb18030').bytes << 0x09 }.flatten, 0x0d
+  def table_3(headers: { '商品' => 16, '单价' => 6, '数目' => 6, '小计' => nil }, cols: [])
+    data_push 0x1b, 0x44
+    widths = []
+    headers[0..-2].each do |_, width|
+      widths << widths.sum + width
     end
+    data_push *widths
+    data_push 0x00
+
+    data_push expand_tr(*headers)
+    cols.each do |col|
+      data_push expand_tr(*col)
+    end
+  end
+
+  def expand_tr(*col)
+    col.map { |h| h.encode('gb18030').bytes << 0x09 }.flatten << 0x0d
   end
 
   def cut
