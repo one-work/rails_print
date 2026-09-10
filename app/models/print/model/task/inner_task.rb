@@ -31,6 +31,7 @@ module Print
       model.to_esc(pr, aim: aim)
       bytes = pr.render
       self.set_raw_array(bytes)
+      bytes
     end
 
     def print_img
