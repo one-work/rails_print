@@ -235,7 +235,7 @@ class BaseEsc
 
   def expand_tr(col, widths:)
     split_cols = col.each_with_index.map do |h, index|
-      parts = h.split_by_display_width(widths[index])
+      parts = h.split_by_display_width(widths[index] - 1)
       parts.empty? ? [''] : parts
     end
 
