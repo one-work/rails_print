@@ -2,11 +2,13 @@
 <% @printer_aims.each do |printer_aim| %>
   <div class="media">
     <div class="media-content">
-      <%= printer_aim.printer.display_name %>
+      <p><%= printer_aim.printer.display_name %></p>
+      <p class="size-7 text-grey">选择打印</p>
     </div>
     <div class="media-right">
       <%= button_to({ action: 'task', printer_id: printer_aim.printer_id, **params.permit(:gid, :aim) }, class: 'button is-borderless') do %>
-        <%= svg_tag 'print' %>
+        <%= svg_tag 'print', class: 'icon is-small is-primary' %>
+        <span>打印</span>
       <% end %>
     </div>
   </div>
