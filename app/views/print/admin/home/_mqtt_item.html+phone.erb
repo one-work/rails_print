@@ -1,5 +1,6 @@
 <p class="size-7 is-wrap">
   <%= link_to({ controller: 'mqtt_printers', action: 'show', id: model.id }, class: 'tags has-addons') do %>
+    <span><%= model.display_name %></span>
     <span class="tag <%= model.online ? 'is-primary' : 'is-danger' %>"><%= model.online_i18n %></span>
   <% end %>
 </p>

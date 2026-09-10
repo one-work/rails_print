@@ -2,7 +2,7 @@
 <% @printer_aims.each do |printer_aim| %>
   <div class="media">
     <div class="media-content">
-      <%= printer_aim.printer.name %>
+      <%= printer_aim.printer.display_name %>
     </div>
     <div class="media-right">
       <%= button_to({ action: 'task', printer_id: printer_aim.printer_id, **params.permit(:gid, :aim) }, class: 'button is-borderless') do %>
