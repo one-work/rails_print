@@ -214,7 +214,7 @@ class BaseEsc
   def table_1()
   end
 
-  def table_3(headers: { '商品' => 16, '单价' => 6, '数目' => 6, '小计' => 6 }, cols: [])
+  def table_3(headers: { '商品' => 15, '单价' => 6, '数目' => 6, '小计' => 6 }, cols: [])
     data_push 0x1b, 0x44
     widths = []
     headers.each do |_, width|
