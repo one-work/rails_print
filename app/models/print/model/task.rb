@@ -20,8 +20,8 @@ module Print
       after_save_commit :online_printer!, if: -> { saved_change_to_completed_at? }
     end
 
-    def body
-      raw_arr.map(&:to_16_str).join
+    def body(split = '')
+      raw_arr.map(&:to_16_str).join(split)
     end
 
     def raw_arr
