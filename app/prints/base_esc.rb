@@ -214,7 +214,7 @@ class BaseEsc
   def table_1()
   end
 
-  def table_3(headers: { '商品' => 16, '单价' => 6, '数目' => 6, '小计' => nil }, cols: [])
+  def table_3(headers: { '商品' => 16, '单价' => 6, '数目' => 6, '小计' => 6 }, cols: [])
     data_push 0x1b, 0x44
     widths = []
     headers[0..-2].each do |_, width|
@@ -223,14 +223,27 @@ class BaseEsc
     data_push *widths
     data_push 0x00
 
-    data_push expand_tr(*headers)
+    expand_tr(headers.keys, widths: headers.values).each do |arr|
+      data_push *arr
+    end
     cols.each do |col|
-      data_push expand_tr(*col)
+      expand_tr(col, widths: headers.values).each do |arr|
+        data_push *arr
+      end
     end
   end
 
-  def expand_tr(*col)
-    col.map { |h| h.encode('gb18030').bytes << 0x09 }.flatten << 0x0d
+  def expand_tr(col, widths:)
+    split_cols = col.each_with_index.map do |h, index|
+      parts = h.split_by_display_width(widths[index])
+      parts.empty? ? [''] : parts
+    end
+
+    row_count = [split_cols.map(&:size).max || 1, 1].max
+    Array.new(row_count) do |i|
+      row = split_cols.map { |parts| parts[i] || '' }
+      row.flat_map { |cell| cell.encode('gb18030').bytes + [0x09] } + [0x0d]
+    end
   end
 
   def cut
