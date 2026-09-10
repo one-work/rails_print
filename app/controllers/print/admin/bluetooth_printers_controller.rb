@@ -7,6 +7,10 @@ module Print
       @bluetooth_printers = BluetoothPrinter.includes(:printer_aims).where(printer_aims: { organ_id: current_organ.id }).page(params[:page])
     end
 
+    def new
+      @bluetooth_printer.printer_aims.build(organ_id: current_organ.id)
+    end
+
     def scan
       if params[:result].include?('&')
         name, _ = params[:result].split('&')
@@ -32,7 +36,6 @@ module Print
 
     def set_new_bluetooth_printer
       @bluetooth_printer = BluetoothPrinter.new(bluetooth_printer_params)
-      @bluetooth_printer.printer_aims.build(organ_id: current_organ.id)
     end
 
     def bluetooth_printer_params
