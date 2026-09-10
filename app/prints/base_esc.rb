@@ -23,7 +23,7 @@ class BaseEsc
   CP_SET = [ 0x1b, 0x74 ]	      		   # Set Code Page
 
   # Text formating
-  TXT_NORMAL = [ 0x1b, 0x21, 0x00 ]        # Normal text
+  TXT_NORMAL = [0x1d, 0x21, 0x00]        # Normal text
   TXT_UNDERL_OFF = [ 0x1b, 0x2d, 0x00 ]        # Underline font OFF
   TXT_BOLD_OFF = [ 0x1b, 0x45, 0x00 ]        # Bold font OFF
   TXT_ALIGN_CENTER = [0x1b, 0x61, 0x01]  # 居中对齐
@@ -111,7 +111,7 @@ class BaseEsc
   end
 
   def double_width(data)
-    data_push 0x1b, 0x21, 0x20, *data.bytes, *TXT_NORMAL
+    data_push 0x1d, 0x21, 0x10, *data.bytes, *TXT_NORMAL
   end
 
   def underline(data)
