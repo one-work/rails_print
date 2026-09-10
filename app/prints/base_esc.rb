@@ -88,13 +88,14 @@ class BaseEsc
   end
 
   def text_big(data)
-    data_push 0x1b, 0x21, 0x30 # Quad area text
+    data_push 0x1d, 0x21, 0x11 # Quad area text
     data_push *data.encode('gb18030').bytes
     data_push *TXT_NORMAL
     data_push *CTL_LF
   end
 
   def text_center(data)
+    data_push 0x1b, 0x40
     data_push *TXT_ALIGN_CENTER
     data_push *data.encode('gb18030').bytes
     data_push *TXT_ALIGN_LT
@@ -106,8 +107,8 @@ class BaseEsc
     data_push 0x1d, 0x21, 0x11 # Quad area text
     data_push *data.encode('gb18030').bytes
     data_push *TXT_NORMAL
-    data_push *CTL_LF
     data_push *TXT_ALIGN_LT
+    data_push *CTL_LF
   end
 
   def double_width(data)
