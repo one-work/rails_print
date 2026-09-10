@@ -71,7 +71,7 @@ module Print
             raw: @task.raw
           }
         else
-          head :ok
+          render 'alert_message', locals: { message: '打印成功！' }
         end
       elsif @printer_aims.length > 1
         render :inner_choose
