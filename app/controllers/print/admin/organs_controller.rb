@@ -9,7 +9,8 @@ module Print
 
     def organ_params
       params.fetch(:organ, {}).permit(
-        :auto_prepare
+        :auto_prepare,
+        :print_note
       )
     end
 

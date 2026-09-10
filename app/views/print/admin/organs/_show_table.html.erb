@@ -6,3 +6,7 @@
     <% end %>
   </dd>
 </div>
+<div>
+  <dt><%= Org::Organ.human_attribute_name(:print_note) %></dt>
+  <dd><%= text_area_tag 'organ[print_note]', @organ.print_note, class: 'textarea', form: 'show-form', data: { single_input_target: 'input' } %></dd>
+</div>
