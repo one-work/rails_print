@@ -101,6 +101,8 @@ module Print
     end
 
     def set_dev_type!(type = 'esc')
+      test_print(type: 'text', text: "切换打印模式为：#{type}")
+
       dev_type = self.class.dev_types[type]
       set_command_task!(
         note: '',
@@ -196,13 +198,13 @@ module Print
       end
     end
 
-    def test_print(type = nil)
+    def test_print(type: nil, text: '文字打印')
       task = raw_tasks.build
 
       case type
       when 'text'
         task.note = '文字测试'
-        task.set_esc! { |pr| pr.text '文字打印' }
+        task.set_esc! { |pr| pr.text_center text }
       when 'qrcode'
         task.note = '二维码测试'
         task.set_esc! { |pr| pr.qrcode_center dev_imei }
