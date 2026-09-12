@@ -22,6 +22,7 @@ class BaseEsc
   # Text formating
   TXT_NORMAL = [0x1d, 0x21, 0x00]        # Normal text
   TXT_BIG = [0x1d, 0x21, 0x11]
+  TXT_HIGH = [0x1d, 0x21, 0x01]
   TXT_UNDERL_OFF = [ 0x1b, 0x2d, 0x00 ]        # Underline font OFF
   TXT_BOLD_OFF = [ 0x1b, 0x45, 0x00 ]        # Bold font OFF
   TXT_ALIGN_LT = [0x1b, 0x61, 0x00]  # 左对齐
@@ -81,7 +82,10 @@ class BaseEsc
   end
 
   def double_height(data)
-    data_push 0x1b, 0x21, 0x10, *data.bytes, *TXT_NORMAL
+    data_push *CLEAR
+    data_push *TXT_HIGH
+    data_push *data.bytes
+    data_push *CTL_LF
   end
 
   def text_big(data)
@@ -208,8 +212,9 @@ class BaseEsc
   end
 
   def table_big(headers:, cols: [])
+    table(headers: headers, cols: [])
     data_push *TXT_BIG
-    table(headers: headers, cols: cols)
+    table(headers: {}, cols: cols)
   end
 
   def table(headers: { '品名' => 16, '单价' => 6, '数量' => 6, '小计' => 6 }, cols: [])
