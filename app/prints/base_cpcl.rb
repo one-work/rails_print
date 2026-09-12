@@ -57,6 +57,10 @@ class BaseCpcl
     @current_y += y if line_add
   end
 
+  def text_big(data, font: 8, size: 0, x: 0, y: 36, line_add: true)
+    text(data, font: 24)
+  end
+
   def text_center(data, font: 8, size: 0, x: 0, y: 36, line_add: true)
     @texts << "T #{font} #{size} #{x} #{@current_y} #{data}"
     @current_y += y if line_add

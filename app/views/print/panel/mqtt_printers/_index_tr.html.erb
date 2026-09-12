@@ -10,6 +10,11 @@
       href: url_for(controller: 'printer_aims', printer_id: model.id),
       icon: 'bullseye',
       title: t('.printer_aims.index.title')
+    },
+    {
+      action: url_for(action: 'ping', id: model.id),
+      icon: 'print',
+      title: t('.ping.title')
     }
   ) { yield }
 %>

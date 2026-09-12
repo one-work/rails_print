@@ -23,6 +23,11 @@ module Print
       @mqtt_printer.dev_step = params[:dev_step]
     end
 
+    def ping
+      @mqtt_printer.test_print
+      head :ok
+    end
+
     private
     def set_mqtt_printer
       @mqtt_printer = MqttPrinter.find(params[:id])

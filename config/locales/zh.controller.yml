@@ -25,6 +25,8 @@ zh:
       mqtt_printers:
         index:
           title: MQTT 打印机
+        ping:
+          title: 自测
       mqtt_users:
         index:
           title: MQTT 用户

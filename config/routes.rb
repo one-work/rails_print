@@ -56,6 +56,7 @@ Rails.app.routes.draw do
           post :organ
           post :dev_type
           post :step
+          post :ping
         end
         resources :tasks do
           collection do
