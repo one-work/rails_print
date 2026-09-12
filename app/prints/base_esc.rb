@@ -1,6 +1,6 @@
 # 此模块专为页模式设计，暂不考虑标准模式
 class BaseEsc
-  CLEAR = [0x1b, 0x40]
+  CLEAR = [0x1b, 0x40]  # 清除模式
   CTL_LF = [0x0d, 0x0a]  # 换行
 
   CTL_FF = [ 0x0c ]                   # Form feed
@@ -21,6 +21,7 @@ class BaseEsc
 
   # Text formating
   TXT_NORMAL = [0x1d, 0x21, 0x00]        # Normal text
+  TXT_BIG = [0x1d, 0x21, 0x11]
   TXT_UNDERL_OFF = [ 0x1b, 0x2d, 0x00 ]        # Underline font OFF
   TXT_BOLD_OFF = [ 0x1b, 0x45, 0x00 ]        # Bold font OFF
   TXT_ALIGN_LT = [0x1b, 0x61, 0x00]  # 左对齐
@@ -85,7 +86,7 @@ class BaseEsc
 
   def text_big(data)
     data_push *CLEAR
-    data_push 0x1d, 0x21, 0x11 # Quad area text
+    data_push *TXT_BIG
     data_push *data.encode('gb18030').bytes
     data_push *CTL_LF
   end
@@ -99,7 +100,7 @@ class BaseEsc
 
   def text_big_center(data)
     data_push *CLEAR
-    data_push 0x1d, 0x21, 0x11 # Quad area text
+    data_push *TXT_BIG
     data_push *TXT_ALIGN_CENTER
     data_push *data.encode('gb18030').bytes
     data_push *CTL_LF
