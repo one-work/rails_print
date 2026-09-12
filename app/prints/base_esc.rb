@@ -207,6 +207,11 @@ class BaseEsc
     text '-' * 32
   end
 
+  def table_big(headers:, cols: [])
+    data_push *TXT_BIG
+    table(headers: headers, cols: cols)
+  end
+
   def table(headers: { '品名' => 16, '单价' => 6, '数量' => 6, '小计' => 6 }, cols: [])
     data_push 0x1b, 0x44
     widths = []
