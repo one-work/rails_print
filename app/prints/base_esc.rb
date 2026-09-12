@@ -207,10 +207,7 @@ class BaseEsc
     text '-' * 32
   end
 
-  def table_1()
-  end
-
-  def table_3(headers: { '商品' => 16, '单价' => 6, '数目' => 6, '小计' => 6 }, cols: [])
+  def table(headers: { '品名' => 16, '单价' => 6, '数量' => 6, '小计' => 6 }, cols: [])
     data_push 0x1b, 0x44
     widths = []
     headers.values.each_with_index do |_, index|
