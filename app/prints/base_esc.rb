@@ -213,6 +213,7 @@ class BaseEsc
 
   def table_big(headers:, cols: [])
     table(headers: headers, cols: [])
+    dash
     data_push *TXT_HIGH
     table(headers: {}, cols: cols, widths: headers.values)
   end
