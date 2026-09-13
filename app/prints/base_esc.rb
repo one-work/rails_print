@@ -220,8 +220,8 @@ class BaseEsc
   def table(headers: { '品名' => 16, '单价' => 6, '数量' => 6, '小计' => 6 }, cols: [], widths: headers.values)
     data_push 0x1b, 0x44
     pads = []
-    headers.values.each_with_index do |_, index|
-      pads << headers.values[0..index].sum
+    widths.each_with_index do |_, index|
+      pads << widths[0..index].sum
     end
     data_push *pads[0..-2]
     data_push 0x00
