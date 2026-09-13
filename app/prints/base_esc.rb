@@ -214,20 +214,20 @@ class BaseEsc
   def table_big(headers:, cols: [])
     table(headers: headers, cols: [])
     data_push *TXT_HIGH
-    table(headers: {}, cols: cols)
+    table(headers: {}, cols: cols, widths: headers.values)
   end
 
-  def table(headers: { '品名' => 16, '单价' => 6, '数量' => 6, '小计' => 6 }, cols: [])
+  def table(headers: { '品名' => 16, '单价' => 6, '数量' => 6, '小计' => 6 }, cols: [], widths: headers.values)
     data_push 0x1b, 0x44
-    widths = []
+    pads = []
     headers.values.each_with_index do |_, index|
-      widths << headers.values[0..index].sum
+      pads << headers.values[0..index].sum
     end
-    data_push *widths[0..-2]
+    data_push *pads[0..-2]
     data_push 0x00
 
-    expand_trs([headers.keys], headers.values)
-    expand_trs(cols, headers.values)
+    expand_trs([headers.keys], widths) if headers.present?
+    expand_trs(cols, widths)
   end
 
   def expand_trs(cols, widths)
