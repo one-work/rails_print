@@ -213,7 +213,7 @@ class BaseEsc
 
   def table_big(headers:, cols: [])
     table(headers: headers, cols: [])
-    data_push *TXT_BIG
+    data_push *TXT_HIGH
     table(headers: {}, cols: cols)
   end
 
@@ -226,11 +226,13 @@ class BaseEsc
     data_push *widths[0..-2]
     data_push 0x00
 
-    expand_tr(headers.keys, widths: headers.values).each do |arr|
-      data_push *arr
-    end
+    expand_trs([headers.keys], headers.values)
+    expand_trs(cols, headers.values)
+  end
+
+  def expand_trs(cols, widths)
     cols.each do |col|
-      expand_tr(col, widths: headers.values).each do |arr|
+      expand_tr(col, widths: widths).each do |arr|
         data_push *arr
       end
     end
