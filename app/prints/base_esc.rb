@@ -218,7 +218,7 @@ class BaseEsc
     table(headers: {}, cols: cols, widths: headers.values)
   end
 
-  def table(headers: { '品名' => 16, '单价' => 6, '数量' => 6, '小计' => 6 }, cols: [], widths: headers.values)
+  def table(headers: {}, cols: [], widths: headers.values)
     data_push 0x1b, 0x44
     pads = []
     widths.each_with_index do |_, index|
