@@ -205,6 +205,7 @@ class BaseEsc
   end
 
   def table_big(headers:, cols: [])
+    data_push *CLEAR
     table(headers: headers, cols: [])
     dash
     data_push *TXT_HIGH
