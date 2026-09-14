@@ -8,14 +8,6 @@ class BaseEsc
   CTL_HT = [ 0x09 ]                   # Horizontal tab
   CTL_VT = [ 0x0b ]                   # Vertical tab
 
-  # Paper
-  PAPER_CUT_A = [ 0x1d, 0x56, 0x41 ]			   # Paper cut A
-  PAPER_CUT_B = [ 0x1d, 0x56, 0x42 ]			   # Paper cut B
-
-  # Cash Drawer
-  CD_KICK_2 = [ 0x1b, 0x70, 0x00 ]			   # Send pulse to pin 2
-  CD_KICK_5 = [ 0x1b, 0x70, 0x01 ]			   # Send pulse to pin 5
-
   # Code Pages
   CP_SET = [ 0x1b, 0x74 ]	      		   # Set Code Page
 
@@ -23,6 +15,7 @@ class BaseEsc
   TXT_NORMAL = [0x1d, 0x21, 0x00]        # Normal text
   TXT_BIG = [0x1d, 0x21, 0x11]
   TXT_HIGH = [0x1d, 0x21, 0x01]
+  TXT_PAD = [0x1b, 0x33, 0x40]
   TXT_UNDERL_OFF = [ 0x1b, 0x2d, 0x00 ]        # Underline font OFF
   TXT_BOLD_OFF = [ 0x1b, 0x45, 0x00 ]        # Bold font OFF
   TXT_ALIGN_LT = [0x1b, 0x61, 0x00]  # 左对齐
@@ -215,6 +208,7 @@ class BaseEsc
     table(headers: headers, cols: [])
     dash
     data_push *TXT_HIGH
+    data_push *TXT_PAD
     table(headers: {}, cols: cols, widths: headers.values)
   end
 
