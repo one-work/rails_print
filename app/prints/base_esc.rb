@@ -2,6 +2,7 @@
 class BaseEsc
   CLEAR = [0x1b, 0x40]  # 清除模式
   CTL_LF = [0x0d, 0x0a]  # 换行
+  CTL_END = [0x1b, 0x4a, 0x50]  # 走纸并换行
 
   CTL_FF = [ 0x0c ]                   # Form feed
   CTL_CR = [ 0x0d ]                   # Carriage return
@@ -57,14 +58,17 @@ class BaseEsc
   end
 
   def render
+    data_push *CTL_END
     @data
   end
 
   def render_raw
+    data_push *CTL_END
     @data.map(&:to_16_str).join
   end
 
   def render_0x
+    data_push *CTL_END
     @data.pack('C*')
   end
 
