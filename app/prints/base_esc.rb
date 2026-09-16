@@ -88,6 +88,7 @@ class BaseEsc
 
   def text_big(data)
     data_push *CLEAR
+    data_push *TXT_PAD
     data_push *TXT_BIG
     data_push *data.encode('gb18030').bytes
     data_push *CTL_LF
