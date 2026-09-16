@@ -50,6 +50,7 @@ class BaseEsc
   end
 
   def break_line
+    data_push *CLEAR
     data_push *CTL_LF
   end
 
