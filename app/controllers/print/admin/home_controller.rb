@@ -62,16 +62,20 @@ module Print
         @task.generate_raw
       elsif @printer_aims.length == 1
         @printer = @printer_aims.take.printer
-        @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
-        @task.save
+        if params.exclude?(:dev_type) || (params.include?(:dev_type) && @printer.dev_type === params[:dev_type])
+          @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
+          @task.save
 
-        if @printer.is_a? Print::BluetoothPrinter
-          @data = {
-            device: @printer.name,
-            raw: @task.raw
-          }
+          if @printer.is_a? Print::BluetoothPrinter
+            @data = {
+              device: @printer.name,
+              raw: @task.raw
+            }
+          else
+            render 'alert_message', locals: { message: '打印指令已下发至云打印机，网络不好可能存在一定延迟！' }
+          end
         else
-          render 'alert_message', locals: { message: '打印指令已下发至云打印机，网络不好可能存在一定延迟！' }
+          render :inner_type
         end
       elsif @printer_aims.length > 1
         render :inner_choose
