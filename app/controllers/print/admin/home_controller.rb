@@ -62,7 +62,9 @@ module Print
         @task.generate_raw
       elsif @printer_aims.length == 1
         @printer = @printer_aims.take.printer
-        if params.exclude?(:dev_type) || (params.include?(:dev_type) && @printer.dev_type === params[:dev_type])
+        if params.exclude?(:dev_type) && @printer.dev_type == 'cpcl' || (params.include?(:dev_type) && @printer.dev_type != params[:dev_type])
+          render :inner_type
+        else
           @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
           @task.save
 
@@ -74,8 +76,6 @@ module Print
           else
             render 'alert_message', locals: { message: '打印指令已下发至云打印机，网络不好可能存在一定延迟！' }
           end
-        else
-          render :inner_type
         end
       elsif @printer_aims.length > 1
         render :inner_choose

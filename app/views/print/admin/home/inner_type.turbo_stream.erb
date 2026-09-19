@@ -1,1 +1,5 @@
-<%= turbo_stream.append_body partial: 'printer_type', layout: 'modal' %>
+<% if @printer.dev_type_esc? %>
+  <%= turbo_stream.append_body partial: 'printer_to_cpcl', layout: 'modal' %>
+<% else %>
+  <%= turbo_stream.append_body partial: 'printer_to_esc', layout: 'modal' %>
+<% end %>

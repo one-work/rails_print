@@ -1,0 +1,33 @@
+<div class="content">
+  <h2 class="title">当前打印机正处于标签模式！</h2>
+  <p>请按如下步骤更换为小票打印模式！</p>
+  <ol>
+    <li>打开纸仓改，更换纸为小票打印纸！</li>
+    <li>关闭纸仓盖！</li>
+    <li>
+      <%=
+        button_to(
+          { controller: 'mqtt_printers', action: 'dev_type', id: @printer.id },
+          params: { dev_type: 'esc' },
+          class: 'button is-rounded is-primary'
+        ) do
+      %>
+        <%= svg_tag 'print' %>
+        <span>切换为 ESC</span>
+      <% end %>
+    </li>
+    <li>
+      <%=
+        button_to(
+          { action: 'inner' },
+          params: params.permit(:gid, :aim),
+          disabled: true,
+          id: 'inner-print-button',
+          class: 'button is-rounded is-primary'
+        ) do
+      %>
+        <span>打印</span>
+      <% end %>
+    </li>
+  </ol>
+</div>
