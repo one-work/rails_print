@@ -90,7 +90,6 @@ module Print
 
       if @printer.is_a? Print::BluetoothPrinter
         @data = {
-          #url: url_for(controller: 'print/api/tasks', action: 'show', auth_token: Current.session.once_token, only_path: false),
           device: @printer.name,
           raw: @task.raw
         }
