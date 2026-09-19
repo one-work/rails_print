@@ -11,6 +11,7 @@ class BaseCpcl
     @qty = 1 # 打印标签数量
     @texts = []
     @current_y = PADDING_TOP
+    @current_x = 0
   end
 
   def render_raw
@@ -58,7 +59,7 @@ class BaseCpcl
   end
 
   # font/size 查表得 字高24， y 为行高 36 乘以 行数
-  def text_v(data, font: 8, size: 0, x: 90, y: 136, line_add: true)
+  def text_v(data, font: 8, size: 0, x: @current_x, y: 300, line_add: true)
     @texts << "VT #{font} #{size} #{x} #{y} #{data}"
   end
 
@@ -137,11 +138,13 @@ class BaseCpcl
   end
 
   def qrcode_v(data, x: 0, y: PADDING_TOP, u: 6)
+    size = RQRCode::QRCode.new(data, level: :m).qrcode.module_count
     @texts << [
       "VB QR #{x} #{y} M 2 U #{u}",
       "MA,#{data}",
       'ENDQR'
     ].join("\n")
+    @current_x += size * u
   end
 
   def qrcode_right(data, y: PADDING_TOP, u: 6)
