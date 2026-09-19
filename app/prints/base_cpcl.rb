@@ -133,7 +133,6 @@ class BaseCpcl
     ].join("\n")
   end
 
-  #  如何计算
   def qrcode_right(data, y: PADDING_TOP, u: 6)
     size = RQRCode::QRCode.new(data, level: :m).qrcode.module_count
     x = @width - (u * size) - 16
@@ -144,7 +143,6 @@ class BaseCpcl
     ].join("\n")
   end
 
-  #  如何计算
   def qrcode_center(data, y: PADDING_TOP, u: 6)
     size = RQRCode::QRCode.new(data, level: :m).qrcode.module_count
     x = (@width - (u * size)) / 2
