@@ -58,9 +58,8 @@ class BaseCpcl
   end
 
   # font/size 查表得 字高24， y 为行高 36 乘以 行数
-  def text_v(data, font: 8, size: 0, x: 0, y: 36, line_add: true)
-    @texts << "VT #{font} #{size} #{x} #{@current_y} #{data}"
-    @current_y += y if line_add
+  def text_v(data, font: 8, size: 0, x: 90, y: 136, line_add: true)
+    @texts << "VT #{font} #{size} #{x} #{y} #{data}"
   end
 
   def text_big(data, font: 8, size: 0, x: 0, y: 36, line_add: true)
