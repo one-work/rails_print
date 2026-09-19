@@ -36,11 +36,10 @@ module Print
       set_raw_array(arr)
       save
     end
-
     def print_base
       if printer&.dev_type_cpcl?
         if printer.dev_spec == '58'
-          BaseCpcl.new(width: 55, height: 40)
+          BaseCpcl.new(width: 48, height: 40)
         else
           BaseCpcl.new
         end
