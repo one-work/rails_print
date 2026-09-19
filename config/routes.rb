@@ -112,6 +112,7 @@ Rails.app.routes.draw do
           post :scan
         end
         member do
+          post :dev_type
           post :test_print
           post :step
         end

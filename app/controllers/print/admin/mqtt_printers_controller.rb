@@ -1,6 +1,9 @@
 module Print
   class Admin::MqttPrintersController < Admin::BaseController
-    before_action :set_mqtt_printer, only: [:show, :edit, :update, :destroy, :actions, :step, :test_print]
+    before_action :set_mqtt_printer, only: [
+      :show, :edit, :update, :destroy, :actions,
+      :dev_type, :step, :test_print
+    ]
     before_action :set_new_mqtt_printer, only: [:new]
 
     def index
@@ -45,6 +48,11 @@ module Print
 
     def edit
       @mqtt_printer.printer_aims.build if @mqtt_printer.printer_aims.none?
+    end
+
+    def dev_type
+      @mqtt_printer.set_dev_type!(params[:dev_type])
+      @mqtt_printer.dev_type = params[:dev_type]
     end
 
     def step

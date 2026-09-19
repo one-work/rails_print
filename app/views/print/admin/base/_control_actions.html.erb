@@ -1,9 +1,8 @@
 <% if model.dev_type_cpcl? %>
   <%=
     button_to(
-      { controller: 'mqtt_printers', action: 'update', id: model.id },
-      method: :patch,
-      params: { 'mqtt_printer[dev_type]': 'esc' },
+      { controller: 'mqtt_printers', action: 'dev_type', id: model.id },
+      params: { dev_type: 'esc' },
       class: 'cell has-column-centered'
     ) do
   %>
@@ -13,9 +12,8 @@
 <% else %>
   <%=
     button_to(
-      { controller: 'mqtt_printers', action: 'update', id: model.id },
-      method: :patch,
-      params: { 'mqtt_printer[dev_type]': 'cpcl' },
+      { controller: 'mqtt_printers', action: 'dev_type', id: model.id },
+      params: { dev_type: 'cpcl' },
       class: 'cell has-column-centered'
     ) do
   %>
