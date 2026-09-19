@@ -46,6 +46,10 @@ module Print
       end
     end
 
+    def show
+      @printer_aims = @mqtt_printer.printer_aims.where(organ_id: current_organ.id)
+    end
+
     def edit
       @mqtt_printer.printer_aims.build if @mqtt_printer.printer_aims.none?
     end
