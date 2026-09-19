@@ -59,8 +59,23 @@ class BaseCpcl
   end
 
   # font/size 查表得 字高24， y 为行高 36 乘以 行数
-  def text_v(data, font: 8, size: 0, x: @current_x, y: 300, line_add: true)
-    @texts << "VT #{font} #{size} #{x} #{y} #{data}"
+  def text_v(data, font: 0, size: 0, y: 300, line_add: true)
+    @current_x += 8
+    @texts << "VT #{font} #{size} #{@current_x} #{real_y} #{data}"
+  end
+
+  def text_vcenter(data, y: 300, **options)
+    real_y = y - (y - (data.display_width * 12)) / 2
+    text_v(data, y: real_y, **options)
+    @current_x += 12
+  end
+
+  def text_v_big(data, y: 300, **options)
+    @texts << '! U1 SETBOLD 2'
+    @texts << 'SETMAG 2 2'
+    real_y = y - (y - (data.display_width * 24)) / 2
+    text_v(data, y: real_y, **options)
+    @current_x += 24
   end
 
   def text_big(data, font: 8, size: 0, x: 0, y: 36, line_add: true)
