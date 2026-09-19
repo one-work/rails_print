@@ -123,11 +123,17 @@ class BaseCpcl
     @texts += texts
   end
 
-  def qrcode(data, y: PADDING_TOP, u: 6)
-    size = RQRCode::QRCode.new(data, level: :m).qrcode.module_count
-    x = @width - (u * size) - 16
+  def qrcode(data, x: 0, y: PADDING_TOP, u: 6)
     @texts << [
       "B QR #{x} #{y} M 2 U #{u}",
+      "MA,#{data}",
+      'ENDQR'
+    ].join("\n")
+  end
+
+  def qrcode_v(data, x: 0, y: PADDING_TOP, u: 6)
+    @texts << [
+      "VB QR #{x} #{y} M 2 U #{u}",
       "MA,#{data}",
       'ENDQR'
     ].join("\n")
