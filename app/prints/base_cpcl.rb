@@ -61,7 +61,7 @@ class BaseCpcl
   # font/size 查表得 字高24， y 为行高 36 乘以 行数
   def text_v(data, font: 0, size: 0, y: 300, line_add: true)
     @current_x += 8
-    @texts << "VT #{font} #{size} #{@current_x} #{real_y} #{data}"
+    @texts << "VT #{font} #{size} #{@current_x} #{y} #{data}"
   end
 
   def text_vcenter(data, y: 300, **options)
