@@ -85,17 +85,21 @@ module Print
     end
 
     def task
-      @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
-      @task.save
-
-      if @printer.is_a? Print::BluetoothPrinter
-        @data = {
-          device: @printer.name,
-          raw: @task.raw
-        }
-        render :inner
+      if params.exclude?(:dev_type) && @printer.dev_type == 'cpcl' || (params.include?(:dev_type) && @printer.dev_type != params[:dev_type])
+        render :inner_type
       else
-        head :ok
+        @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
+        @task.save
+
+        if @printer.is_a? Print::BluetoothPrinter
+          @data = {
+            device: @printer.name,
+            raw: @task.raw
+          }
+          render :inner
+        else
+          render 'alert_message', locals: { message: '打印指令已下发至云打印机，网络不好可能存在一定延迟！' }
+        end
       end
     end
 
