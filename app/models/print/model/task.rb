@@ -39,7 +39,11 @@ module Print
 
     def print_base
       if printer&.dev_type_cpcl?
-        BaseCpcl.new
+        if printer.dev_spec == '58'
+          BaseCpcl.new(width: 55, height: 40)
+        else
+          BaseCpcl.new
+        end
       else
         BaseEsc.new
       end

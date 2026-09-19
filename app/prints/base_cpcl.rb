@@ -147,7 +147,7 @@ class BaseCpcl
   #  如何计算
   def qrcode_center(data, y: PADDING_TOP, u: 6)
     size = RQRCode::QRCode.new(data, level: :m).qrcode.module_count
-    x = @width - (u * size) - 16
+    x = (@width - (u * size)) / 2
     @texts << [
       "B QR #{x} #{y} M 2 U #{u}",
       "MA,#{data}",

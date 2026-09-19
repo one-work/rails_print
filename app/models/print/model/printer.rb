@@ -64,7 +64,7 @@ module Print
       self.dev_version = infos[7] # 版本序号
       self.dev_desc = infos[8] # 版本描述
       self.dev_tel = infos[9] # 4g 卡号
-      self.dev_spec = infos[10]
+      self.dev_spec = infos[10] # 打印宽度
       self.dev_cut = infos[11]
     end
 
