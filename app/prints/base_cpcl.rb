@@ -78,8 +78,10 @@ class BaseCpcl
     @current_x += 24
   end
 
-  def text_big(data, font: 8, size: 0, x: 0, y: 36, line_add: true)
-    text(data, font: 24)
+  def text_big(data, **options)
+    @texts << '! U1 SETBOLD 2'
+    @texts << 'SETMAG 2 1'
+    text(data)
   end
 
   def text_center(data, font: 8, size: 0, x: 0, y: 36, line_add: true)
