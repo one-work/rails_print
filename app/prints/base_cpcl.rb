@@ -82,6 +82,7 @@ class BaseCpcl
     @texts << '! U1 SETBOLD 2'
     @texts << 'SETMAG 2 1'
     text(data)
+    @texts << 'SETMAG 0 0'
   end
 
   def text_center(data, font: 8, size: 0, x: 0, y: 36, line_add: true)
