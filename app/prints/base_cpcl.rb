@@ -88,6 +88,8 @@ class BaseCpcl
   end
 
   def text_big_center(data, font: 8, size: 0, x: 0, y: 36, line_add: true)
+    @texts << '! U1 SETBOLD 2'
+    @texts << 'SETMAG 2 2'
     @texts << "T #{font} #{size} #{x} #{@current_y} #{data}"
     @current_y += y if line_add
   end
