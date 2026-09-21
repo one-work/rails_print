@@ -35,7 +35,8 @@ module Print
         device: @bluetooth_printer.name,
         raw: @task.raw
       }
-      @bluetooth_printer.dev_type = params[:dev_type] # 此处只是为了前端展示，所以不存储
+      @bluetooth_printer.dev_type = params[:dev_type] 
+      @bluetooth_printer.save
     end
 
     private
