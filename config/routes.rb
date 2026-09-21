@@ -124,6 +124,9 @@ Rails.app.routes.draw do
         collection do
           post :scan
         end
+        member do
+          post :dev_type
+        end
       end
     end
   end

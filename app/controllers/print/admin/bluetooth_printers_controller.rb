@@ -1,6 +1,6 @@
 module Print
   class Admin::BluetoothPrintersController < Admin::BaseController
-    before_action :set_bluetooth_printer, only: [:show, :edit, :update, :destroy, :actions]
+    before_action :set_bluetooth_printer, only: [:show, :edit, :update, :destroy, :actions, :dev_type]
     before_action :set_new_bluetooth_printer, only: [:new, :create]
 
     def index
@@ -27,6 +27,15 @@ module Print
       if @bluetooth_printer.printer_aims.none?
         @bluetooth_printer.printer_aims.build(organ_id: current_organ.id)
       end
+    end
+
+    def dev_type
+      @task = @bluetooth_printer.set_dev_type!(params[:dev_type])
+      @data = {
+        device: @bluetooth_printer.name,
+        raw: @task.raw
+      }
+      @bluetooth_printer.dev_type = params[:dev_type] # 此处只是为了前端展示，所以不存储
     end
 
     private

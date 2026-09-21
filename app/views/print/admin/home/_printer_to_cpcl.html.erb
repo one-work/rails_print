@@ -5,15 +5,28 @@
     <li>打开纸仓盖，更换为标签打印纸！</li>
     <li>关闭纸仓盖！</li>
     <li>
-      <%=
-        button_to(
-          { controller: 'mqtt_printers', action: 'dev_type', id: @printer.id },
-          params: { dev_type: 'cpcl' },
-          class: 'button is-rounded is-primary'
-        ) do
-      %>
-        <%= svg_tag 'print' %>
-        <span>切换为 CPCL</span>
+      <% if @printer.is_a? Print::MqttPrinter %>
+        <%=
+          button_to(
+            { controller: 'mqtt_printers', action: 'dev_type', id: @printer.id },
+            params: { dev_type: 'cpcl' },
+            class: 'button is-rounded is-primary'
+          ) do
+        %>
+          <%= svg_tag 'print' %>
+          <span>切换为 CPCL</span>
+        <% end %>
+      <% else %>
+        <%=
+          button_to(
+            { controller: 'bluetooth_printers', action: 'dev_type', id: @printer.id },
+            params: { dev_type: 'cpcl' },
+            class: 'button is-rounded is-primary'
+          ) do
+        %>
+          <%= svg_tag 'print' %>
+          <span>切换为 CPCL</span>
+        <% end %>
       <% end %>
     </li>
     <li>

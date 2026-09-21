@@ -56,12 +56,12 @@ module Print
 
     def dev_type
       @mqtt_printer.set_dev_type!(params[:dev_type])
-      @mqtt_printer.dev_type = params[:dev_type]
+      @mqtt_printer.dev_type = params[:dev_type] # 此处只是为了前端展示，所以不存储
     end
 
     def step
       @mqtt_printer.set_step!(params[:dev_step])
-      @mqtt_printer.dev_step = params[:dev_step]
+      @mqtt_printer.dev_step = params[:dev_step] # 此处只是为了前端展示，所以不存储
     end
 
     def destroy
