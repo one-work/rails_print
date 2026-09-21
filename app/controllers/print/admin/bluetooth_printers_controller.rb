@@ -35,7 +35,7 @@ module Print
         device: @bluetooth_printer.name,
         raw: @task.raw
       }
-      @bluetooth_printer.dev_type = params[:dev_type] 
+      @bluetooth_printer.dev_type = params[:dev_type]
       @bluetooth_printer.save
     end
 

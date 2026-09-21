@@ -33,7 +33,7 @@
       <%=
         button_to(
           { action: 'inner' },
-          params: params.permit(:gid, :aim),
+          params: params.permit(:gid, :aim, :dev_type),
           disabled: true,
           id: 'inner-print-button',
           class: 'button is-rounded is-primary'
