@@ -47,6 +47,9 @@ zh:
       templates:
         index:
           title: 模版
+      template_items:
+        index:
+          title: 模板编辑
     admin:
       title: 打印机
       home:
