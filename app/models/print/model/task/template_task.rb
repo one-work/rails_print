@@ -16,13 +16,18 @@ module Print
 
     def set_raw
       set_esc do |pr|
-        template.code_kinds.each do |code, kind|
-          value = payload[code]
-          method = pr.method(kind)
-          if [0, -1].include? method.arity
-            method.call
+        template.template_items.each do |template_item|
+          if template_item.is_a?(TemplateTable)
+            cols = payload[template_item.code]
+            pr.table(headers: template_item.name_with_widthes, cols: cols)
           else
-            method.call(value)
+            value = payload[template_item.code]
+            method = pr.method(template_item.kind)
+            if [0, -1].include? method.arity
+              method.call
+            else
+              method.call(value)
+            end
           end
         end
       end

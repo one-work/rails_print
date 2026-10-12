@@ -8,5 +8,9 @@ module Print
       accepts_nested_attributes_for :template_table_items, allow_destroy: true
     end
 
+    def name_with_widths
+      template_table_items.order(position: :asc).pluck(:name, :width).to_h
+    end
+
   end
 end
