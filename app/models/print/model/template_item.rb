@@ -3,6 +3,7 @@ module Print
     extend ActiveSupport::Concern
 
     included do
+      attribute :type, :string
       attribute :name, :string
       attribute :code, :string
       attribute :position, :integer
