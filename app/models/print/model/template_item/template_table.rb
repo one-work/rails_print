@@ -4,8 +4,9 @@ module Print
 
     included do
       has_many :template_table_items, dependent: :delete_all
-    end
 
+      accepts_nested_attributes_for :template_table_items, allow_destroy: true
+    end
 
   end
 end

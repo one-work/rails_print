@@ -9,6 +9,13 @@ module Print
 
     def new_table
       @template_item = @template.template_items.build(type: 'Print::TemplateTable')
+      @template_item.template_table_items.build
+    end
+
+    def create_table
+      @template_item = @template.template_items.build(type: 'Print::TemplateTable')
+      @template_item.assign_attributes(template_table_params)
+      @template_item.save
     end
 
     private
@@ -22,6 +29,14 @@ module Print
 
     def template_item_params
       params.expect(template_item: [:name, :code, :kind])
+    end
+
+    def template_table_params
+      params.fetch(:template_table, {}).permit(
+        :name,
+        :code,
+        template_table_items_attributes: [:name, :width, :_destroy]
+      )
     end
 
   end

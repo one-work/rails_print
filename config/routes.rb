@@ -74,6 +74,7 @@ Rails.app.routes.draw do
         resources :template_items do
           collection do
             post :new_table
+            post :create_table
           end
           member do
             patch :reorder
