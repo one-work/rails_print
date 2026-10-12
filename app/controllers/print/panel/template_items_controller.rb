@@ -7,6 +7,10 @@ module Print
       @template_items = @template.template_items.order(position: :asc).page(params[:page])
     end
 
+    def new_table
+      @template_item = @template.template_items.build(type: 'Print::TemplateTable')
+    end
+
     private
     def set_template
       @template = Template.find params[:template_id]

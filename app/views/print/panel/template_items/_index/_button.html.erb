@@ -1,0 +1,8 @@
+<%= button_to({ action: 'new' }, class: 'button is-rounded is-primary') do %>
+  <%= svg_tag 'plus' %>
+  <span><%= t('.new.title') %></span>
+<% end %>
+<%= button_to({ action: 'new_table' }, class: 'button is-rounded is-primary') do %>
+  <%= svg_tag 'plus' %>
+  <span><%= t('.new_table.title') %></span>
+<% end %>
