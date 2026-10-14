@@ -1,0 +1,15 @@
+<%= f.text_field :name, autofocus: true %>
+<%= f.text_field :code %>
+<%= f.fields :template_table_items, label: nil, placeholder: true do |ef| %>
+  <div class="field is-horizontal" data-controller="field" data-field-index-value="<%= ef.index %>">
+    <div class="field-label"></div>
+    <div class="field-body">
+      <%= ef.text_field :name %>
+      <%= ef.number_field :width %>
+      <span class="field has-addons has-addons-middle">
+        <%= svg_tag 'plus', data: { action: 'click->field#add' }, class: 'icon clickable' %>
+        <%= svg_tag 'minus', data: { action: 'click->field#remove' }, class: 'icon clickable' %>
+      </span>
+    </div>
+  </div>
+<% end %>

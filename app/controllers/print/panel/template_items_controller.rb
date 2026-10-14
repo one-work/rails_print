@@ -1,6 +1,7 @@
 module Print
   class Panel::TemplateItemsController < Panel::BaseController
     before_action :set_template
+    before_action :set_template_item, only: [:show, :edit, :update, :destroy, :edit_table, :update_table]
     before_action :set_create_template_item, only: [:create]
 
     def index
@@ -21,6 +22,10 @@ module Print
     private
     def set_template
       @template = Template.find params[:template_id]
+    end
+
+    def set_template_item
+      @template_item = @template.template_items.find(params[:id])
     end
 
     def set_create_template_item

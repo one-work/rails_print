@@ -78,6 +78,8 @@ Rails.app.routes.draw do
           end
           member do
             patch :reorder
+            post :edit_table
+            post :update_table
           end
         end
       end
