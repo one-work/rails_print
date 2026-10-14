@@ -1,16 +1,10 @@
 <%=
   tr_tag(
     model,
-    {
-      action: url_for(action: 'edit_table', id: model.id),
-      title: t('.edit_table.title'),
-      icon: 'pencil',
-      position: 0,
-      enable: model.is_a?(Print::TemplateTable)
-    },
     data: {
       url: url_for(action: 'reorder', id: model.id),
       id: model.id
-    }
+    },
+    icons: model.is_a?(Print::TemplateTable) ? ['show', { 'edit' => 'edit_table' }, 'destroy'] : ['show', 'edit', 'destroy']
   ) { yield }
 %>
