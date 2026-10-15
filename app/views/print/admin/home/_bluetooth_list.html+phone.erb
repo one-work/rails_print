@@ -16,5 +16,14 @@
       <%= svg_tag 'plus' %>
       <span><%= t('.bluetooth_printers.new.title') %></span>
     <% end %>
+    <div
+      data-controller="mini-program"
+      data-mini-program-url-value="/pages/print/index"
+      data-mini-program-data-value="<%= { url: url_for(only_path: false) }.to_json %>"
+      data-action="click->mini-program#link"
+      class="button is-rounded is-small is-primary"
+    >
+      <span><%= '设置打印机' %></span>
+    </div>
   </div>
 </div>
