@@ -80,6 +80,9 @@ module Print
       elsif @printer_aims.length > 1
         render :inner_choose
       else
+        @data = {
+          raw: @task.raw
+        }
         render :inner_blank
       end
     end

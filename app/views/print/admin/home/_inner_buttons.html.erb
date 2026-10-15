@@ -1,0 +1,19 @@
+<button
+  data-controller="scan bridge-scan"
+  data-action="click->scan#report"
+  class="button is-rounded is-primary"
+  data-report-url="<%= url_for(action: 'scan') %>"
+  disabled
+>
+  <%= svg_tag 'plus' %>
+  <span><%= t('.scan.title') %></span>
+</button>
+<div
+  data-controller="mini-program"
+  data-mini-program-url-value="/pages/print/index"
+  data-mini-program-data-value="<%= { url: url_for(only_path: false), **@data }.to_json %>"
+  data-action="click->mini-program#link"
+  class="button is-rounded is-small is-primary"
+>
+  <span>蓝牙打印</span>
+</div>
