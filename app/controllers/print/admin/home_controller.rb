@@ -80,6 +80,8 @@ module Print
       elsif @printer_aims.length > 1
         render :inner_choose
       else
+        @task = InnerTask.new(gid: params[:gid], aim: params[:aim])
+        @task.generate_raw
         @data = {
           raw: @task.raw
         }
