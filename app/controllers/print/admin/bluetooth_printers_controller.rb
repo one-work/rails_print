@@ -12,7 +12,14 @@ module Print
     end
 
     def create
-
+      printer = BluetoothPrinter.find_by(name: bluetooth_printer_params[:name])
+      if printer && printer.printer_aims.exists?(organ_id: current_organ.id)
+      else
+        if @bluetooth_printer.printer_aims.blank?
+          @bluetooth_printer.printer_aims.build(organ_id: current_organ.id)
+        end
+        @bluetooth_printer.save
+      end
     end
 
     def scan
