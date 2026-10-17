@@ -1,0 +1,25 @@
+<div class="card as-transparent">
+  <div class="card-header">
+    <div>
+      <span class="size-7 text-grey has-border-left-primary">蓝牙打印机</span>
+    </div>
+    <%= link_to({ controller: 'bluetooth_printers' }) do %>
+      <span>更多</span>
+      <%= svg_tag 'angles-right' %>
+    <% end %>
+  </div>
+  <div class="card-content p-0">
+    <%= yield %>
+  </div>
+  <div class="card-footer">
+    <div
+      data-controller="mini-program"
+      data-mini-program-url-value="/pages/print/index"
+      data-mini-program-data-value="<%= { url: url_for(only_path: false) }.to_json %>"
+      data-action="click->mini-program#link"
+      class="button is-rounded is-small is-primary"
+    >
+      <span>蓝牙绑定</span>
+    </div>
+  </div>
+</div>
