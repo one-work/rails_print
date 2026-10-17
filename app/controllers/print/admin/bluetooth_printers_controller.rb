@@ -11,6 +11,10 @@ module Print
       @bluetooth_printer.printer_aims.build(organ_id: current_organ.id)
     end
 
+    def create
+
+    end
+
     def scan
       if params[:result].include?('&')
         name, _ = params[:result].split('&')
