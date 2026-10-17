@@ -12,7 +12,7 @@ module Print
     end
 
     def create
-      printer_aim = PrinterAim.includes(:printer).where(printer: { name: bluetooth_printer_params[:name], type: 'Print::BluetoothPrinter' }).exists?
+      printer_aim = PrinterAim.includes(:printer).where(organ_id: current_organ.id, printer: { name: bluetooth_printer_params[:name], type: 'Print::BluetoothPrinter' }).exists?
       unless printer_aim
         if @bluetooth_printer.printer_aims.blank?
           @bluetooth_printer.printer_aims.build(organ_id: current_organ.id)
