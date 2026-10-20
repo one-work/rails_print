@@ -11,4 +11,8 @@
     <%= svg_tag 'pencil' %>
     <span><%= t('.edit.title') %></span>
   <% end %>
+  <%= button_to({ action: 'destroy' }, method: :delete, class: 'cell has-column-centered') do %>
+    <%= svg_tag 'trash' %>
+    <span><%= t('.destroy.title') %></span>
+  <% end %>
 <% end %>
