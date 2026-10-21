@@ -1,0 +1,17 @@
+<% if referer_eql?(controller_path, 'index') %>
+  <%=
+    turbo_stream.prepend(
+      'tbody',
+      partial: 'index_item',
+      layout: 'index_item_actions',
+      locals: {
+        model: defined?(model) ? model : instance_variable_get("@#{model_name}")
+      }
+    )
+  %>
+  <%= turbo_stream.remove 'modal_form' %>
+<% elsif referer_eql?(controller_path, 'new') %>
+  <%= turbo_stream.visit url: url_for(action: 'show', id: model.id) %>
+<% else %>
+  <%= turbo_stream.visit %>
+<% end %>
