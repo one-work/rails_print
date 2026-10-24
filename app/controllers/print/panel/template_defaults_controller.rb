@@ -1,8 +1,8 @@
 module Print
   class Panel::TemplateDefaultsController < Panel::BaseController
     before_action :set_template
-    before_action :set_template_default, only: [:show, :edit, :update, :destroy, :edit_table, :update_table]
-    before_action :set_create_template_default, only: [:create]
+    before_action :set_template_default, only: [:show, :edit, :update, :destroy]
+    before_action :set_new_template_default, only: [:new, :create]
 
     def index
       @template_defaults = @template.template_defaults.order(position: :asc).page(params[:page])

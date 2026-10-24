@@ -5,6 +5,8 @@
       url: url_for(action: 'reorder', id: model.id),
       id: model.id
     },
-    icons: model.is_a?(Print::TemplateTable) ? ['show', { 'edit' => 'edit_table' }, 'destroy'] : ['show', 'edit', 'destroy']
+    param: {
+      controller: model.model_name.route_key
+    }
   ) { yield }
 %>
