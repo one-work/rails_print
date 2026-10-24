@@ -8,13 +8,6 @@ module Print
       attribute :code, :string
       attribute :position, :integer
 
-      enum :kind, {
-        break_line: 'break_line',
-        text: 'text',
-        qrcode: 'qrcode',
-        dash: 'dash'
-      }
-
       belongs_to :template
 
       positioned on: :template_id
