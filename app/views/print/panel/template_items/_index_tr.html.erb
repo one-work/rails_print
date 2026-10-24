@@ -2,7 +2,7 @@
   tr_tag(
     model,
     data: {
-      url: url_for(action: 'reorder', id: model.id),
+      url: url_for(controller: 'template_items', action: 'reorder', id: model.id),
       id: model.id
     },
     param: {
