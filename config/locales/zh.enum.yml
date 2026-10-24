@@ -8,5 +8,5 @@ zh:
       print/template_item:
         type:
           Print::TemplateLine: 填值
-          Print::TemplateDefualt: 默认值
+          Print::TemplateDefault: 默认值
           Print::TemplateTable: 表格
