@@ -20,6 +20,8 @@ module Print
           if template_item.is_a?(TemplateTable)
             cols = payload[template_item.code]
             pr.table(headers: template_item.name_with_widthes, cols: cols)
+          elsif template_item.is_a?(TemplateDefault)
+            pr.method(template_item.kind).call(template_item.name)
           else
             value = payload[template_item.code]
             method = pr.method(template_item.kind)
