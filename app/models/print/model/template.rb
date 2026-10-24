@@ -4,7 +4,6 @@ module Print
 
     included do
       attribute :name, :string
-      attribute :title, :string
       attribute :spec, :string
 
       belongs_to :organ, class_name: 'Org::Organ', optional: true
