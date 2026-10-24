@@ -71,17 +71,14 @@ Rails.app.routes.draw do
         resources :printer_aims
       end
       resources :templates do
-        resources :template_items do
-          collection do
-            post :new_table
-            post :create_table
-          end
+        resources :template_items, only: [:index, :destroy] do
           member do
             patch :reorder
-            post :edit_table
-            post :update_table
           end
         end
+        resources :template_lines
+        resources :template_tables
+        resources :template_defaults
       end
       resources :tasks, only: [] do
         collection do
