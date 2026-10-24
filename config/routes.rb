@@ -71,7 +71,7 @@ Rails.app.routes.draw do
         resources :printer_aims
       end
       resources :templates do
-        resources :template_items, only: [:index, :destroy] do
+        resources :template_items do
           member do
             patch :reorder
           end

@@ -4,21 +4,6 @@ module Print
     before_action :set_template_default, only: [:show, :edit, :update, :destroy]
     before_action :set_new_template_default, only: [:new, :create]
 
-    def index
-      @template_defaults = @template.template_defaults.order(position: :asc).page(params[:page])
-    end
-
-    def new
-      @template_default = @template.template_defaults.build(type: 'Print::TemplateTable')
-      @template_default.template_table_items.build
-    end
-
-    def create
-      @template_default = @template.template_defaults.build(type: 'Print::TemplateTable')
-      @template_default.assign_attributes(template_table_params)
-      @template_default.save
-    end
-
     private
     def set_template
       @template = Template.find params[:template_id]
@@ -29,7 +14,7 @@ module Print
     end
 
     def set_new_template_default
-      @template_default = @template.template_defaults.build(template_default_params)
+      @template_default = @template.template_items.build(type: 'Print::TemplateDefault')
     end
 
     def template_default_params
