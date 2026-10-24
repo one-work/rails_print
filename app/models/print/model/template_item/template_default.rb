@@ -1,5 +1,5 @@
 module Print
-  module Model::Template::TemplateDefault
+  module Model::TemplateItem::TemplateDefault
     extend ActiveSupport::Concern
 
     included do
