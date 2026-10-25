@@ -13,7 +13,7 @@ module Print
     end
 
     def code_kinds
-      template_items.load.pluck(:code, :kind).to_h
+      template_items.order(position: :asc).pluck(:code, :kind).to_h
     end
 
     def code_names
