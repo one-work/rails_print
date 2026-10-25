@@ -1,4 +1,4 @@
-<%= f.fields :payload, model: OpenStruct.new(f.object.payload) do |ef| %>
+<%= f.fields :payload, theme: 'default_phone', model: OpenStruct.new(f.object.payload) do |ef| %>
   <% @template.template_items.order(position: :asc).each do |template_item| %>
     <% if template_item.is_a?(Print::TemplateLine) %>
       <%= ef.text_field template_item.code, value: f.object.payload[template_item.code], class: 'input', label: template_item.name %>
