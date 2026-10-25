@@ -50,8 +50,15 @@ zh:
       template_items:
         index:
           title: 模板编辑
-        edit_table:
-          title: 编辑
+      template_lines:
+        new:
+          title: 添加普通行
+      template_tables:
+        new:
+          title: 添加表格
+      template_defaults:
+        new:
+          title: 添加默认值
     admin:
       title: 打印机
       home:

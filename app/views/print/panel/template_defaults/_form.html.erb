@@ -1,0 +1,2 @@
+<%= f.select :kind, options_for_select(Print::TemplateDefault.options_i18n(:kind), @template_default.kind) %>
+<%= f.text_field :name, autofocus: true %>

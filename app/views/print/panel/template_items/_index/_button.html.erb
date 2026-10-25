@@ -1,8 +1,12 @@
-<%= button_to({ action: 'new' }, class: 'button is-rounded is-primary') do %>
+<%= button_to({ controller: 'template_lines', action: 'new' }, params: { turbo_action: 'append' }, class: 'button is-rounded is-primary') do %>
   <%= svg_tag 'plus' %>
-  <span><%= t('.new.title') %></span>
+  <span><%= t('.template_line.new.title') %></span>
 <% end %>
-<%= button_to({ action: 'new_table' }, class: 'button is-rounded is-primary') do %>
+<%= button_to({ controller: 'template_tables', action: 'new' }, params: { turbo_action: 'append' }, class: 'button is-rounded is-primary') do %>
   <%= svg_tag 'plus' %>
-  <span><%= t('.new_table.title') %></span>
+  <span><%= t('.template_tables.new.title') %></span>
+<% end %>
+<%= button_to({ controller: 'template_defaults', action: 'new' }, params: { turbo_action: 'append' }, class: 'button is-rounded is-primary') do %>
+  <%= svg_tag 'plus' %>
+  <span><%= t('.template_defaults.new.title') %></span>
 <% end %>

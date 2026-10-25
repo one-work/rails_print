@@ -5,3 +5,11 @@ zh:
         online:
           true: 在线
           false: 离线
+      print/template_item:
+        type:
+          Print::TemplateLine: 填值
+          Print::TemplateDefault: 默认值
+          Print::TemplateTable: 表格
+      print/template_kind:
+        kind:
+          text: 文本
