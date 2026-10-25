@@ -6,10 +6,12 @@
       <span><%= template_item.name %></span>
     </div>
   <% elsif template_item.is_a?(Print::TemplateTable) %>
-    <%= f.fields template_item.code, theme: 'default_phone', model: OpenStruct.new(f.object.payload.fetch(template_item.code, template_item.name_with_blank)) do |ef| %>
+    <div class="field is-grouped">
+    <%= f.fields template_item.code, theme: 'fields', model: OpenStruct.new(f.object.payload.fetch(template_item.code, template_item.name_with_blank)) do |ef| %>
       <% template_item.name_with_widths.each do |name, _| %>
-        <%= ef.text_field name, label: name %>
+        <%= ef.text_field name, label: nil, placeholder: name %>
       <% end %>
     <% end %>
+    </div>
   <% end %>
 <% end %>
