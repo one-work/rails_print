@@ -11,8 +11,6 @@ module Print
       belongs_to :template
 
       positioned on: :template_id
-
-      validates :code, uniqueness: { scope: :template_id }
     end
 
   end

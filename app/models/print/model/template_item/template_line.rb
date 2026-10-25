@@ -8,6 +8,8 @@ module Print
         qrcode: 'qrcode',
         dash: 'dash'
       }
+
+      validates :code, uniqueness: { scope: :template_id }
     end
 
   end
