@@ -1,9 +1,15 @@
-<%= f.fields :payload, theme: 'default_phone', model: OpenStruct.new(f.object.payload) do |ef| %>
-  <% @template.template_items.order(position: :asc).each do |template_item| %>
-    <% if template_item.is_a?(Print::TemplateLine) %>
-      <%= ef.text_field template_item.code, value: f.object.payload[template_item.code], class: 'input', label: template_item.name %>
-    <% elsif template_item.is_a?(Print::TemplateDefault) %>
-      <p><%= template_item.name %></p>
+<% @template.template_items.order(position: :asc).each do |template_item| %>
+  <% if template_item.is_a?(Print::TemplateLine) %>
+    <%= f.text_field template_item.code, value: f.object.payload[template_item.code], class: 'input', label: template_item.name %>
+  <% elsif template_item.is_a?(Print::TemplateDefault) %>
+    <div class="field">
+      <span><%= template_item.name %></span>
+    </div>
+  <% elsif template_item.is_a?(Print::TemplateTable) %>
+    <%= f.fields template_item.code, theme: 'default_phone', model: OpenStruct.new(f.object.payload.fetch(template_item.code, template_item.name_with_blank)) do |ef| %>
+      <% template_item.name_with_widths.each do |name, _| %>
+        <%= ef.text_field name, label: name %>
+      <% end %>
     <% end %>
   <% end %>
 <% end %>

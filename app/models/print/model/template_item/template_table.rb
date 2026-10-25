@@ -12,5 +12,11 @@ module Print
       template_table_items.order(position: :asc).pluck(:name, :width).to_h
     end
 
+    def name_with_blank
+      template_table_items.order(position: :asc).pluck(:name).each_with_object({}) do |k, h|
+        h.merge! k => nil
+      end
+    end
+
   end
 end
