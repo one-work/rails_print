@@ -7,8 +7,23 @@ module Print
         break_line: 'break_line',
         text: 'text',
         qrcode: 'qrcode',
-        dash: 'dash'
+        dash: 'dash',
+        time: 'time'
       }
+    end
+
+    def value(pr)
+      case kind
+      when 'time'
+        pr.text Time.current
+      else
+        method = pr.method(kind)
+        if [0, -1].include? method.arity
+          method.call
+        else
+          method.call(name)
+        end
+      end
     end
 
   end

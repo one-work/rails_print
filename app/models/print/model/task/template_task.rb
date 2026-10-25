@@ -21,7 +21,7 @@ module Print
             cols = payload[template_item.code]
             pr.table(headers: template_item.name_with_widthes, cols: cols)
           elsif template_item.is_a?(TemplateDefault)
-            pr.method(template_item.kind).call(template_item.name)
+            template_item.value(pr)
           else
             value = payload[template_item.code]
             method = pr.method(template_item.kind)
