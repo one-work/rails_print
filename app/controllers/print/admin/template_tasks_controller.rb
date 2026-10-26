@@ -2,10 +2,9 @@ module Print
   class Admin::TemplateTasksController < Admin::BaseController
     before_action :set_template
     before_action :set_new_template_task, only: [:new, :create]
-    before_action :set_mqtt_printers, only: [:new, :create, :edit, :update]
 
     def index
-      @template_tasks = @template.template_tasks.order(id: :desc).page(params[:page])
+      @template_tasks = @template.template_tasks.where(default_params).order(id: :desc).page(params[:page])
     end
 
     private

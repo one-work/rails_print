@@ -5,6 +5,8 @@ module Print
     included do
       attribute :payload, :json, default: {}
 
+      belongs_to :organ, class_name: 'Org::Organ', optional: true
+
       belongs_to :template
       belongs_to :printer, optional: true
 
