@@ -13,8 +13,6 @@ module Print
 
       scope :todo, -> { where(completed_at: nil) }
 
-      belongs_to :printer
-
       has_one_attached :file, service: :local
 
       after_save_commit :online_printer!, if: -> { saved_change_to_completed_at? }

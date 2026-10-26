@@ -5,6 +5,8 @@ module Print
     included do
       attribute :gid, :string
 
+      belongs_to :printer
+
       before_create :generate_raw, if: -> { model.present? }
       before_save :print_img, if: -> { attachment_changes['file'].present? && file.attached? }
       after_save_commit :sync_to_locator, if: :saved_change_to_completed_at?

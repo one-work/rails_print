@@ -6,6 +6,7 @@ module Print
       attribute :payload, :json, default: {}
 
       belongs_to :template
+      belongs_to :printer, optional: true
 
       before_create :set_raw
       after_create_commit :print
@@ -19,7 +20,7 @@ module Print
         template.template_items.each do |template_item|
           if template_item.is_a?(TemplateTable)
             cols = payload[template_item.code]
-            pr.table(headers: template_item.name_with_widthes, cols: cols)
+            pr.table(headers: template_item.name_with_widths, cols: cols)
           elsif template_item.is_a?(TemplateDefault)
             template_item.value(pr)
           else

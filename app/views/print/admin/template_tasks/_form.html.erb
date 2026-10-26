@@ -6,8 +6,8 @@
       <span><%= template_item.name %></span>
     </div>
   <% elsif template_item.is_a?(Print::TemplateTable) %>
-    <%= f.fields template_item.code, theme: 'fields' do |ef| %>
-      <% f.object.payload.fetch(template_item.code, [template_item.name_with_blank]).each_with_index do |x, index| %>
+    <% f.object.payload.fetch(template_item.code, [template_item.name_with_blank]).each_with_index do |x, index| %>
+      <%= f.fields template_item.code, theme: 'fields', index: index do |ef| %>
       <div class="field is-grouped" data-controller="field" data-field-index-value="<%= index %>">
         <% template_item.name_with_widths.each do |name, _| %>
           <%= ef.text_field name, label: nil, placeholder: name %>

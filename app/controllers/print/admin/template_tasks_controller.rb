@@ -14,7 +14,8 @@ module Print
     end
 
     def set_new_template_task
-      @template_task = @template.template_tasks.build(template_task_params)
+      @template_task = @template.template_tasks.build
+      @template_task.payload = template_task_params
     end
 
     def set_mqtt_printers
@@ -22,10 +23,7 @@ module Print
     end
 
     def template_task_params
-      params.fetch(:template_task, {}).permit(
-        :imei,
-        payload: {}
-      )
+      params.fetch(:template_task, {}).permit!
     end
 
   end
