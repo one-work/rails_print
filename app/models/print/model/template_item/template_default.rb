@@ -15,7 +15,7 @@ module Print
     def value(pr)
       case kind
       when 'time'
-        pr.text "#{name}：#{Time.current.to_fs}"
+        pr.text "#{name}：#{Time.current.to_fs(:cn)}"
       else
         method = pr.method(kind)
         if [0, -1].include? method.arity
