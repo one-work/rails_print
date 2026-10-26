@@ -105,6 +105,9 @@ Rails.app.routes.draw do
             patch :reorder
           end
         end
+        resources :template_lines
+        resources :template_tables
+        resources :template_defaults
       end
       resources :printers, only: [] do
         resources :tasks
