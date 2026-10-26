@@ -6,6 +6,10 @@
   <%= svg_tag 'circle-info' %>
   <span><%= t('.show.title') %></span>
 <% end %>
+<%= link_to({ controller: 'template_tasks', template_id: model.id }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'list' %>
+  <span><%= t('.template_tasks.index.title') %></span>
+<% end %>
 <% if current_organ.id == model.organ_id %>
   <%= button_to({ action: 'edit' }, class: 'cell has-column-centered') do %>
     <%= svg_tag 'pencil' %>

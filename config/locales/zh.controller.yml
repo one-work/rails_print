@@ -79,9 +79,6 @@ zh:
           title: 手动添加
         destroy:
           title: 解绑
-      devices:
-        index:
-          title: 打印机设置
       mqtt_printers:
         index:
           title: 云打印
@@ -98,5 +95,7 @@ zh:
         index:
           title: 打印模板
       template_tasks:
+        index:
+          title: 打印记录
         new:
           title: 打印任务

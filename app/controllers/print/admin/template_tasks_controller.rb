@@ -14,6 +14,7 @@ module Print
 
     def set_new_template_task
       @template_task = @template.template_tasks.build
+      @template_task.organ = current_organ
       @template_task.payload = template_task_params
     end
 
