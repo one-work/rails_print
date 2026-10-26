@@ -1,0 +1,16 @@
+<%= button_to({ action: 'destroy' }, method: :delete, form: { data: { turbo_confirm: t('.destroy.confirm') } }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'trash' %>
+  <span><%= t('.destroy.title') %></span>
+<% end %>
+<%= button_to({ action: 'edit' }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'pencil' %>
+  <span><%= t('.edit.title') %></span>
+<% end %>
+<%= button_to({ controller: 'home', action: 'inner' }, params: { task_id: model.id }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'print' %>
+  <span><%= t('.home.inner.title') %></span>
+<% end %>
+<%= link_to({ action: 'show' }, class: 'cell has-column-centered') do %>
+  <%= svg_tag 'circle-info' %>
+  <span><%= t('.show.title') %></span>
+<% end %>

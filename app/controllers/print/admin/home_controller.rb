@@ -58,16 +58,13 @@ module Print
       end
 
       if request.variant.include?(:native)
-        @task = InnerTask.new(gid: params[:gid], aim: params[:aim])
-        @task.generate_raw
+        @task = set_task
       elsif @printer_aims.length == 1
         @printer = @printer_aims.take.printer
         if params.exclude?(:dev_type) && @printer.dev_type == 'cpcl' || (params.include?(:dev_type) && @printer.dev_type != params[:dev_type])
           render :inner_type
         else
-          @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
-          @task.save
-
+          @task = set_task_with_printer(@printer)
           if @printer.is_a? Print::BluetoothPrinter
             @data = {
               device: @printer.name,
@@ -80,8 +77,7 @@ module Print
       elsif @printer_aims.length > 1
         render :inner_choose
       else
-        @task = InnerTask.new(gid: params[:gid], aim: params[:aim])
-        @task.generate_raw
+        @task = set_task
         @data = {
           raw: @task.raw
         }
@@ -93,8 +89,7 @@ module Print
       if params.exclude?(:dev_type) && @printer.dev_type == 'cpcl' || (params.include?(:dev_type) && @printer.dev_type != params[:dev_type])
         render :inner_type
       else
-        @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
-        @task.save
+        @task = set_task_with_printer(@printer)
 
         if @printer.is_a? Print::BluetoothPrinter
           @data = {
@@ -116,13 +111,23 @@ module Print
     def set_task
       if params[:task_id]
         task = Task.find params[:task_id]
-      elsif @printer
-        @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
-        @task.save
       else
-        @task = InnerTask.new(gid: params[:gid], aim: params[:aim])
-        @task.generate_raw
+        task = InnerTask.new(gid: params[:gid], aim: params[:aim])
+        task.generate_raw
       end
+      task
+    end
+
+    def set_task_with_printer(printer)
+      if params[:task_id]
+        task = Task.find params[:task_id]
+        task.printer = printer
+        task.save
+      else
+        task = printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
+        task.save
+      end
+      task
     end
 
   end
