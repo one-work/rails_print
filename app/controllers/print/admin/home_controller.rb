@@ -113,5 +113,17 @@ module Print
       @printer = Printer.find params[:printer_id]
     end
 
+    def set_task
+      if params[:task_id]
+        task = Task.find params[:task_id]
+      elsif @printer
+        @task = @printer.inner_tasks.build(gid: params[:gid], aim: params[:aim])
+        @task.save
+      else
+        @task = InnerTask.new(gid: params[:gid], aim: params[:aim])
+        @task.generate_raw
+      end
+    end
+
   end
 end
