@@ -51,7 +51,7 @@ module Print
       yield pr
       bytes = pr.render
 
-      if printer.dev_cut_type_full?
+      if printer&.dev_cut_type_full?
         arr = bytes + [0x1b, 0x69]
       else
         arr = bytes + [0x1b, 0x6d]
@@ -67,7 +67,7 @@ module Print
     end
 
     def print
-      printer.print_cmd(raw_arr, id)
+      printer.print_cmd(raw_arr, id) if printer
     end
 
     def online_printer!
