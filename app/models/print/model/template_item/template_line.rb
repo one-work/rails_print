@@ -7,6 +7,8 @@ module Print
 
       enum :kind, {
         text: 'text',
+        text_center: 'text_center',
+        text_big_center: 'text_big_center',
         qrcode: 'qrcode',
         dash: 'dash'
       }
