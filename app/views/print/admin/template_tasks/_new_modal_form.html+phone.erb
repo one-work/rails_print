@@ -1,0 +1,8 @@
+<%= form_with theme: nil, model: @template_task, url: { action: 'create' }, id: 'form_wrapper' do |f| %>
+  <%= render 'modal_header' %>
+  <section id="modal-card-body" class="modal-card-body">
+    <%= render 'error_messages', target: f.object if f.object.errors.present? %>
+    <%= render partial: 'form', locals: { f: f } %>
+  </section>
+  <%= f.submit %>
+<% end %>
