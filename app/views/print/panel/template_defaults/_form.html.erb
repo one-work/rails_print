@@ -1,2 +1,3 @@
 <%= f.select :kind, options_for_select(Print::TemplateDefault.options_i18n(:kind), @template_default.kind) %>
 <%= f.text_field :name, required: true, autofocus: true %>
+<%= f.text_field :code %>
