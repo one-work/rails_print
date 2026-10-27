@@ -6,7 +6,10 @@ module Print
       enum :kind, {
         break_line: 'break_line',
         text: 'text',
+        text_center: 'text_center',
+        text_big_center: 'text_big_center',
         qrcode: 'qrcode',
+        qrcode_center: 'qrcode_center',
         dash: 'dash',
         time: 'time'
       }
