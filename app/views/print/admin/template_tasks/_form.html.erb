@@ -1,13 +1,13 @@
 <% @template.template_items.order(position: :asc).each do |template_item| %>
   <% if template_item.is_a?(Print::TemplateLine) %>
-    <%= f.text_field template_item.code, value: f.object.payload[template_item.code], class: 'input', label: template_item.name %>
+    <%= f.text_field template_item.code, value: f.object.payload[template_item.code], label: template_item.name %>
   <% elsif template_item.is_a?(Print::TemplateDefault) %>
     <div class="field has-addons">
       <div class="control">
         <div class="button is-static"><%= template_item.name %></div>
       </div>
       <div class="control is-expanded">
-        <div class="button is-fullwidth text-right"><%= template_item.value %></div>
+        <div class="button is-fullwidth justify-content-flex-end"><%= template_item.value %></div>
       </div>
     </div>
   <% elsif template_item.is_a?(Print::TemplateTable) %>
