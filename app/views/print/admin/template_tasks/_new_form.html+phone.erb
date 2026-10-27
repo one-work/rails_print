@@ -1,6 +1,6 @@
-<%= form_with theme: 'level', model: @template_task, url: { action: 'create' }, class: nil do |f| %>
+<%= form_with theme: 'level', model: @template_task, url: { action: 'create' }, class: 'form-fields as-boxed' do |f| %>
   <%= render 'error_messages', target: f.object if f.object.errors.present? %>
-  <div class="form-inlinex">
+  <div class="form-inline">
     <%= render partial: 'form', locals: { f: f } %>
   </div>
   <%= f.submit %>

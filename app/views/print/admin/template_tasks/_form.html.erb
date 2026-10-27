@@ -2,8 +2,10 @@
   <% if template_item.is_a?(Print::TemplateLine) %>
     <%= f.text_field template_item.code, value: f.object.payload[template_item.code], class: 'input', label: template_item.name %>
   <% elsif template_item.is_a?(Print::TemplateDefault) %>
-    <div class="field is-horizontal">
-      <span><%= template_item.name %></span>
+    <div class="field has-addons">
+      <div class="control">
+        <div class="button is-static"><%= template_item.name %></div>
+      </div>
     </div>
   <% elsif template_item.is_a?(Print::TemplateTable) %>
     <div class="field is-horizontal">
