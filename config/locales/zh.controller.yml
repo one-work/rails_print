@@ -94,6 +94,8 @@ zh:
       templates:
         index:
           title: 打印模板
+        new:
+          title: 添加模板
       template_tasks:
         index:
           title: 打印记录
