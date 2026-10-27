@@ -24,7 +24,7 @@ module Print
             cols = payload[template_item.code].map { |i| i.values.compact_blank }
             pr.table(headers: template_item.name_with_widths, cols: cols)
           elsif template_item.is_a?(TemplateDefault)
-            template_item.value(pr)
+            template_item.value_pr(pr)
           else
             value = payload[template_item.code]
             method = pr.method(template_item.kind)

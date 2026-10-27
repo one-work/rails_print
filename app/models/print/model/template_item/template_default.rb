@@ -12,7 +12,7 @@ module Print
       }
     end
 
-    def value(pr)
+    def value_pr(pr)
       case kind
       when 'time'
         pr.text "#{name}：#{value}"
