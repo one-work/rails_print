@@ -1,8 +1,10 @@
-<%= form_with theme: nil, model: @template_task, url: { action: 'create' }, id: 'form_wrapper' do |f| %>
+<%= form_with theme: nil, model: @template_task, url: { action: 'create' }, id: 'form_wrapper', class: 'modal-card' do |f| %>
   <%= render 'modal_header' %>
   <section id="modal-card-body" class="modal-card-body">
     <%= render 'error_messages', target: f.object if f.object.errors.present? %>
     <%= render partial: 'form', locals: { f: f } %>
   </section>
-  <%= f.submit %>
+  <footer class="modal-card-foot">
+    <%= f.submit nil, class: 'button is-primary' %>
+  </footer>
 <% end %>
