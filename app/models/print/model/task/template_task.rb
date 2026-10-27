@@ -26,7 +26,12 @@ module Print
           elsif template_item.is_a?(TemplateDefault)
             template_item.value_pr(pr)
           else
-            value = payload[template_item.code]
+            if template_item.unit.present?
+              value = "#{payload[template_item.code]}#{template_item.unit}"
+            else
+              value = payload[template_item.code]
+            end
+
             method = pr.method(template_item.kind)
             if [0, -1].include? method.arity
               method.call

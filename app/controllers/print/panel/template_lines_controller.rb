@@ -17,7 +17,7 @@ module Print
     end
 
     def template_line_params
-      params.expect(template_line: [:name, :code, :kind])
+      params.expect(template_line: [:name, :code, :kind, :unit])
     end
 
   end

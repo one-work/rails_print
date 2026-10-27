@@ -3,6 +3,8 @@ module Print
     extend ActiveSupport::Concern
 
     included do
+      attribute :unit, :string
+
       enum :kind, {
         text: 'text',
         qrcode: 'qrcode',

@@ -1,3 +1,4 @@
 <%= f.text_field :name, required: true, autofocus: true %>
 <%= f.text_field :code, required: true %>
 <%= f.select :kind, options_for_select(Print::TemplateLine.options_i18n(:kind), @template_line.kind) %>
+<%= f.text_field :unit, placeholder: '没有则不填' %>
