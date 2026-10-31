@@ -14,6 +14,11 @@ module Print
       r['data']
     end
 
+    def hooks
+      r = get 'exhooks'
+      r['data']
+    end
+
     def auth
       get 'authentication'
     end
