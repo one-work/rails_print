@@ -4,7 +4,7 @@ module Print
     extend CommonApi
     extend self
     BASIC = [
-      { name: 'authorized', url: 'http://mqtt:3000/print/authorized' }
+      { name: 'authorized', url: 'http://linli:3000/print/authorized' }
     ]
 
     def base_url
@@ -20,6 +20,12 @@ module Print
     def hooks
       r = get 'exhooks'
       r['data']
+    end
+
+    def add_connectors
+      BASIC.each do |i|
+        add_connector(name: i[:name], url: i[:url])
+      end
     end
 
     def add_connector(name:, url:, **options)
