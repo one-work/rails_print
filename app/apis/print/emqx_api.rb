@@ -3,6 +3,9 @@ module Print
   module EmqxApi
     extend CommonApi
     extend self
+    BASIC = [
+      { name: 'authorized', url: 'http://mqtt:3000/print/authorized' }
+    ]
 
     def base_url
       return @base_url if defined? @base_url
@@ -17,6 +20,16 @@ module Print
     def hooks
       r = get 'exhooks'
       r['data']
+    end
+
+    def add_connector(name:, url:, **options)
+      options.with_defaults!(
+        type: 'http',
+        headers: {
+          'content-type': 'application/json'
+        }
+      )
+      r = post 'connectors', name: name, url: url, **options
     end
 
     def auth
