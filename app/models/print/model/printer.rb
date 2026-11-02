@@ -35,6 +35,7 @@ module Print
       has_many :organs, through: :printer_aims
       accepts_nested_attributes_for :printer_aims, allow_destroy: true
 
+      has_many :printer_logs, dependent: :delete_all
       has_many :tasks, dependent: :delete_all
       has_many :template_tasks, dependent: :delete_all
       has_many :raw_tasks, dependent: :delete_all

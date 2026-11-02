@@ -53,6 +53,7 @@ module Print
       off_at = Time.at_milli(params[:disconnected_at])
       if @mqtt_printer && (@mqtt_printer.ready_at - off_at).abs > 30
         @mqtt_printer.update online: false, offline_at: off_at
+        @mqtt_printer.printer_logs.create(note: 'offline')
       end
 
       head :ok
@@ -62,6 +63,7 @@ module Print
     def subscribe
       if params[:clientid] == params[:topic]
         @mqtt_printer.update online: true, offline_at: nil
+        @mqtt_printer.printer_logs.create(note: 'subscribe')
       end
 
       head :ok
@@ -70,6 +72,7 @@ module Print
     def unsubscribe
       if params[:clientid] == params[:topic]
         @mqtt_printer.update online: false, offline_at: Time.current
+        @mqtt_printer.printer_logs.create(note: 'unsubscribe')
       end
 
       head :ok
