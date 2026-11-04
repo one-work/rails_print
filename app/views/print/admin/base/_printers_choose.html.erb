@@ -1,6 +1,6 @@
 <div class="medias as-boxed">
 <% @printer_aims.each do |printer_aim| %>
-  <%= button_to({ action: 'task' }, params: { printer_id: printer_aim.printer_id, **params.permit(:gid, :aim, :dev_type) }, class: 'media') do %>
+  <%= button_to({ controller: 'home', action: 'task' }, params: { printer_id: printer_aim.printer_id, **params.permit(:gid, :aim, :dev_type) }, class: 'media') do %>
     <div class="media-content">
       <p class="is-wrap">
         <span><%= printer_aim.printer.display_name %></span>

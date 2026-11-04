@@ -3,7 +3,7 @@
     data-controller="scan bridge-scan"
     data-action="click->scan#report"
     class="button is-rounded is-primary"
-    data-report-url="<%= url_for(action: 'scan') %>"
+    data-report-url="<%= url_for(controller: 'home', action: 'scan') %>"
     disabled
   >
     <%= svg_tag 'plus' %>
