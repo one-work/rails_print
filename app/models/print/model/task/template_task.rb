@@ -27,7 +27,7 @@ module Print
               end
               r.values.compact_blank
             end
-            pr.table(headers: template_item.name_with_widths, cols: cols)
+            pr.table_big(headers: template_item.name_with_widths, cols: cols)
           elsif template_item.is_a?(TemplateDefault)
             template_item.value_pr(pr)
           else
