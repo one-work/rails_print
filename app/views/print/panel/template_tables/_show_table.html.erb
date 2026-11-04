@@ -1,0 +1,21 @@
+<div>
+  <dt><%= Print::TemplateTable.human_attribute_name(:name) %></dt>
+  <dd><%= @template_table.name %></dd>
+</div>
+<div>
+  <dt><%= Print::TemplateTable.human_attribute_name(:code) %></dt>
+  <dd><%= @template_table.code %></dd>
+</div>
+<div>
+  <dt></dt>
+  <dd>
+    <table class="table is-fullwidth">
+    <% @template_table.template_table_items.each do |template_table_item| %>
+      <tr>
+        <td><%= template_table_item.name %></td>
+        <td><%= template_table_item.width %></td>
+      </tr>
+    <% end %>
+    </table>
+  </dd>
+</div>
