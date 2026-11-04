@@ -13,7 +13,7 @@ module Print
     end
 
     def name_with_units
-      template_table_items.order(position: :asc).pluck(:name, :unit).to_h
+      template_table_items.load.sort_by(&:position).pluck(:name, :unit).to_h
     end
 
     def name_with_blank

@@ -22,7 +22,10 @@ module Print
         template.template_items.each do |template_item|
           if template_item.is_a?(TemplateTable)
             cols = payload[template_item.code].map do |i|
-              i.values.compact_blank
+              r = i.each_with_object({}) do |(k, v), h|
+                h.merge! k => "#{v}#{template_item.name_with_units[k]}"
+              end
+              r.values.compact_blank
             end
             pr.table(headers: template_item.name_with_widths, cols: cols)
           elsif template_item.is_a?(TemplateDefault)
