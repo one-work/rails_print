@@ -9,7 +9,7 @@ module Print
     end
 
     def name_with_widths
-      template_table_items.order(position: :asc).pluck(:name, :width).to_h
+      template_table_items.load.sort_by(&:position).pluck(:name, :width).to_h
     end
 
     def name_with_units
@@ -17,7 +17,7 @@ module Print
     end
 
     def name_with_blank
-      template_table_items.order(position: :asc).pluck(:name).each_with_object({}) do |k, h|
+      template_table_items.load.sort_by(&:position).pluck(:name).each_with_object({}) do |k, h|
         h.merge! k => nil
       end
     end
