@@ -5,5 +5,6 @@ default:
   print/admin/templates: all
   print/admin/template_lines: all
   print/admin/template_defaults: all
+  print/admin/template_tables: all
   print/admin/mqtt_printers: all
   print/admin/bluetooth_printers: all
