@@ -27,7 +27,7 @@
       <%= f.fields template_item.code, theme: 'fields', index: nil do |ef| %>
         <div class="field is-horizontal" data-controller="field" data-field-index-value="<%= index %>">
           <div class="field-body">
-            <% template_item.name_with_units.each do |name, unit| %>
+            <% template_item.name_with_suffixes.each do |name, unit| %>
               <%= ef.text_field name, label: nil, placeholder: "#{name}:#{unit}", id: nil %>
             <% end %>
             <span class="field has-addons has-addons-middle">
