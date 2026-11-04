@@ -27,7 +27,7 @@ module Print
             template_item.value_pr(pr)
           else
             if template_item.unit.present?
-              value = "#{payload[template_item.code]}#{template_item.unit}"
+              value = "#{payload[template_item.name]}：#{payload[template_item.code]}#{template_item.unit}"
             else
               value = payload[template_item.code]
             end
