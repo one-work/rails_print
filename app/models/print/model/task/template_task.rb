@@ -23,7 +23,7 @@ module Print
           if template_item.is_a?(TemplateTable)
             cols = payload[template_item.code].map do |i|
               r = i.each_with_object({}) do |(k, v), h|
-                h.merge! k => "#{v}#{template_item.name_with_units[k]}"
+                h.merge! k => "#{template_item.name_with_prefixes[k]}#{v}#{template_item.name_with_suffixes[k]}"
               end
               r.values.compact_blank
             end

@@ -12,8 +12,12 @@ module Print
       template_table_items.load.sort_by(&:position).pluck(:name, :width).to_h
     end
 
-    def name_with_units
-      template_table_items.load.sort_by(&:position).pluck(:name, :unit).to_h
+    def name_with_suffixes
+      template_table_items.load.sort_by(&:position).pluck(:name, :suffix).to_h
+    end
+
+    def name_with_prefixes
+      template_table_items.load.sort_by(&:position).pluck(:name, :prefix).to_h
     end
 
     def name_with_blank

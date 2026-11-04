@@ -5,8 +5,19 @@ module Print
     included do
       attribute :name, :string
       attribute :width, :integer
-      attribute :unit, :string
+      attribute :prefix, :string
+      attribute :suffix, :string
       attribute :position, :integer
+      attribute :input, :string
+
+      enum :input, {
+        date: 'date',
+        datetime: 'datetime',
+        integer: 'integer',
+        decimal: 'decimal',
+        string: 'string',
+        text: 'text'
+      }
 
       belongs_to :template_table
 
