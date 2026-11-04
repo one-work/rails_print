@@ -6,6 +6,7 @@
     <div class="field-body">
       <%= ef.text_field :name %>
       <%= ef.number_field :width %>
+      <%= ef.text_field :unit %>
       <span class="field has-addons has-addons-middle">
         <%= svg_tag 'plus', data: { action: 'click->field#add' }, class: 'icon clickable' %>
         <%= svg_tag 'minus', data: { action: 'click->field#remove' }, class: 'icon clickable' %>

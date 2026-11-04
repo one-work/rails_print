@@ -5,6 +5,7 @@ module Print
     included do
       attribute :name, :string
       attribute :width, :integer
+      attribute :unit, :string
       attribute :position, :integer
 
       belongs_to :template_table

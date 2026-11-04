@@ -24,7 +24,7 @@ module Print
       params.fetch(:template_table, {}).permit(
         :name,
         :code,
-        template_table_items_attributes: [:name, :width, :id, :_destroy]
+        template_table_items_attributes: [:name, :width, :unit, :id, :_destroy]
       )
     end
 
