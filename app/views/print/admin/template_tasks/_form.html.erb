@@ -18,9 +18,11 @@
       <div class="control">
         <div class="button is-static"><%= template_item.name %></div>
       </div>
+      <% if template_item.value.present? %>
       <div class="control is-expanded">
         <div class="button is-fullwidth justify-content-flex-end"><%= template_item.value %></div>
       </div>
+      <% end %>
     </div>
   <% elsif template_item.is_a?(Print::TemplateTable) %>
     <% f.object.payload.fetch(template_item.code, [template_item.name_with_blank]).each_with_index do |x, index| %>
