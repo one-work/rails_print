@@ -11,7 +11,9 @@ module Print
         qrcode: 'qrcode',
         qrcode_center: 'qrcode_center',
         dash: 'dash',
-        time: 'time'
+        date: 'date',
+        time: 'time',
+        datetime: 'datetime'
       }
     end
 
@@ -30,9 +32,14 @@ module Print
     end
 
     def value
+      now = Time.current
       case kind
+      when 'datetime'
+        now.to_fs(:cn)
+      when 'date'
+        now.to_fs(:cn_date)
       when 'time'
-        Time.current.to_fs(:cn)
+        now.to_fs(:cn_time)
       else
         code
       end

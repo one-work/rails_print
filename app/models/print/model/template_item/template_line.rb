@@ -7,6 +7,7 @@ module Print
 
       enum :kind, {
         text: 'text',
+        text_big: 'text_big',
         text_center: 'text_center',
         text_big_center: 'text_big_center',
         qrcode: 'qrcode',
@@ -22,7 +23,7 @@ module Print
       if unit.present?
         _value = "#{name}：#{value}#{unit}"
       else
-        _value = value
+        _value = "#{name}：#{value}"
       end
 
       method = pr.method(kind)
