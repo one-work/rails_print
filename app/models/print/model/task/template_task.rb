@@ -19,7 +19,7 @@ module Print
 
     def set_raw
       set_esc do |pr|
-        template.template_items.each do |template_item|
+        template.template_items.order(position: :asc).each do |template_item|
           if template_item.is_a?(TemplateTable)
             cols = payload[template_item.code].map do |i|
               r = i.each_with_object({}) do |(k, v), h|
