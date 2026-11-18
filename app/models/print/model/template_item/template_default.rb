@@ -19,7 +19,7 @@ module Print
 
     def value_pr(pr)
       case kind
-      when 'time'
+      when 'time', 'date', 'datetime'
         pr.text "#{name}：#{value}"
       else
         method = pr.method(kind)
