@@ -1,1 +1,8 @@
 <td><%= link_to model.name, { controller: 'template_items', template_id: model.id } %></td>
+<td>
+<% if model.organ %>
+  <span><%= model.organ.name %></span>
+<% else %>
+  <span class="tag">平台模板</span>
+<% end %>
+</td>
