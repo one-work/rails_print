@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'print_test_helper'
 
 class MqttAclTest < ActiveSupport::TestCase
 
