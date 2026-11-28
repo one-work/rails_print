@@ -1,10 +1,10 @@
 source "https://rubygems.org"
 gemspec
 
-gem 'rails_com', path: '../rails_com'
-gem 'rails_ui', path: '../rails_ui'
-gem 'rails_auth', path: '../rails_auth'
-gem 'default_form', path: '../default_form'
+gem 'rails_com', github: 'one-work/rails_com'
+gem 'rails_ui', github: 'one-work/rails_ui'
+gem 'rails_auth', github: 'one-work/rails_auth'
+gem 'default_form', github: 'one-work/default_form'
 
 gem 'solid_queue'
 gem 'propshaft'
