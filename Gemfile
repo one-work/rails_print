@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 gemspec
 
+gem 'rails', github: 'rails/rails'
 gem 'rails_com', github: 'one-work/rails_com'
 gem 'rails_ui', github: 'one-work/rails_ui'
 gem 'rails_auth', github: 'one-work/rails_auth'
